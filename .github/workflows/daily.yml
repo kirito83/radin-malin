@@ -1,0 +1,33 @@
+name: 💰 Daily cash-machine
+
+on:
+  schedule:
+    - cron: "7 6 * * *"   # 1 article/jour à 06h07 UTC, 100% auto
+  workflow_dispatch: {}    # bouton "Run" manuel possible
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publier 1 article + rebuild
+        run: |
+          python daily.py
+      - name: Commit auto
+        run: |
+          git config user.name "cash-bot"
+          git config user.email "cash-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "auto: article du jour $(date -u +%F)" || echo "rien à commiter"
+          git push
+      - name: Déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

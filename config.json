@@ -1,0 +1,18 @@
+{
+  "site_name": "Radin Malin",
+  "site_url": "https://VOTRE-PSEUDO.github.io/radin-malin",
+  "site_lang": "fr",
+  "site_description": "Outils gratuits et comparatifs malins pour économiser chaque jour : calculatrices, convertisseurs, bons plans.",
+  "author": "Radin Malin",
+  "monetization": {
+    "adsense_client": "",
+    "monetag_tag": "",
+    "amazon_tag": "votre-tag-21",
+    "awin_publisher_id": "",
+    "stripe_pro_link": "https://buy.stripe.com/VOTRE-LIEN-PRO",
+    "paypal_link": "https://paypal.me/VOTRE-PSEUDO/9.90",
+    "premium_price": "9,90 €",
+    "premium_product": "Pack 50 templates factures + devis + suivi budget (Excel + PDF)"
+  },
+  "affiliate_disclaimer": "Liens affiliés : si vous achetez via nos liens, nous touchons une petite commission sans surcoût pour vous. Cela finance les outils gratuits."
+}

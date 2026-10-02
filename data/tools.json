@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "calcul-tva-remise",
+    "title": "Calcul TVA, remise et pourcentage (gratuit)",
+    "meta": "Calculez TVA, prix HT/TTC et remises en % en 1 clic. Outil gratuit, sans inscription.",
+    "h1": "Calcul TVA, remise et pourcentage",
+    "pitch": "Calculez un prix HT en TTC (TVA 20 %, 10 %, 5,5 %), appliquez une remise en % ou retrouvez un pourcentage. Idéal pour devis, factures et promos. 100 % gratuit, calcul instantané dans votre navigateur.",
+    "ui_html": "<label>Prix (€)<input id='prix' type='number' value='100' step='0.01'></label><label>TVA (%)<select id='tva'><option>20</option><option>10</option><option>5.5</option><option value='0'>0</option></select></label><label>Remise (%)<input id='remise' type='number' value='0' step='0.1'></label><button onclick='calcTVA()'>Calculer</button><div id='res' class='res'></div>",
+    "js": "function calcTVA(){var p=parseFloat(document.getElementById('prix').value)||0;var t=parseFloat(document.getElementById('tva').value)||0;var r=parseFloat(document.getElementById('remise').value)||0;var apresRemise=p*(1-r/100);var ttc=apresRemise*(1+t/100);document.getElementById('res').innerHTML='Prix après remise HT : <b>'+apresRemise.toFixed(2)+' €</b><br>Prix TTC : <b>'+ttc.toFixed(2)+' €</b><br>Économie : <b>'+(p-apresRemise).toFixed(2)+' €</b>';}"
+  },
+  {
+    "slug": "calcul-pret-mensualite",
+    "title": "Calcul mensualité de prêt / crédit (gratuit)",
+    "meta": "Simulez votre mensualité de crédit : montant, taux, durée. Outil gratuit pour emprunt immobilier ou conso.",
+    "h1": "Calcul mensualité de prêt",
+    "pitch": "Simulez votre crédit en 10 secondes : entrez le montant, le taux annuel et la durée. Vous obtenez la mensualité, le coût total et le coût des intérêts. Outil indicatif, hors assurance.",
+    "ui_html": "<label>Montant emprunté (€)<input id='cap' type='number' value='150000'></label><label>Taux annuel (%)<input id='taux' type='number' value='3.5' step='0.01'></label><label>Durée (années)<input id='duree' type='number' value='20'></label><button onclick='calcPret()'>Simuler</button><div id='res' class='res'></div>",
+    "js": "function calcPret(){var C=parseFloat(document.getElementById('cap').value)||0;var t=parseFloat(document.getElementById('taux').value)||0;var a=parseFloat(document.getElementById('duree').value)||0;var n=a*12;var m=t/100/12;var mens=n>0&&m>0?C*m/(1-Math.pow(1+m,-n)):C/Math.max(n,1);var total=mens*n;document.getElementById('res').innerHTML='Mensualité : <b>'+mens.toFixed(2)+' €/mois</b><br>Coût total : <b>'+total.toFixed(0)+' €</b><br>Intérêts : <b>'+(total-C).toFixed(0)+' €</b>';}"
+  },
+  {
+    "slug": "calcul-imc",
+    "title": "Calcul IMC gratuit : poids idéal et interprétation",
+    "meta": "Calculez votre IMC gratuitement : poids, taille, interprétation OMS et poids idéal.",
+    "h1": "Calcul IMC gratuit",
+    "pitch": "Entrez votre poids et votre taille pour connaître votre Indice de Masse Corporelle et sa signification (maigreur, normal, surpoids, obésité). Indicatif, ne remplace pas un avis médical.",
+    "ui_html": "<label>Poids (kg)<input id='poids' type='number' value='70'></label><label>Taille (cm)<input id='taille' type='number' value='175'></label><button onclick='calcIMC()'>Calculer mon IMC</button><div id='res' class='res'></div>",
+    "js": "function calcIMC(){var p=parseFloat(document.getElementById('poids').value)||0;var t=parseFloat(document.getElementById('taille').value)||0;var m=t/100;if(m<=0)return;var imc=p/(m*m);var cat=imc<18.5?'Maigreur':imc<25?'Poids normal':imc<30?'Surpoids':'Obésité';var ideal=(22*m*m).toFixed(1);document.getElementById('res').innerHTML='Votre IMC : <b>'+imc.toFixed(1)+'</b> — '+cat+'<br>Poids idéal indicatif (IMC 22) : <b>'+ideal+' kg</b>';}"
+  },
+  {
+    "slug": "convertisseur-devises",
+    "title": "Convertisseur devises EUR / USD / GBP",
+    "meta": "Convertissez euros, dollars, livres en 1 clic. Taux indicatifs, outil gratuit.",
+    "h1": "Convertisseur de devises",
+    "pitch": "Conversion indicative EUR, USD, GBP, CHF, CAD. Taux statiques à ajuster selon le jour — vérifiez le taux réel de votre banque avant un gros transfert. Pratique pour voyages et shopping.",
+    "ui_html": "<label>Montant<input id='mnt' type='number' value='100'></label><label>De<select id='de'><option>EUR</option><option>USD</option><option>GBP</option><option>CHF</option><option>CAD</option></select></label><label>Vers<select id='vers'><option>USD</option><option>EUR</option><option>GBP</option><option>CHF</option><option>CAD</option></select></label><button onclick='conv()'>Convertir</button><div id='res' class='res'></div><p class='hint'>Taux indicatifs (1 EUR ≈ 1.08 USD, 0.85 GBP, 0.97 CHF, 1.47 CAD). Modifiables dans le code.</p>",
+    "js": "function conv(){var r={EUR:1,USD:1.08,GBP:0.85,CHF:0.97,CAD:1.47};var m=parseFloat(document.getElementById('mnt').value)||0;var d=document.getElementById('de').value;var v=document.getElementById('vers').value;var eur=m/r[d];var out=eur*r[v];document.getElementById('res').innerHTML='<b>'+m+' '+d+' ≈ '+out.toFixed(2)+' '+v+'</b>';}"
+  },
+  {
+    "slug": "generateur-mot-de-passe",
+    "title": "Générateur de mot de passe fort (gratuit)",
+    "meta": "Générez un mot de passe fort et unique en 1 clic. 100 % local, rien n'est envoyé.",
+    "h1": "Générateur de mot de passe fort",
+    "pitch": "Un mot de passe unique de 16+ caractères avec chiffres et symboles. Généré localement dans votre navigateur, jamais envoyé sur internet. Copiez-collez dans votre gestionnaire.",
+    "ui_html": "<label>Longueur<input id='len' type='number' value='16' min='8' max='64'></label><label><input id='sym' type='checkbox' checked> Symboles (!@#...)</label><button onclick='genMDP()'>Générer</button><div id='res' class='res'></div><button onclick='copyMDP()'>Copier</button>",
+    "js": "var last='';function genMDP(){var l=parseInt(document.getElementById('len').value)||16;var s=document.getElementById('sym').checked;var c='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789'+(s?'!@#$%^&*()-_=+':'');last='';var a=new Uint32Array(l);crypto.getRandomValues(a);for(var i=0;i<l;i++)last+=c[a[i]%c.length];document.getElementById('res').innerHTML='<b>'+last+'</b>';}function copyMDP(){if(last)navigator.clipboard.writeText(last).then(function(){alert('Copie !');});}genMDP();"
+  },
+  {
+    "slug": "compteur-mots-caracteres",
+    "title": "Compteur de mots et caractères en ligne",
+    "meta": "Comptez mots, caractères, phrases et temps de lecture gratuitement.",
+    "h1": "Compteur de mots et caractères",
+    "pitch": "Collez votre texte : nombre de mots, caractères avec/sans espaces, phrases et temps de lecture estimé. Idéal pour SEO, CV, dissertations et réseaux sociaux.",
+    "ui_html": "<textarea id='txt' rows='7' placeholder='Collez votre texte ici...'></textarea><button onclick='compter()'>Compter</button><div id='res' class='res'></div>",
+    "js": "function compter(){var t=document.getElementById('txt').value;var mots=(t.trim().match(/\\S+/g)||[]).length;var cars=t.length;var sans=t.replace(/\\s/g,'').length;var phrases=(t.match(/[^.!?]+[.!?]+/g)||[]).length;var min=Math.max(1,Math.round(mots/200));document.getElementById('res').innerHTML='Mots : <b>'+mots+'</b> | Caractères : <b>'+cars+'</b> ('+sans+' sans espaces)<br>Phrases : <b>'+phrases+'</b> | Lecture : ~<b>'+min+' min</b>';}document.addEventListener('input',function(e){if(e.target&&e.target.id==='txt')compter();});"
+  },
+  {
+    "slug": "generateur-qr-code",
+    "title": "Générateur QR Code gratuit",
+    "meta": "Créez un QR code gratuit pour lien, wifi, texte. Téléchargeable en image.",
+    "h1": "Générateur QR Code gratuit",
+    "pitch": "Transformez un lien, un texte ou un contact en QR code téléchargeable. Pratique pour menus, cartes de visite, wifi invité. Image générée via API gratuite.",
+    "ui_html": "<label>Texte / lien<input id='qrtext' type='text' value='https://example.com' style='width:100%'></label><button onclick='genQR()'>Générer QR</button><div id='res' class='res'></div>",
+    "js": "function genQR(){var t=encodeURIComponent(document.getElementById('qrtext').value||'test');document.getElementById('res').innerHTML='<img alt=\"QR\" src=\"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+t+'\"><br><a href=\"https://api.qrserver.com/v1/create-qr-code/?size=600x600&data='+t+'\" download>Clic droit > Enregistrer pour télécharger</a>';}genQR();"
+  },
+  {
+    "slug": "convertisseur-unites",
+    "title": "Convertisseur unités : kg/lbs, cm/inch, °C/°F",
+    "meta": "Convertissez poids, tailles, distances et températures. Outil gratuit.",
+    "h1": "Convertisseur d'unités",
+    "pitch": "kg ↔ livres, cm ↔ pouces, km ↔ miles, °C ↔ °F. Indispensable pour recettes US, voyage et shopping international.",
+    "ui_html": "<label>Valeur<input id='v' type='number' value='1' step='any'></label><label>Conversion<select id='c'><option value='kg-lb'>kg → livres</option><option value='lb-kg'>livres → kg</option><option value='cm-in'>cm → pouces</option><option value='in-cm'>pouces → cm</option><option value='km-mi'>km → miles</option><option value='mi-km'>miles → km</option><option value='c-f'>°C → °F</option><option value='f-c'>°F → °C</option></select></label><button onclick='convU()'>Convertir</button><div id='res' class='res'></div>",
+    "js": "function convU(){var v=parseFloat(document.getElementById('v').value)||0;var c=document.getElementById('c').value;var o=0;if(c==='kg-lb')o=v*2.20462;if(c==='lb-kg')o=v/2.20462;if(c==='cm-in')o=v/2.54;if(c==='in-cm')o=v*2.54;if(c==='km-mi')o=v*0.621371;if(c==='mi-km')o=v/0.621371;if(c==='c-f')o=v*9/5+32;if(c==='f-c')o=(v-32)*5/9;document.getElementById('res').innerHTML='Résultat : <b>'+o.toFixed(2)+'</b>';}"
+  },
+  {
+    "slug": "calcul-age",
+    "title": "Calcul d'âge exact : ans, mois, jours",
+    "meta": "Calculez votre âge exact en ans, mois et jours. Gratuit.",
+    "h1": "Calcul d'âge exact",
+    "pitch": "Date de naissance → âge exact en années, mois, jours et total de jours vécus. Fun et utile pour formulaires administratifs.",
+    "ui_html": "<label>Date de naissance<input id='dn' type='date' value='1990-01-01'></label><button onclick='calcAge()'>Calculer</button><div id='res' class='res'></div>",
+    "js": "function calcAge(){var d=new Date(document.getElementById('dn').value);var n=new Date();if(isNaN(d))return;var age=n.getFullYear()-d.getFullYear();var m=n.getMonth()-d.getMonth();if(m<0||(m===0&&n.getDate()<d.getDate()))age--;var diff=Math.floor((n-d)/86400000);document.getElementById('res').innerHTML='Âge : <b>'+age+' ans</b><br>Jours vécus : <b>'+diff.toLocaleString('fr-FR')+'</b>';}"
+  },
+  {
+    "slug": "generateur-facture",
+    "title": "Générateur de facture / devis gratuit (PDF)",
+    "meta": "Créez une facture ou un devis gratuit et imprimez en PDF. Sans inscription.",
+    "h1": "Générateur facture / devis gratuit",
+    "pitch": "Remplissez, prévisualisez, imprimez en PDF (Ctrl+P). Pour auto-entrepreneurs. Version de base gratuite — le Pack 50 templates Excel + suivi auto est en vente pour aller plus loin.",
+    "ui_html": "<label>Votre nom / société<input id='f1' value='Mon Entreprise'></label><label>Client<input id='f2' value='Client Exemple'></label><label>Prestation<input id='f3' value='Prestation design'></label><label>Montant HT (€)<input id='f4' type='number' value='500'></label><label>TVA (%)<input id='f5' type='number' value='20'></label><button onclick='fact()'>Générer aperçu</button><button onclick='window.print()'>Imprimer / PDF</button><div id='res' class='res'></div>",
+    "js": "function fact(){var a=document.getElementById('f1').value;var b=document.getElementById('f2').value;var c=document.getElementById('f3').value;var m=parseFloat(document.getElementById('f4').value)||0;var t=parseFloat(document.getElementById('f5').value)||0;var ttc=m*(1+t/100);var d=new Date().toLocaleDateString('fr-FR');document.getElementById('res').innerHTML='<hr><b>FACTURE — '+d+'</b><br>De : '+a+'<br>À : '+b+'<br>Objet : '+c+'<br>Total HT : '+m.toFixed(2)+' €<br>TVA '+t+'%<br><b>Total TTC : '+ttc.toFixed(2)+' €</b>';}fact();"
+  }
+]
