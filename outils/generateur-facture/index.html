@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Générateur de facture / devis gratuit (PDF) — Radin Malin</title>
+<meta name="description" content="Créez une facture ou un devis gratuit et imprimez en PDF. Sans inscription.">
+<meta name="theme-color" content="#0d1120">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="canonical" href="https://VOTRE-PSEUDO.github.io/radin-malin/outils/generateur-facture/">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="site"><div class="wrap topbar">
+<a class="logo" href="../../"><span class="logo-dot">💰</span><span>Radin Malin<small>OUTILS GRATUITS • COMPARATIFS</small></span></a>
+<nav class="main"><a href="../../">Accueil</a><a href="../../#outils">Outils</a><a href="../../#comparatifs">Comparatifs</a><a class="cta" href="../../#comparatifs">Top promos →</a></nav>
+</div></header>
+<main class="wrap sheet">
+<div style="height:14px"></div>
+
+<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Tous les outils</a></p>
+<h1 class="page">Générateur facture / devis gratuit</h1>
+<p class="lead">Remplissez, prévisualisez, imprimez en PDF (Ctrl+P). Pour auto-entrepreneurs. Version de base gratuite — le Pack 50 templates Excel + suivi auto est en vente pour aller plus loin.</p>
+<div class="toolbox"><label>Votre nom / société<input id='f1' value='Mon Entreprise'></label><label>Client<input id='f2' value='Client Exemple'></label><label>Prestation<input id='f3' value='Prestation design'></label><label>Montant HT (€)<input id='f4' type='number' value='500'></label><label>TVA (%)<input id='f5' type='number' value='20'></label><button class="action" onclick='fact()'>Générer aperçu</button><button class="action" onclick='window.print()'>Imprimer / PDF</button><div id='res' class='res'></div></div>
+<script>function fact(){var a=document.getElementById('f1').value;var b=document.getElementById('f2').value;var c=document.getElementById('f3').value;var m=parseFloat(document.getElementById('f4').value)||0;var t=parseFloat(document.getElementById('f5').value)||0;var ttc=m*(1+t/100);var d=new Date().toLocaleDateString('fr-FR');document.getElementById('res').innerHTML='<hr><b>FACTURE — '+d+'</b><br>De : '+a+'<br>À : '+b+'<br>Objet : '+c+'<br>Total HT : '+m.toFixed(2)+' €<br>TVA '+t+'%<br><b>Total TTC : '+ttc.toFixed(2)+' €</b>';}fact();</script>
+<div class="card-section"><h2>Pourquoi utiliser cet outil ?</h2>
+<div class="guide"><div><b>⚡ Instantané</b><br>Calcul direct dans ton navigateur.</div><div><b>🔒 Privé</b><br>Rien n'est envoyé ni stocké.</div><div><b>📱 Mobile</b><br>Fonctionne sur téléphone et PC.</div><div><b>🆓 Gratuit</b><br>Sans inscription, pour toujours.</div></div></div>
+
+<p class="disc">⚠️ Liens affiliés : si vous achetez via nos liens, nous touchons une petite commission sans surcoût pour vous. Cela finance les outils gratuits.</p>
+</main>
+<footer class="site"><div class="wrap"><div class="foot-grid">
+<div><h4>💰 Radin Malin</h4><p style="margin:0;font-size:14px">Outils gratuits + 1 comparatif publié chaque jour en automatique. On finance le site avec l'affiliation et la pub, sans surcoût pour toi.</p></div>
+<div><h4>Site</h4><a href="../../">Accueil</a><a href="../../#outils">Tous les outils</a><a href="../../#comparatifs">Comparatifs</a></div>
+<div><h4>Technique</h4><a href="../../sitemap.xml">Sitemap</a><a href="../../rss.xml">Flux RSS</a><a href="../../#methode">Notre méthode</a></div>
+</div><p class="hint">© 2026 Radin Malin — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
+</body>
+</html>
