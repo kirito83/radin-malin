@@ -39,7 +39,7 @@ python daily.py        # simule la tâche du jour : +1 article + rebuild
 | Amazon affiliation | `amazon_tag` | Amazon Partenaires → ton tag `xxx-21` (3 ventes/180j requises sinon) |
 | Pubs Google | `adsense_client` | AdSense → `ca-pub-xxx` (accepte après ~20-30 pages) |
 | Pubs faciles (en attendant AdSense) | `monetag_tag` | Monetag.com → tag JS (acceptation immédiate) |
-| Vente premium auto | `stripe_pro_link` / `paypal_link` | Stripe Dashboard → Payment Links / PayPal.me |
+| Vente premium auto | `stripe_pro_link` / `paypal_link` | Stripe Dashboard → Payment Links / PayPal.me (page `/premium/`, livraison auto via `/premium/merci/`) |
 
 Sans les IDs, les boutons pointent vers la recherche Amazon simple (0 commission) et les pubs sont masquées : le site tourne quand même et accumule le SEO.
 

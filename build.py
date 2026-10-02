@@ -291,9 +291,13 @@ def build():
 <h1 class="page">Pack Malin : 50 templates factures + devis + budget — {esc(m.get('premium_price','9,90 €'))}</h1>
 <p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','50 templates'))}. Paiement Stripe/PayPal, accès immédiat, sans abonnement.</p>
 <div class="card-section"><h2>✅ Ce que tu reçois</h2>
-<div class="guide"><div><b>🧾 20 factures/devis</b><br>Excel + PDF, TVA auto, numérotation.</div><div><b>📊 Suivi budget</b><br>Tableau revenus/dépenses 12 mois.</div><div><b>📦 30 bonus</b><br>Relances, CGV, reçus, checklists.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement après paiement.</div></div>
+<div class="guide"><div><b>📊 Budget 12 mois</b><br>96 lignes pré-remplies, écarts rouge/vert + tableau de bord graphique + traqueur d'abonnements.</div><div><b>🧾 Suivi 50 factures</b><br>TTC auto, statuts, reste à encaisser calculé seul.</div><div><b>🖨️ Facture + devis A4</b><br>Modèles pro prêts à imprimer, TVA auto, mentions légales.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement dès le paiement, sans abonnement.</div></div>
 <div class="actions"><a class="btn" href="{esc(m.get('stripe_pro_link',''))}">💳 Acheter {esc(m.get('premium_price','9,90 €'))} avec Stripe →</a><a class="btn ghost" style="color:#111;border-color:#ddd;background:#fff" href="{esc(m.get('paypal_link',''))}">Payer avec PayPal</a></div>
-<p class="hint">Paiement sécurisé. Si les liens contiennent encore VOTRE-LIEN, remplace-les dans config.json.</p></div>"""
+<p class="hint">🛡️ Garantie 14 jours : pack inutile ? Un email et on te rembourse, sans question. Paiement sécurisé Stripe/PayPal. Si les liens contiennent encore VOTRE-LIEN, remplace-les dans config.json.</p></div>
+<div class="card-section"><h2>❓ Questions</h2>
+<details open><summary>Faut-il Excel payant ?</summary><p>Non. Les fichiers s'ouvrent dans Excel, LibreOffice (gratuit) et Google Sheets. Les CSV bonus s'ouvrent partout.</p></details>
+<details><summary>Et si je suis auto-entrepreneur en franchise TVA ?</summary><p>Le modèle facture l'explique : supprime la ligne TVA et ajoute la mention art. 293 B, déjà écrite dans le fichier.</p></details>
+<details><summary>Comment je reçois le pack ?</summary><p>Redirection immédiate vers la page de téléchargement après paiement Stripe. Reçu + facture Stripe par email.</p></details></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Pack premium " + m.get('premium_price',''), "Pack templates factures devis budget Excel PDF.", prem_body, "premium/", prefix="../"))
@@ -317,8 +321,8 @@ def build():
     merci_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">✅ Merci ! Voici ton pack ({esc(m.get('premium_price','9,90 €'))})</h1>
 <p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
-<div class="card-section"><h2>📦 Tes 3 fichiers Excel (formules incluses)</h2>
-<div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories, écarts auto rouge/vert, total annuel.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div></div>
+<div class="card-section"><h2>📦 Tes 4 fichiers Excel (formules incluses)</h2>
+<div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories + tableau de bord graphique + chasse aux abonnements.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div><div><b>📝 modele-devis.xlsx</b><br>Devis pro valable 3 mois, acompte 30 %.<br><a class="btn small" href="../telechargement/modele-devis.xlsx" download>Télécharger →</a></div></div>
 <p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a> · <a href="../telechargement/epargne-objectifs.csv" download>épargne.csv</a></p>
 <p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(cfg['site_url'].rstrip('/'))}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)

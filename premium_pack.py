@@ -71,6 +71,60 @@ def build_pack(dl_dir):
     ], start=3):
         g.cell(i, 1, t)
     g.column_dimensions["A"].width = 90
+    # --- Onglet Tableau de bord : totaux par catégorie + graphique ---
+    from openpyxl.chart import BarChart, Reference
+    db = wb.create_sheet("Tableau de bord")
+    db["A1"] = "Dépenses annuelles par catégorie (Réel)"
+    db["A1"].font = Font(bold=True, size=14)
+    db.append([])  # ligne 2 vide
+    db.cell(3, 1, "Catégorie").fill = HDR
+    db.cell(3, 1).font = HDRF
+    db.cell(3, 2, "Prévu (€)").fill = HDR
+    db.cell(3, 2).font = HDRF
+    db.cell(3, 3, "Réel (€)").fill = HDR
+    db.cell(3, 3).font = HDRF
+    for i, (cat, _) in enumerate(cats, start=4):
+        db.cell(i, 1, cat).border = BOX
+        db.cell(i, 2, f"=SUMIF('Budget 2026'!B2:B97,A{i},'Budget 2026'!C2:C97)").border = BOX
+        db.cell(i, 3, f"=SUMIF('Budget 2026'!B2:B97,A{i},'Budget 2026'!D2:D97)").border = BOX
+    tot = 4 + len(cats)
+    db.cell(tot, 1, "TOTAL").font = Font(bold=True)
+    db.cell(tot, 2, f"=SUM(B4:B{tot-1})").font = Font(bold=True)
+    db.cell(tot, 3, f"=SUM(C4:C{tot-1})").font = Font(bold=True)
+    db.cell(tot + 2, 1, "Taux d'épargne réel").font = Font(bold=True, size=12)
+    db.cell(tot + 2, 3, f"=SUMIF('Budget 2026'!B2:B97,\"Épargne\",'Budget 2026'!D2:D97)/C{tot}")
+    db.cell(tot + 2, 3).number_format = "0%"
+    chart = BarChart()
+    chart.title = "Réel dépensé par catégorie"
+    chart.data = Reference(db, min_col=3, min_row=3, max_row=tot - 1)
+    chart.cats = Reference(db, min_col=1, min_row=4, max_row=tot - 1)
+    chart.height, chart.width = 8, 15
+    db.add_chart(chart, f"A{tot + 4}")
+    for col, w in [("A", 16), ("B", 13), ("C", 13)]:
+        db.column_dimensions[col].width = w
+    # --- Onglet Abonnements : le tueur d'économies ---
+    ab = wb.create_sheet("Abonnements")
+    ab["A1"] = "Tous tes abonnements : garde ou résilie (l'économie se calcule seule)"
+    ab["A1"].font = Font(bold=True, size=13)
+    for col, h in enumerate(["Service", "€ / mois", "€ / an", "Je garde ? (Oui/Non)", "Économisé si résilié"], start=1):
+        c = ab.cell(3, col, h)
+        c.fill, c.font, c.border = HDR, HDRF, BOX
+    exemples_ab = [("Netflix", 13.49), ("Spotify", 11.12), ("Salle de sport", 30), ("Stockage cloud", 2.99), ("À compléter", 0)]
+    for i, (nom, prix) in enumerate(exemples_ab, start=4):
+        ab.cell(i, 1, nom).border = BOX
+        ab.cell(i, 2, prix).border = BOX
+        ab.cell(i, 3, f"=B{i}*12").border = BOX
+        ab.cell(i, 4, "Oui").border = BOX
+        ab.cell(i, 5, f'=IF(D{i}="Non",C{i},0)').border = BOX
+        ab.cell(i, 5).fill = EDIT
+    ab.cell(10, 1, "ÉCONOMIE ANNUELLE SI RÉSILIATION").font = Font(bold=True, size=12)
+    ab.cell(10, 5, "=SUM(E4:E9)").font = Font(bold=True, size=13)
+    ab.cell(10, 5).fill = ACC
+    dv2 = DataValidation(type="list", formula1='"Oui,Non"', allow_blank=True)
+    ab.add_data_validation(dv2)
+    dv2.add("D4:D9")
+    for col, w in [("A", 22), ("B", 11), ("C", 11), ("D", 18), ("E", 22)]:
+        ab.column_dimensions[col].width = w
     wb.save(os.path.join(dl_dir, "budget-mensuel.xlsx"))
 
     # ---------- 2. SUIVI FACTURES ----------
@@ -161,7 +215,23 @@ def build_pack(dl_dir):
               "TVA non applicable si auto-entrepreneur en franchise (art. 293 B du CGI) — supprime la ligne TVA dans ce cas."]:
         ws.cell(ws.max_row + 2, 1, t).font = Font(size=9, color="64748B")
     wb.save(os.path.join(dl_dir, "modele-facture.xlsx"))
-    return ["budget-mensuel.xlsx", "suivi-factures.xlsx", "modele-facture.xlsx"]
+    # ---------- 4. MODELE DEVIS (clone de la facture, mentions devis) ----------
+    from copy import copy as _copy
+    from openpyxl import load_workbook as _load
+    wd = _load(os.path.join(dl_dir, "modele-facture.xlsx"))
+    ws = wd["Facture"]
+    ws["A1"] = "DEVIS"
+    ws["B2"] = "2026-001-D"
+    ws.title = "Devis"
+    # Remplace les 3 lignes de mentions par des mentions devis
+    for row in ws.iter_rows(min_row=1, max_row=ws.max_row):
+        for c in row:
+            if c.value and isinstance(c.value, str) and c.value.startswith("Conditions"):
+                c.value = "Devis valable 3 mois. Bon pour accord, date + signature du client :"
+            if c.value and isinstance(c.value, str) and c.value.startswith("Pénalités"):
+                c.value = "Signature du devis = commande ferme. Acompte de 30 % demandé à la commande."
+    wd.save(os.path.join(dl_dir, "modele-devis.xlsx"))
+    return ["budget-mensuel.xlsx", "suivi-factures.xlsx", "modele-facture.xlsx", "modele-devis.xlsx"]
 
 if __name__ == "__main__":
     print(build_pack(os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "premium", "telechargement")))
