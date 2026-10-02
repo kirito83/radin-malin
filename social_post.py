@@ -14,10 +14,11 @@ def main():
     cfg = json.load(open(os.path.join(ROOT, "config.json"), encoding="utf-8"))
     kws = {k["slug"]: k for k in json.load(open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8"))}
     pub = json.load(open(os.path.join(ROOT, "data", "published.json"), encoding="utf-8"))
-    if not pub:
+    slugs = list(pub.keys()) if isinstance(pub, dict) else pub
+    if not slugs:
         print("SKIP : rien de publié.")
         return
-    last = kws.get(pub[-1])
+    last = kws.get(slugs[-1])
     if not last:
         print("SKIP : dernier slug introuvable.")
         return

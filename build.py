@@ -2,16 +2,22 @@
 # -*- coding: utf-8 -*-
 """Generateur site statique - 100% stdlib, 0 dependance. Cout hebergement: 0 EUR."""
 import json, os, html, datetime, shutil, urllib.parse
+from lib import load, load_published, save_published, today_iso
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
 
-def load(name, default):
-    p = os.path.join(ROOT, name)
-    if not os.path.exists(p):
-        return default
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
+ICONS = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸"}
+
+def art_card(a, href_prefix=""):
+    return f"<a class='art-card' href='{href_prefix}comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>publié le {esc(fr_date(a.get('pub_date', '')))}</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>"
+
+def fr_date(iso):
+    try:
+        y, m, d = iso.split("-")
+        return f"{d}/{m}/{y}"
+    except (ValueError, AttributeError):
+        return iso
 
 def esc(s):
     return html.escape(str(s), quote=True)
@@ -83,7 +89,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <p class="disc">⚠️ {esc(cfg['affiliate_disclaimer'])}</p>
 </main>
 <footer class="site"><div class="wrap"><div class="foot-grid">
-<div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 1 comparatif publié chaque jour en automatique. On finance le site avec l'affiliation et la pub, sans surcoût pour toi.</p></div>
+<div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 2 nouveaux comparatifs chaque jour. Le site est financé par l'affiliation et la pub, sans surcoût pour toi.</p></div>
 <div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
 <div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a></div>
@@ -93,7 +99,9 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 
 def css():
     return """:root{--bg:#f6f7fb;--card:#ffffff;--ink:#0f172a;--muted:#64748b;--line:#e8ecf3;--brand:#ffd60a;--brand-ink:#111;--accent:#6c5ce7;--accent2:#00d2a8;--radius:18px;--shadow:0 10px 30px rgba(15,23,42,.08);--shadow-sm:0 4px 14px rgba(15,23,42,.07)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;margin:0;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;margin:0;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
+a,button,input,select,textarea{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 header.site{position:sticky;top:0;z-index:50;background:rgba(13,17,28,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);color:#fff}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px}
@@ -116,7 +124,7 @@ main.sheet{background:transparent;margin:0 auto 28px;padding:0}
 .stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px;font-size:13px;color:#dbe2ef}
 .stat b{color:#fff;font-size:16px;display:block;line-height:1}
 .actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#111;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-size:15px;box-shadow:0 8px 20px rgba(255,214,10,.3);transition:.18s}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#111;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-size:15px;box-shadow:0 8px 20px rgba(255,214,10,.3);transition:.18s;min-height:44px}
 .btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(255,214,10,.38)}
 .btn.ghost{background:rgba(255,255,255,.08);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.16)}
 .btn.dark{background:#0f172a;color:#fff;box-shadow:var(--shadow-sm)}
@@ -187,7 +195,7 @@ body{padding-bottom:0}
 .topbar{flex-direction:column;align-items:stretch;padding:10px 0}
 nav.main{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
 nav.main::-webkit-scrollbar{display:none}
-nav.main a{white-space:nowrap;flex:0 0 auto}
+nav.main a{white-space:nowrap;flex:0 0 auto;min-height:44px;display:inline-flex;align-items:center}
 .hero{padding:34px 0 26px;border-radius:0 0 22px 22px}
 .card-section{padding:16px;margin:14px 0}
 .toolbox{padding:14px}
@@ -220,14 +228,14 @@ def article_html(cfg, item, related=None):
     faq = f"""<h2>Questions fréquentes</h2>
 <details open><summary>Quel est le meilleur choix en 2026 ?</summary><p>Notre pick qualité/prix : <b>{esc(item['products'][0])}</b>. Les promos changent vite, clique sur « Voir le prix » pour le tarif du jour.</p></details>
 <details><summary>Où acheter au meilleur prix ?</summary><p>Compare Amazon, Cdiscount et Boulanger. Nos boutons pointent vers la recherche Amazon (lien affilié, sans surcoût pour toi).</p></details>
-<details><summary>Comment avons-nous comparé ?</summary><p>Avis clients, fiabilité SAV, rapport qualité/prix et dispo en France. Page mise à jour automatiquement.</p></details>"""
+<details><summary>Comment avons-nous comparé ?</summary><p>Avis clients, fiabilité SAV, rapport qualité/prix et dispo en France. Fiche révisée à chaque mise à jour des offres.</p></details>"""
     schema = {
         "@context": "https://schema.org", "@type": "Article",
         "headline": item["title"], "inLanguage": "fr-FR",
         "author": {"@type": "Organization", "name": cfg["site_name"]},
-        "datePublished": datetime.date.today().isoformat()
+        "datePublished": item.get("pub_date", today_iso())
     }
-    body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a> <span class="cat">{esc(item['category'])}</span> <span class="hint">mis à jour le {datetime.date.today().strftime('%d/%m/%Y')}</span></p>
+    body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a> <span class="cat">{esc(item['category'])}</span> <span class="hint">publié le {esc(fr_date(item.get('pub_date', '')))}</span></p>
 <h1 class="page">{esc(item['title'])}</h1>
 <p class="lead">Tu cherches <b>{esc(item['keyword'])}</b> ? Voici les 3 modèles qui reviennent le plus dans les avis positifs en France, classés par rapport qualité/prix.</p>
 <div class="podium">{podium}</div>
@@ -239,38 +247,45 @@ def article_html(cfg, item, related=None):
 <div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (1 message/jour max, zéro spam).</p>
 <div class="actions">{'<a class="btn" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Recevoir les alertes prix →</a>' if cfg.get('telegram_channel') else '<a class="btn" href="../../#comparatifs">⭐ Voir les autres comparatifs →</a>'}</div></div>
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
-<div class="grid">{"".join([f"<a class='art-card' href='../../comparatifs/{esc(r['slug'])}/'><div class='art-top'><span class='cat'>{esc(r['category'])}</span></div><b class='t'>{esc(r['title'])}</b><span class='k'>{esc(r['keyword'])}</span><span class='art-cta'>Comparer →</span></a>" for r in (related or [])[:3]])}</div></div>
+<div class="grid">{"".join([art_card(r, "../../") for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
 <div style="height:64px"></div>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
     return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../")
 
-def tool_page(cfg, t):
+def tool_page(cfg, t, all_tools=None):
     # Boutons avec la bonne classe moderne
     ui = t['ui_html'].replace('<button', '<button class="action"')
+    others = [x for x in (all_tools or []) if x["slug"] != t["slug"]][:3]
+    others_html = "".join([f"<a class='tool-card' href='../../outils/{esc(x['slug'])}/'><span class='ico'>{ICONS.get(x['slug'], '🧰')}</span><span><b>{esc(x['h1'])}</b><span>{esc(x['meta'])}</span></span><span class='go'>→</span></a>" for x in others])
     body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Tous les outils</a></p>
 <h1 class="page">{esc(t['h1'])}</h1>
 <p class="lead">{esc(t['pitch'])}</p>
 <div class="toolbox">{ui}</div>
 <script>{t['js']}</script>
 <div class="card-section"><h2>Pourquoi utiliser cet outil ?</h2>
-<div class="guide"><div><b>⚡ Instantané</b><br>Calcul direct dans ton navigateur.</div><div><b>🔒 Privé</b><br>Rien n'est envoyé ni stocké.</div><div><b>📱 Mobile</b><br>Fonctionne sur téléphone et PC.</div><div><b>🆓 Gratuit</b><br>Sans inscription, pour toujours.</div></div></div>"""
+<div class="guide"><div><b>⚡ Instantané</b><br>Calcul direct dans ton navigateur.</div><div><b>🔒 Privé</b><br>Rien n'est envoyé ni stocké.</div><div><b>📱 Mobile</b><br>Fonctionne sur téléphone et PC.</div><div><b>🆓 Gratuit</b><br>Sans inscription, pour toujours.</div></div></div>
+<div class="card-section"><h2>🧰 Autres outils gratuits</h2><div class="grid">{others_html}</div></div>"""
     return base_page(cfg, t["title"], t["meta"], body, f"outils/{t['slug']}/", prefix="../../")
 
 def build():
     cfg = load("config.json", {})
     tools = load("data/tools.json", [])
     keywords = load("data/keywords.json", [])
-    published = load("data/published.json", [])
+    published = load_published()
     if not published:
         # Seed : 3 articles pour le lancement
-        published = [k["slug"] for k in keywords[:3]]
-        with open(os.path.join(ROOT, "data", "published.json"), "w", encoding="utf-8") as f:
-            json.dump(published, f, ensure_ascii=False, indent=2)
+        published = {k["slug"]: today_iso() for k in keywords[:3]}
+        save_published(published)
 
     by_slug = {k["slug"]: k for k in keywords}
-    articles = [by_slug[s] for s in published if s in by_slug]
+    articles = []
+    for s, d in published.items():
+        if s in by_slug:
+            a = dict(by_slug[s])
+            a["pub_date"] = d
+            articles.append(a)
 
     if os.path.exists(PUBLIC):
         shutil.rmtree(PUBLIC)
@@ -288,7 +303,7 @@ def build():
         d = os.path.join(PUBLIC, "outils", t["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(tool_page(cfg, t))
+            f.write(tool_page(cfg, t, tools))
 
     # Pages articles
     for a in articles:
@@ -305,7 +320,7 @@ def build():
     for cat in hubs:
         items = [a for a in articles if a["category"] == cat]
         label = cat_labels.get(cat, cat)
-        cards = "".join([f"<a class='art-card' href='../../comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(cat)}</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>" for a in reversed(items)])
+        cards = "".join([art_card(a, "../../") for a in reversed(items)])
         hbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a></p>
 <h1 class="page">Comparatifs {esc(label)} ({len(items)})</h1>
 <p class="lead">Tous nos guides d'achat {esc(label.lower())} : {esc(', '.join([x['keyword'] for x in items[:5]]))}… mis à jour en continu.</p>
@@ -316,25 +331,24 @@ def build():
             f.write(base_page(cfg, f"Comparatifs {label}", f"Tous nos comparatifs {label.lower()} : guides d'achat et meilleurs prix.", hbody, f"categorie/{cat}/", prefix="../../"))
 
     # Index
-    icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸"}
-    cards_outils = "".join([f"<a class='tool-card' data-name='{esc(t['h1'] + ' ' + t['meta'])}' href='outils/{esc(t['slug'])}/'><span class='ico'>{icons.get(t['slug'], '🧰')}</span><span><b>{esc(t['h1'])}</b><span>{esc(t['meta'])}</span></span><span class='go'>→</span></a>" for t in tools])
-    cards_articles = "".join([f"<a class='art-card' href='comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>mis à jour • 2 min</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>" for a in reversed(articles)])
+    cards_outils = "".join([f"<a class='tool-card' data-name='{esc(t['h1'] + ' ' + t['meta'])}' href='outils/{esc(t['slug'])}/'><span class='ico'>{ICONS.get(t['slug'], '🧰')}</span><span><b>{esc(t['h1'])}</b><span>{esc(t['meta'])}</span></span><span class='go'>→</span></a>" for t in tools])
+    cards_articles = "".join([art_card(a) for a in reversed(articles)])
     index_body = f"""<div class="hero"><div class="wrap">
-<span class="badge"><span class="pulse"></span> +1 comparatif publié chaque jour en auto • 100% gratuit</span>
+<span class="badge"><span class="pulse"></span> 2 nouveaux comparatifs chaque jour • 100% gratuit</span>
 <h1>Économise chaque jour<br><span>sans y penser.</span></h1>
 <p class="lead">{esc(cfg['site_description'])} Outils instantanés + comparatifs malins avec meilleur prix.</p>
 <div class="actions"><a class="btn" href="#outils">🧰 Utiliser un outil gratuit</a><a class="btn ghost" href="#comparatifs">⭐ Voir les comparatifs</a>{'<a class="btn ghost" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Bons plans sur Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
-<div class="stats"><div class="stat"><b>{len(tools)}</b>outils gratuits</div><div class="stat"><b>{len(articles)}</b>comparatifs en ligne</div><div class="stat"><b>+1/jour</b>publication auto</div><div class="stat"><b>0 €</b>sans inscription</div></div>
+<div class="stats"><div class="stat"><b>{len(tools)}</b>outils gratuits</div><div class="stat"><b>{len(articles)}</b>comparatifs en ligne</div><div class="stat"><b>+2/jour</b>comparatifs frais</div><div class="stat"><b>0 €</b>sans inscription</div></div>
 </div></div>
 <div class="card-section"><h2 id="outils">🧰 Outils gratuits</h2><p class="sub">Les pages qui ramènent le trafic Google stable. Clique, utilise, repars.</p>
 <div class="search"><span>🔎</span><input id="q" placeholder="Rechercher un outil : TVA, prêt, IMC, QR..." oninput="filtrer()"></div>
 <div class="grid" id="tools-grid">{cards_outils}</div>
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
-<div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Pages « meilleur X » qui génèrent les commissions affiliation en automatique.</p>
+<div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Nos guides « meilleur X » : le bon choix au meilleur prix du jour.</p>
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
-<div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">Un nouveau guide d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
+<div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">2 nouveaux guides d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
 <p class="hint"><b>Ajoute-nous à tes favoris :</b> un nouvel outil ou comparatif t'attend chaque jour.</p></div>"""
     with open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, cfg["site_name"] + " — outils gratuits & comparatifs", cfg["site_description"], index_body, ""))
@@ -343,7 +357,7 @@ def build():
     m = cfg.get("monetization", {})
     prem_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Pack Malin : 50 templates factures + devis + budget — {esc(m.get('premium_price','9,90 €'))}</h1>
-<p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','50 templates'))}. Paiement Stripe/PayPal, accès immédiat, sans abonnement.</p>
+<p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','pack Excel'))}. {'Paiement Stripe ou PayPal' if m.get('paypal_link') and 'VOTRE' not in m.get('paypal_link') else 'Paiement Stripe sécurisé'}, accès immédiat, sans abonnement.</p>
 <div class="card-section"><h2>✅ Ce que tu reçois</h2>
 <div class="guide"><div><b>📊 Budget 12 mois</b><br>96 lignes pré-remplies, écarts rouge/vert + tableau de bord graphique + traqueur d'abonnements.</div><div><b>🧾 Suivi 50 factures</b><br>TTC auto, statuts, reste à encaisser calculé seul.</div><div><b>🖨️ Facture + devis A4</b><br>Modèles pro prêts à imprimer, TVA auto, mentions légales.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement dès le paiement, sans abonnement.</div></div>
 <div class="actions"><a class="btn" href="{esc(m.get('stripe_pro_link',''))}">💳 Acheter {esc(m.get('premium_price','9,90 €'))} avec Stripe →</a>{'<a class="btn ghost" style="color:#111;border-color:#ddd;background:#fff" href="' + esc(m.get('paypal_link','')) + '">Payer avec PayPal</a>' if m.get('paypal_link') and 'VOTRE' not in m.get('paypal_link') else ''}</div>
@@ -389,7 +403,7 @@ def build():
     legales = {
         "a-propos": ("À propos", "Qui est derrière Radin Malin et sa méthode.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">À propos de {esc(cfg['site_name'])}</h1>
-<p class="lead">{esc(cfg['site_name'])} aide à dépenser moins : outils gratuits pour calculer et comparer, plus un comparatif d'achat publié chaque jour.</p>
+<p class="lead">{esc(cfg['site_name'])} aide à dépenser moins : outils gratuits pour calculer et comparer, plus 2 comparatifs d'achat chaque jour.</p>
 <div class="card-section"><h2>🧭 Notre méthode</h2><div class="guide"><div><b>Indépendance</b><br>Classement par rapport qualité/prix, jamais vendu aux marques.</div><div><b>Transparence</b><br>Liens affiliés signalés, sans surcoût pour toi.</div><div><b>Pratique</b><br>Outils sans inscription, comparatifs de 2 minutes.</div><div><b>Régularité</b><br>Contenu frais chaque jour, prix vérifiés au clic.</div></div></div>"""),
         "contact": ("Contact", "Une erreur, une idée, un partenariat ? Écris-nous.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Contact</h1>
@@ -398,7 +412,7 @@ def build():
         "confidentialite": ("Politique de confidentialité", "Cookies, affiliation et données : ce que fait ce site.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Politique de confidentialité</h1>
 <p class="lead">Site personnel sans compte ni inscription. Voici exactement ce qui se passe quand tu visites.</p>
-<div class="card-section"><h2>🍪 Cookies et publicité</h2><p>Nos partenaires publicitaires (Monetag, et plus tard Google AdSense) déposent des cookies pour mesurer et personnaliser les annonces. Tu peux les refuser dans ton navigateur, le site reste utilisable.</p>
+<div class="card-section"><h2>🍪 Cookies et publicité</h2><p>Nos partenaires publicitaires (Monetag, Google AdSense) déposent des cookies pour mesurer et personnaliser les annonces. Tu peux les refuser dans ton navigateur, le site reste utilisable.</p>
 <h2>🔗 Affiliation</h2><p>Nos boutons « Voir le prix » contiennent un identifiant affilié (Amazon) : si tu achètes dans les 24 h, nous touchons une commission <b>sans surcoût pour toi</b>. C'est ce qui finance les outils gratuits.</p>
 <h2>📊 Mesure d'audience</h2><p>Statistiques anonymes éventuelles (pages vues), aucune donnée nominative collectée sur le site. Les outils calculent dans ton navigateur : rien n'est envoyé ni stocké.</p>
 <h2>✉️ Contact</h2><p>Pour toute question ou suppression de donnée : passe par la page Contact.</p></div>"""),
