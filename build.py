@@ -85,6 +85,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 1 comparatif publié chaque jour en automatique. On finance le site avec l'affiliation et la pub, sans surcoût pour toi.</p></div>
 <div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
+<div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
 </body>
 </html>"""
@@ -169,7 +170,7 @@ summary{font-weight:800;cursor:pointer}
 .hint{font-size:12.5px;color:var(--muted)}
 footer.site{margin-top:26px;background:#0d1120;color:#aeb8cc;padding:28px 0;border-radius:28px 28px 0 0}
 footer.site a{color:#dbe2ef}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:16px}
 .foot-grid h4{color:#fff;margin:0 0 8px;font-size:14px}
 .foot-grid a{display:block;text-decoration:none;font-size:14px;margin:4px 0;color:#aeb8cc}
 .search{position:relative;margin:12px 0 4px}
@@ -178,7 +179,26 @@ footer.site a{color:#dbe2ef}
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
 body{padding-bottom:0}
-@media(max-width:640px){.foot-grid{grid-template-columns:1fr}nav.main a{padding:7px 11px;font-size:13px}.hero{padding:40px 0 30px}}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
+.tscroll table{margin:0;min-width:560px}
+@media(max-width:640px){
+.foot-grid{grid-template-columns:1fr 1fr}
+.topbar{flex-direction:column;align-items:stretch;padding:10px 0}
+nav.main{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{white-space:nowrap;flex:0 0 auto}
+.hero{padding:34px 0 26px;border-radius:0 0 22px 22px}
+.card-section{padding:16px;margin:14px 0}
+.toolbox{padding:14px}
+th,td{padding:9px 8px;font-size:13px}
+.sticky-cta{padding:8px 10px;gap:8px}
+.sticky-cta span{display:none}
+.sticky-cta .btn{width:100%;justify-content:center}
+.hero .actions .btn{width:100%;justify-content:center}
+.pick{padding:12px}
+h1.page{margin-top:10px}
+}
+@media(max-width:400px){.foot-grid{grid-template-columns:1fr}}
 """
 
 def article_html(cfg, item, related=None):
@@ -210,8 +230,8 @@ def article_html(cfg, item, related=None):
 <h1 class="page">{esc(item['title'])}</h1>
 <p class="lead">Tu cherches <b>{esc(item['keyword'])}</b> ? Voici les 3 modèles qui reviennent le plus dans les avis positifs en France, classés par rapport qualité/prix.</p>
 <div class="podium">{podium}</div>
-<div class="card-section"><h2>⚡ Comparatif express</h2><p class="sub">Clique pour vérifier la promo du jour — les prix bougent vite.</p>
-<table><tr><th>Modèle</th><th>Note</th><th>Budget</th><th>Offre</th></tr>{rows}</table></div>
+<div class="card-section"><h2>⚡ Comparatif express</h2><p class="sub">Clique pour vérifier la promo du jour — les prix bougent vite. Fais défiler → sur mobile.</p>
+<div class="tscroll"><table><tr><th>Modèle</th><th>Note</th><th>Budget</th><th>Offre</th></tr>{rows}</table></div></div>
 <div class="card-section"><h2>🧭 Guide d'achat express (2 min)</h2>
 <div class="guide"><div><b>1. Budget</b><br>Fixe un plafond AVANT de cliquer.</div><div><b>2. Usage réel</b><br>Liste tes 3 critères non-négociables.</div><div><b>3. Avis</b><br>Lis 5 avis 3-4 étoiles, les plus honnêtes.</div><div><b>4. Prix</b><br>Clique « Voir le prix » pour la promo du jour.</div></div></div>
 {faq}
@@ -343,9 +363,34 @@ def build():
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../"))
 
+    # Pages légales (exigées pour AdSense + confiance)
+    tg = cfg.get("telegram_channel", "")
+    contact_cta = f"""<div class="actions"><a class="btn" href="{esc(tg)}">✈️ Nous contacter sur Telegram →</a></div>""" if tg else ""
+    legales = {
+        "a-propos": ("À propos", "Qui est derrière Radin Malin et sa méthode.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">À propos de {esc(cfg['site_name'])}</h1>
+<p class="lead">{esc(cfg['site_name'])} aide à dépenser moins : outils gratuits pour calculer et comparer, plus un comparatif d'achat publié chaque jour.</p>
+<div class="card-section"><h2>🧭 Notre méthode</h2><div class="guide"><div><b>Indépendance</b><br>Classement par rapport qualité/prix, jamais vendu aux marques.</div><div><b>Transparence</b><br>Liens affiliés signalés, sans surcoût pour toi.</div><div><b>Pratique</b><br>Outils sans inscription, comparatifs de 2 minutes.</div><div><b>Régularité</b><br>Contenu frais chaque jour, prix vérifiés au clic.</div></div></div>"""),
+        "contact": ("Contact", "Une erreur, une idée, un partenariat ? Écris-nous.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">Contact</h1>
+<p class="lead">Prix cassé, lien mort, idée d'outil ou proposition de partenariat : on lit tout, réponse sous 48 h ouvrées.</p>
+<div class="card-section"><h2>✈️ Le plus rapide : Telegram</h2><p class="sub">Canal + messages directs, sans spam.</p>{contact_cta}</div>"""),
+        "confidentialite": ("Politique de confidentialité", "Cookies, affiliation et données : ce que fait ce site.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">Politique de confidentialité</h1>
+<p class="lead">Site personnel sans compte ni inscription. Voici exactement ce qui se passe quand tu visites.</p>
+<div class="card-section"><h2>🍪 Cookies et publicité</h2><p>Nos partenaires publicitaires (Monetag, et plus tard Google AdSense) déposent des cookies pour mesurer et personnaliser les annonces. Tu peux les refuser dans ton navigateur, le site reste utilisable.</p>
+<h2>🔗 Affiliation</h2><p>Nos boutons « Voir le prix » contiennent un identifiant affilié (Amazon) : si tu achètes dans les 24 h, nous touchons une commission <b>sans surcoût pour toi</b>. C'est ce qui finance les outils gratuits.</p>
+<h2>📊 Mesure d'audience</h2><p>Statistiques anonymes éventuelles (pages vues), aucune donnée nominative collectée sur le site. Les outils calculent dans ton navigateur : rien n'est envoyé ni stocké.</p>
+<h2>✉️ Contact</h2><p>Pour toute question ou suppression de donnée : passe par la page Contact.</p></div>"""),
+    }
+    for slug, (titre, meta, body) in legales.items():
+        os.makedirs(os.path.join(PUBLIC, slug), exist_ok=True)
+        with open(os.path.join(PUBLIC, slug, "index.html"), "w", encoding="utf-8") as f:
+            f.write(base_page(cfg, titre, meta, body, f"{slug}/", prefix="../"))
+
     # Sitemap + robots + RSS
     url = cfg["site_url"].rstrip("/")
-    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/"]
+    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/", url + "/a-propos/", url + "/contact/", url + "/confidentialite/"]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join([f"<url><loc>{esc(u)}</loc><changefreq>weekly</changefreq></url>" for u in urls]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
