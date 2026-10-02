@@ -300,7 +300,7 @@ def build():
             f.write(article_html(cfg, a, rel))
 
     # Index
-    icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮"}
+    icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠"}
     cards_outils = "".join([f"<a class='tool-card' data-name='{esc(t['h1'] + ' ' + t['meta'])}' href='outils/{esc(t['slug'])}/'><span class='ico'>{icons.get(t['slug'], '🧰')}</span><span><b>{esc(t['h1'])}</b><span>{esc(t['meta'])}</span></span><span class='go'>→</span></a>" for t in tools])
     cards_articles = "".join([f"<a class='art-card' href='comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>mis à jour • 2 min</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>" for a in reversed(articles)])
     index_body = f"""<div class="hero"><div class="wrap">
