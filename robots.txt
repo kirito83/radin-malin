@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /radin-malin/premium/merci/
+Disallow: /radin-malin/premium/telechargement/
 Sitemap: https://kirito83.github.io/radin-malin/sitemap.xml
