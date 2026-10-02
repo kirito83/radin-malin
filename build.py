@@ -39,9 +39,12 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 
     stripe_box = ""
     if ads.get("stripe_pro_link") and "VOTRE" not in ads["stripe_pro_link"]:
+        paypal_btn = ""
+        if ads.get("paypal_link") and "VOTRE" not in ads["paypal_link"]:
+            paypal_btn = f"""<a class="btn ghost" href="{esc(ads.get('paypal_link',''))}">Payer avec PayPal</a>"""
         stripe_box = f"""<div class="pro"><b>⏫ Aller plus loin — {esc(ads['premium_product'])} : {esc(ads['premium_price'])}</b><br>
 <a class="btn" href="{esc(ads['stripe_pro_link'])}">Acheter en 1 clic (Stripe)</a>
-<a class="btn ghost" href="{esc(ads.get('paypal_link',''))}">Payer avec PayPal</a></div>"""
+{paypal_btn}</div>"""
 
     return f"""<!DOCTYPE html>
 <html lang="fr">
@@ -69,7 +72,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <body>
 <header class="site"><div class="wrap topbar">
 <a class="logo" href="{prefix or './'}"><span class="logo-dot">💰</span><span>{site}<small>OUTILS GRATUITS • COMPARATIFS</small></span></a>
-<nav class="main"><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a class="cta" href="{prefix or './'}#comparatifs">Top promos →</a></nav>
+<nav class="main"><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel</a><a class="cta" href="{prefix or './'}#comparatifs">Top promos →</a></nav>
 </div></header>
 <main class="wrap sheet">
 <div style="height:14px"></div>
@@ -80,7 +83,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 </main>
 <footer class="site"><div class="wrap"><div class="foot-grid">
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 1 comparatif publié chaque jour en automatique. On finance le site avec l'affiliation et la pub, sans surcoût pour toi.</p></div>
-<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a></div>
+<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a></div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
 </body>
@@ -215,7 +218,9 @@ def article_html(cfg, item, related=None):
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
 <div class="grid">{"".join([f"<a class='art-card' href='../../comparatifs/{esc(r['slug'])}/'><div class='art-top'><span class='cat'>{esc(r['category'])}</span></div><b class='t'>{esc(r['title'])}</b><span class='k'>{esc(r['keyword'])}</span><span class='art-cta'>Comparer →</span></a>" for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
-<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>"""
+<div style="height:64px"></div>
+<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
     return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../")
 
 def tool_page(cfg, t):
@@ -288,9 +293,9 @@ def build():
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
 <div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Pages « meilleur X » qui génèrent les commissions affiliation en automatique.</p>
 <div class="grid">{cards_articles}</div></div>
-<div class="card-section" id="methode"><h2>⚙️ Comment ce site gagne en automatique ?</h2><p class="sub">Tu dors, il publie, Google indexe, les clics convertissent.</p>
-<div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Trafic SEO stable et gratuit.</span></div><div class="step"><i>2</i><br><b>+1 comparatif/jour</b><br><span class="hint">Cron GitHub Actions, zéro action.</span></div><div class="step"><i>3</i><br><b>Affiliation</b><br><span class="hint">Commission si achat via « Voir le prix ».</span></div><div class="step"><i>4</i><br><b>Pubs + premium</b><br><span class="hint">Display auto + pack Stripe {esc(cfg['monetization']['premium_price'])}.</span></div></div>
-<p class="hint"><b>Objectif réaliste :</b> 0 € mois 1 (indexation), premiers centimes dès 100-500 visites/jour, puis scale.</p></div>"""
+<div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
+<div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">Un nouveau guide d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
+<p class="hint"><b>Ajoute-nous à tes favoris :</b> un nouvel outil ou comparatif t'attend chaque jour.</p></div>"""
     with open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, cfg["site_name"] + " — outils gratuits & comparatifs", cfg["site_description"], index_body, ""))
 
@@ -301,8 +306,8 @@ def build():
 <p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','50 templates'))}. Paiement Stripe/PayPal, accès immédiat, sans abonnement.</p>
 <div class="card-section"><h2>✅ Ce que tu reçois</h2>
 <div class="guide"><div><b>📊 Budget 12 mois</b><br>96 lignes pré-remplies, écarts rouge/vert + tableau de bord graphique + traqueur d'abonnements.</div><div><b>🧾 Suivi 50 factures</b><br>TTC auto, statuts, reste à encaisser calculé seul.</div><div><b>🖨️ Facture + devis A4</b><br>Modèles pro prêts à imprimer, TVA auto, mentions légales.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement dès le paiement, sans abonnement.</div></div>
-<div class="actions"><a class="btn" href="{esc(m.get('stripe_pro_link',''))}">💳 Acheter {esc(m.get('premium_price','9,90 €'))} avec Stripe →</a><a class="btn ghost" style="color:#111;border-color:#ddd;background:#fff" href="{esc(m.get('paypal_link',''))}">Payer avec PayPal</a></div>
-<p class="hint">🛡️ Garantie 14 jours : pack inutile ? Un email et on te rembourse, sans question. Paiement sécurisé Stripe/PayPal. Si les liens contiennent encore VOTRE-LIEN, remplace-les dans config.json.</p></div>
+<div class="actions"><a class="btn" href="{esc(m.get('stripe_pro_link',''))}">💳 Acheter {esc(m.get('premium_price','9,90 €'))} avec Stripe →</a>{'<a class="btn ghost" style="color:#111;border-color:#ddd;background:#fff" href="' + esc(m.get('paypal_link','')) + '">Payer avec PayPal</a>' if m.get('paypal_link') and 'VOTRE' not in m.get('paypal_link') else ''}</div>
+<p class="hint">🛡️ Garantie 14 jours : pack inutile ? Un simple email et tu es remboursé, sans question. Paiement sécurisé via Stripe ou PayPal, reçu fiscal fourni.</p></div>
 <div class="card-section"><h2>❓ Questions</h2>
 <details open><summary>Faut-il Excel payant ?</summary><p>Non. Les fichiers s'ouvrent dans Excel, LibreOffice (gratuit) et Google Sheets. Les CSV bonus s'ouvrent partout.</p></details>
 <details><summary>Et si je suis auto-entrepreneur en franchise TVA ?</summary><p>Le modèle facture l'explique : supprime la ligne TVA et ajoute la mention art. 293 B, déjà écrite dans le fichier.</p></details>
@@ -333,7 +338,7 @@ def build():
 <div class="card-section"><h2>📦 Tes 4 fichiers Excel (formules incluses)</h2>
 <div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories + tableau de bord graphique + chasse aux abonnements.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div><div><b>📝 modele-devis.xlsx</b><br>Devis pro valable 3 mois, acompte 30 %.<br><a class="btn small" href="../telechargement/modele-devis.xlsx" download>Télécharger →</a></div></div>
 <p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a> · <a href="../telechargement/epargne-objectifs.csv" download>épargne.csv</a></p>
-<p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(cfg['site_url'].rstrip('/'))}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
+<p class="hint">💡 Astuce : ouvre les fichiers dans Excel, LibreOffice (gratuit) ou Google Sheets. Commence par l'onglet Guide du budget, puis remplis ta 1ère facture avec le modèle.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../"))
