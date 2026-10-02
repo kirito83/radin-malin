@@ -434,7 +434,7 @@ def build():
         f.write(sm)
     with open(os.path.join(PUBLIC, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"User-agent: *\nAllow: /\nDisallow: /radin-malin/premium/merci/\nDisallow: /radin-malin/premium/telechargement/\nSitemap: {url}/sitemap.xml\n")
-    rss_items = "".join([f"<item><title>{esc(a['title'])}</title><link>{esc(url)}/comparatifs/{esc(a['slug'])}/</link><description>{esc(a['title'])}</description></item>" for a in reversed(articles[-10:])])
+    rss_items = "".join([f"<item><title>{esc(a['title'])}</title><link>{esc(url)}/comparatifs/{esc(a['slug'])}/</link><description>{esc(a['title'])}</description><enclosure url=\"{esc(url)}/pins/{esc(a['slug'])}.png\" type=\"image/png\" /></item>" for a in reversed(articles[-10:])])
     rss = f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{esc(cfg["site_name"])}</title><link>{esc(url)}/</link><description>{esc(cfg["site_description"])}</description>{rss_items}</channel></rss>'
     with open(os.path.join(PUBLIC, "rss.xml"), "w", encoding="utf-8") as f:
         f.write(rss)
