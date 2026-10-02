@@ -301,6 +301,11 @@ def build():
     # Page merci + fichiers téléchargeables (livraison auto après paiement Stripe)
     dl_dir = os.path.join(PUBLIC, "premium", "telechargement")
     os.makedirs(dl_dir, exist_ok=True)
+    try:
+        from premium_pack import build_pack
+        xlsx = build_pack(dl_dir)
+    except ImportError:
+        xlsx = []
     fichiers = {
         "budget-mensuel.csv": "Mois;Catégorie;Prévu (€);Réel (€);Écart (€)\nJanvier;Loyer;800;800;0\nJanvier;Courses;350;0;350\nJanvier;Transport;75;0;75\nJanvier;Loisirs;100;0;100\nJanvier;Épargne;150;0;150\n",
         "suivi-factures.csv": "N°;Date;Client;Objet;HT (€);TVA (%);TTC (€);Statut\n2026-001;02/10/2026;Exemple;Prestation design;500;20;600;Payée\n",
@@ -312,8 +317,9 @@ def build():
     merci_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">✅ Merci ! Voici ton pack ({esc(m.get('premium_price','9,90 €'))})</h1>
 <p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
-<div class="card-section"><h2>📦 Tes 3 fichiers</h2>
-<div class="guide"><div><b>📊 budget-mensuel.csv</b><br>Suivi mois par mois.<br><a class="btn small" href="../telechargement/budget-mensuel.csv" download>Télécharger →</a></div><div><b>🧾 suivi-factures.csv</b><br>Numérotation + TVA auto.<br><a class="btn small" href="../telechargement/suivi-factures.csv" download>Télécharger →</a></div><div><b>🎯 epargne-objectifs.csv</b><br>Objectifs et progression.<br><a class="btn small" href="../telechargement/epargne-objectifs.csv" download>Télécharger →</a></div></div>
+<div class="card-section"><h2>📦 Tes 3 fichiers Excel (formules incluses)</h2>
+<div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories, écarts auto rouge/vert, total annuel.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div></div>
+<p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a> · <a href="../telechargement/epargne-objectifs.csv" download>épargne.csv</a></p>
 <p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(cfg['site_url'].rstrip('/'))}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
