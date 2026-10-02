@@ -298,9 +298,30 @@ def build():
     with open(os.path.join(PUBLIC, "premium", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Pack premium " + m.get('premium_price',''), "Pack templates factures devis budget Excel PDF.", prem_body, "premium/", prefix="../"))
 
+    # Page merci + fichiers téléchargeables (livraison auto après paiement Stripe)
+    dl_dir = os.path.join(PUBLIC, "premium", "telechargement")
+    os.makedirs(dl_dir, exist_ok=True)
+    fichiers = {
+        "budget-mensuel.csv": "Mois;Catégorie;Prévu (€);Réel (€);Écart (€)\nJanvier;Loyer;800;800;0\nJanvier;Courses;350;0;350\nJanvier;Transport;75;0;75\nJanvier;Loisirs;100;0;100\nJanvier;Épargne;150;0;150\n",
+        "suivi-factures.csv": "N°;Date;Client;Objet;HT (€);TVA (%);TTC (€);Statut\n2026-001;02/10/2026;Exemple;Prestation design;500;20;600;Payée\n",
+        "epargne-objectifs.csv": "Objectif;Montant visé (€);Épargné (€);Échéance;Progression (%)\nFond urgence;3000;0;31/12/2026;0\nVacances;1200;0;01/07/2027;0\n",
+    }
+    for nom, contenu in fichiers.items():
+        with open(os.path.join(dl_dir, nom), "w", encoding="utf-8") as f:
+            f.write(contenu)
+    merci_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">✅ Merci ! Voici ton pack ({esc(m.get('premium_price','9,90 €'))})</h1>
+<p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
+<div class="card-section"><h2>📦 Tes 3 fichiers</h2>
+<div class="guide"><div><b>📊 budget-mensuel.csv</b><br>Suivi mois par mois.<br><a class="btn small" href="telechargement/budget-mensuel.csv" download>Télécharger →</a></div><div><b>🧾 suivi-factures.csv</b><br>Numérotation + TVA auto.<br><a class="btn small" href="telechargement/suivi-factures.csv" download>Télécharger →</a></div><div><b>🎯 epargne-objectifs.csv</b><br>Objectifs et progression.<br><a class="btn small" href="telechargement/epargne-objectifs.csv" download>Télécharger →</a></div></div>
+<p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(url)}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
+    os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
+    with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
+        f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../"))
+
     # Sitemap + robots + RSS
     url = cfg["site_url"].rstrip("/")
-    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/"]
+    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/"]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join([f"<url><loc>{esc(u)}</loc><changefreq>weekly</changefreq></url>" for u in urls]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
