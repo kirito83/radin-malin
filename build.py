@@ -342,6 +342,19 @@ def build():
     with open(os.path.join(PUBLIC, "rss.xml"), "w", encoding="utf-8") as f:
         f.write(rss)
 
+    # Fichiers statiques (vérifications Monetag/AdSense, etc.) : copiés tels quels
+    static_dir = os.path.join(ROOT, "static")
+    if os.path.isdir(static_dir):
+        for entry in os.listdir(static_dir):
+            if entry == "LISEZ-MOI.txt":
+                continue
+            src = os.path.join(static_dir, entry)
+            dst = os.path.join(PUBLIC, entry)
+            if os.path.isfile(src):
+                shutil.copy2(src, dst)
+            elif os.path.isdir(src):
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+
     print(f"BUILD OK : {len(tools)} outils, {len(articles)} articles -> {PUBLIC}")
     return len(tools), len(articles)
 

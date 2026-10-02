@@ -1,0 +1,6 @@
+Mets ici les fichiers de vérification (Monetag, AdSense, etc.).
+Tout fichier placé dans ce dossier est copié tel quel à la racine du site
+à chaque build et survit aux rebuilds automatiques.
+
+Exemple : `monetag-abc123.html` dans ce dossier →
+https://kirito83.github.io/radin-malin/monetag-abc123.html
