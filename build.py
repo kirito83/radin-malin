@@ -54,6 +54,14 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <meta name="google-site-verification" content="{esc(cfg.get('google_site_verification',''))}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
 <link rel="canonical" href="{esc(canon)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(meta_desc)}">
+<meta property="og:url" content="{esc(canon)}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(meta_desc)}">
 <link rel="stylesheet" href="{prefix}style.css">
 {cfg.get('analytics_script','')}
 </head>
