@@ -63,6 +63,9 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <meta name="theme-color" content="#0d1120">
 <meta name="google-site-verification" content="{esc(cfg.get('google_site_verification',''))}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="{prefix}icon-32.png">
+<link rel="apple-touch-icon" href="{prefix}apple-touch-icon.png">
+<link rel="manifest" href="{prefix}site.webmanifest">
 <link rel="canonical" href="{esc(canon)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{site}">
