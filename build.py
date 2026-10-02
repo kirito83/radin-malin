@@ -314,7 +314,7 @@ def build():
 <p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
 <div class="card-section"><h2>📦 Tes 3 fichiers</h2>
 <div class="guide"><div><b>📊 budget-mensuel.csv</b><br>Suivi mois par mois.<br><a class="btn small" href="telechargement/budget-mensuel.csv" download>Télécharger →</a></div><div><b>🧾 suivi-factures.csv</b><br>Numérotation + TVA auto.<br><a class="btn small" href="telechargement/suivi-factures.csv" download>Télécharger →</a></div><div><b>🎯 epargne-objectifs.csv</b><br>Objectifs et progression.<br><a class="btn small" href="telechargement/epargne-objectifs.csv" download>Télécharger →</a></div></div>
-<p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(url)}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
+<p class="hint">Configure dans Stripe : après paiement → rediriger vers <b>{esc(cfg['site_url'].rstrip('/'))}/premium/merci/</b>. Sans paiement, cette page reste accessible (V1) — on la protègera plus tard si ça vend.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../"))
