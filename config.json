@@ -6,7 +6,7 @@
   "author": "Radin Malin",
   "google_site_verification": "5t2OwqeRZDOva-czt4yi0RcFMKmREKKrJFCy3eS01fs",
   "analytics_script": "",
-  "head_extra": "",
+  "head_extra": "<meta name=\"monetag\" content=\"daa189d9cc8ec4b32e475c1f16ae39c7\">",
   "monetization": {
     "adsense_client": "",
     "monetag_tag": "",
