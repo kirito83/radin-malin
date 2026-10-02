@@ -1,0 +1,32 @@
+name: 📌 Pinterest autopin
+
+on:
+  workflow_run:
+    workflows: ["💰 Daily cash-machine"]
+    types: [completed]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  pin:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Epingler les nouveautés (skip si non configuré)
+        env:
+          PINTEREST_TOKEN: ${{ secrets.PINTEREST_TOKEN }}
+          PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
+        run: python pin_pinterest.py
+      - name: Mémoriser les épingles
+        run: |
+          git config user.name "cash-bot"
+          git config user.email "cash-bot@users.noreply.github.com"
+          git add data/pinned.json
+          git commit -m "auto: epingles Pinterest $(date -u +%F)" || echo "rien à commiter"
+          git push || echo "push ignore"

@@ -28,7 +28,7 @@ def amazon_link(query, tag):
         return f"https://www.amazon.fr/s?k={q}&tag={tag}"
     return f"https://www.amazon.fr/s?k={q}"
 
-def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow"):
+def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image=""):
     site = esc(cfg["site_name"])
     url = cfg["site_url"].rstrip("/")
     canon = f"{url}/{canonical_path.lstrip('/')}" if canonical_path else url + "/"
@@ -69,9 +69,10 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(meta_desc)}">
 <meta property="og:url" content="{esc(canon)}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(meta_desc)}">
+{('<meta property="og:image" content="' + esc(image) + '"><meta name="twitter:image" content="' + esc(image) + '">') if image else ''}
 <link rel="stylesheet" href="{prefix}style.css">
 {cfg.get('analytics_script','')}
 {cfg.get('head_extra','')}
@@ -252,7 +253,7 @@ def article_html(cfg, item, related=None):
 <div style="height:64px"></div>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
-    return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../")
+    return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{item['slug']}.png")
 
 def tool_page(cfg, t, all_tools=None):
     # Boutons avec la bonne classe moderne
@@ -434,6 +435,14 @@ def build():
     rss = f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{esc(cfg["site_name"])}</title><link>{esc(url)}/</link><description>{esc(cfg["site_description"])}</description>{rss_items}</channel></rss>'
     with open(os.path.join(PUBLIC, "rss.xml"), "w", encoding="utf-8") as f:
         f.write(rss)
+
+    # Visuels Pinterest 1000x1500 (1 par article, ignores si Pillow absent)
+    try:
+        from pin_images import build_all as build_pins
+        n = build_pins(articles, cfg["site_name"], os.path.join(PUBLIC, "pins"))
+        print(f"PINS : {n} nouveaux visuels")
+    except ImportError:
+        print("PINS : Pillow absent, visuels ignores")
 
     # Fichiers statiques (vérifications Monetag/AdSense, etc.) : copiés tels quels
     static_dir = os.path.join(ROOT, "static")
