@@ -64,6 +64,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <meta name="twitter:description" content="{esc(meta_desc)}">
 <link rel="stylesheet" href="{prefix}style.css">
 {cfg.get('analytics_script','')}
+{cfg.get('head_extra','')}
 </head>
 <body>
 <header class="site"><div class="wrap topbar">
