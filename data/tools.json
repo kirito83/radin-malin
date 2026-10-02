@@ -88,5 +88,23 @@
     "pitch": "Remplissez, prévisualisez, imprimez en PDF (Ctrl+P). Pour auto-entrepreneurs. Version de base gratuite — le Pack 50 templates Excel + suivi auto est en vente pour aller plus loin.",
     "ui_html": "<label>Votre nom / société<input id='f1' value='Mon Entreprise'></label><label>Client<input id='f2' value='Client Exemple'></label><label>Prestation<input id='f3' value='Prestation design'></label><label>Montant HT (€)<input id='f4' type='number' value='500'></label><label>TVA (%)<input id='f5' type='number' value='20'></label><button onclick='fact()'>Générer aperçu</button><button onclick='window.print()'>Imprimer / PDF</button><div id='res' class='res'></div>",
     "js": "function fact(){var a=document.getElementById('f1').value;var b=document.getElementById('f2').value;var c=document.getElementById('f3').value;var m=parseFloat(document.getElementById('f4').value)||0;var t=parseFloat(document.getElementById('f5').value)||0;var ttc=m*(1+t/100);var d=new Date().toLocaleDateString('fr-FR');document.getElementById('res').innerHTML='<hr><b>FACTURE — '+d+'</b><br>De : '+a+'<br>À : '+b+'<br>Objet : '+c+'<br>Total HT : '+m.toFixed(2)+' €<br>TVA '+t+'%<br><b>Total TTC : '+ttc.toFixed(2)+' €</b>';}fact();"
+  },
+  {
+    "slug": "salaire-brut-net",
+    "title": "Salaire brut net 2026 : convertisseur gratuit",
+    "meta": "Convertissez salaire brut en net (et inversement) : cadre, non-cadre, fonction publique. Gratuit.",
+    "h1": "Salaire brut en net : simulateur 2026",
+    "pitch": "Estime ton salaire net après cotisations selon ton statut (non-cadre ~23 %, cadre ~25 %, fonction publique ~15 %, auto-entrepreneur ~22 %). Taux moyens indicatifs 2026, hors impôt sur le revenu.",
+    "ui_html": "<label>Salaire mensuel brut (€)<input id='sb' type='number' value='2500'></label><label>Statut<select id='st'><option value='0.77'>Non-cadre (~23 % charges)</option><option value='0.75'>Cadre (~25 % charges)</option><option value='0.85'>Fonction publique (~15 %)</option><option value='0.78'>Auto-entrepreneur service (~22 %)</option></select></label><button class='action' onclick='calcS()'>Convertir</button><div id='res' class='res'></div><p class='hint'>Estimation indicative. Net fiscal et prélèvement à la source non inclus.</p>",
+    "js": "function calcS(){var b=parseFloat(document.getElementById('sb').value)||0;var t=parseFloat(document.getElementById('st').value)||0.77;var n=b*t;document.getElementById('res').innerHTML='Net mensuel estimé : <b>'+n.toFixed(0)+' €</b><br>Net annuel : <b>'+(n*12).toFixed(0)+' €</b><br>Charges estimées : <b>'+(b-n).toFixed(0)+' €/mois</b>';}calcS();"
+  },
+  {
+    "slug": "frais-notaire",
+    "title": "Frais de notaire 2026 : simulateur achat immobilier",
+    "meta": "Estimez vos frais de notaire 2026 : ancien, neuf, terrain. Gratuit.",
+    "h1": "Simulateur frais de notaire 2026",
+    "pitch": "Estime les droits et émoluments selon le prix du bien et le type (ancien ~7-8 %, neuf ~2-3 %, terrain). Barèmes moyens indicatifs, hors négociation et prêt.",
+    "ui_html": "<label>Prix du bien (€)<input id='px' type='number' value='250000'></label><label>Type de bien<select id='tb'><option value='0.075'>Ancien (~7,5 %)</option><option value='0.025'>Neuf (~2,5 %)</option><option value='0.06'>Terrain (~6 %)</option></select></label><button class='action' onclick='calcN()'>Estimer</button><div id='res' class='res'></div><p class='hint'>Estimation indicative : droits ~5,8 % + émoluments + déboursés dans l'ancien.</p>",
+    "js": "function calcN(){var p=parseFloat(document.getElementById('px').value)||0;var t=parseFloat(document.getElementById('tb').value)||0.075;var f=p*t;document.getElementById('res').innerHTML='Frais de notaire estimés : <b>'+f.toFixed(0)+' €</b><br>Budget total : <b>'+(p+f).toFixed(0)+' €</b>';}calcN();"
   }
 ]

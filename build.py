@@ -235,6 +235,8 @@ def article_html(cfg, item, related=None):
 <div class="card-section"><h2>🧭 Guide d'achat express (2 min)</h2>
 <div class="guide"><div><b>1. Budget</b><br>Fixe un plafond AVANT de cliquer.</div><div><b>2. Usage réel</b><br>Liste tes 3 critères non-négociables.</div><div><b>3. Avis</b><br>Lis 5 avis 3-4 étoiles, les plus honnêtes.</div><div><b>4. Prix</b><br>Clique « Voir le prix » pour la promo du jour.</div></div></div>
 {faq}
+<div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (1 message/jour max, zéro spam).</p>
+<div class="actions">{'<a class="btn" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Recevoir les alertes prix →</a>' if cfg.get('telegram_channel') else '<a class="btn" href="../../#comparatifs">⭐ Voir les autres comparatifs →</a>'}</div></div>
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
 <div class="grid">{"".join([f"<a class='art-card' href='../../comparatifs/{esc(r['slug'])}/'><div class='art-top'><span class='cat'>{esc(r['category'])}</span></div><b class='t'>{esc(r['title'])}</b><span class='k'>{esc(r['keyword'])}</span><span class='art-cta'>Comparer →</span></a>" for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
