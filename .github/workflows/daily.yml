@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "7 6 * * *"   # 1 article/jour à 06h07 UTC, 100% auto
+    - cron: "7 6 * * *"   # article n°1 à 06h07 UTC
+    - cron: "7 18 * * *"  # article n°2 à 18h07 UTC (vélocité x2)
   workflow_dispatch: {}    # bouton "Run" manuel possible
 
 permissions:

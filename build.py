@@ -172,10 +172,13 @@ footer.site a{color:#dbe2ef}
 .search{position:relative;margin:12px 0 4px}
 .search input{padding-left:44px;border-radius:999px}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
+.sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
+body{padding-bottom:0}
 @media(max-width:640px){.foot-grid{grid-template-columns:1fr}nav.main a{padding:7px 11px;font-size:13px}.hero{padding:40px 0 30px}}
 """
 
-def article_html(cfg, item):
+def article_html(cfg, item, related=None):
     tag = cfg["monetization"].get("amazon_tag", "")
     rows = ""
     podium = ""
@@ -209,6 +212,9 @@ def article_html(cfg, item):
 <div class="card-section"><h2>🧭 Guide d'achat express (2 min)</h2>
 <div class="guide"><div><b>1. Budget</b><br>Fixe un plafond AVANT de cliquer.</div><div><b>2. Usage réel</b><br>Liste tes 3 critères non-négociables.</div><div><b>3. Avis</b><br>Lis 5 avis 3-4 étoiles, les plus honnêtes.</div><div><b>4. Prix</b><br>Clique « Voir le prix » pour la promo du jour.</div></div></div>
 {faq}
+<div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
+<div class="grid">{"".join([f"<a class='art-card' href='../../comparatifs/{esc(r['slug'])}/'><div class='art-top'><span class='cat'>{esc(r['category'])}</span></div><b class='t'>{esc(r['title'])}</b><span class='k'>{esc(r['keyword'])}</span><span class='art-cta'>Comparer →</span></a>" for r in (related or [])[:3]])}</div></div>
+<div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>"""
     return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../")
 
@@ -258,10 +264,12 @@ def build():
 
     # Pages articles
     for a in articles:
+        rel = [x for x in articles if x["slug"] != a["slug"] and x["category"] == a["category"]]
+        rel += [x for x in articles if x["slug"] != a["slug"] and x["category"] != a["category"]]
         d = os.path.join(PUBLIC, "comparatifs", a["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(article_html(cfg, a))
+            f.write(article_html(cfg, a, rel))
 
     # Index
     icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮"}
