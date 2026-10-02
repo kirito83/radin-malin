@@ -1,32 +1,662 @@
 [
-  {"slug": "meilleur-aspirateur-robot-2026", "title": "Meilleur aspirateur robot 2026 : comparatif des 3 qui valent vraiment le coup", "category": "maison", "keyword": "meilleur aspirateur robot 2026", "products": ["Roborock Q7 Max", "iRobot Roomba i3", "Ecovacs Deebot N8"]},
-  {"slug": "meilleure-friteuse-sans-huile-2026", "title": "Meilleure friteuse sans huile 2026 : comparatif airfryer", "category": "cuisine", "keyword": "meilleure friteuse sans huile", "products": ["Philips Airfryer XL", "Ninja AF101", "Moulinex Easy Fry"]},
-  {"slug": "meilleur-casque-bluetooth-moins-100-euros", "title": "Meilleur casque Bluetooth à moins de 100 € (2026)", "category": "tech", "keyword": "meilleur casque bluetooth moins 100 euros", "products": ["Sony WH-CH520", "JBL Tune 510BT", "Soundcore Life Q30"]},
-  {"slug": "meilleure-brosse-dent-electrique-2026", "title": "Meilleure brosse à dent électrique 2026 : Oral-B vs Philips", "category": "sante", "keyword": "meilleure brosse à dent électrique", "products": ["Oral-B Pro 3", "Philips Sonicare 3100", "Oral-B iO3"]},
-  {"slug": "meilleur-matelas-140x190-pas-cher", "title": "Meilleur matelas 140x190 pas cher : comparatif 2026", "category": "maison", "keyword": "matelas 140x190 pas cher", "products": ["Emma Original", "Hypnia Bien-être", "Tediber"]},
-  {"slug": "meilleur-clavier-sans-fil-bureautique", "title": "Meilleur clavier sans fil bureautique 2026", "category": "tech", "keyword": "meilleur clavier sans fil bureautique", "products": ["Logitech K380", "Logitech MX Keys Mini", "Dell KB500"]},
-  {"slug": "meilleure-souris-ergonomique-2026", "title": "Meilleure souris ergonomique 2026 : fini le mal de poignet", "category": "tech", "keyword": "meilleure souris ergonomique", "products": ["Logitech MX Vertical", "Anker Ergonomique", "Logitech Lift"]},
-  {"slug": "meilleur-ssd-externe-1to-2026", "title": "Meilleur SSD externe 1 To 2026 : rapide et fiable", "category": "tech", "keyword": "meilleur ssd externe 1to", "products": ["Samsung T7", "Crucial X8", "SanDisk Extreme"]},
-  {"slug": "meilleure-machine-cafe-grain-pas-chere", "title": "Meilleure machine à café grain pas chère (2026)", "category": "cuisine", "keyword": "machine à café grain pas chère", "products": ["De'Longhi Magnifica S", "Philips 2200", "Krups Essential"]},
-  {"slug": "meilleur-ventilateur-silencieux-ete", "title": "Meilleur ventilateur silencieux pour l'été", "category": "maison", "keyword": "meilleur ventilateur silencieux", "products": ["Dyson Cool AM07", "Rowenta Turbo Silence", "Xiaomi Smart Fan 2"]},
-  {"slug": "meilleur-tapis-course-pliable-appartement", "title": "Meilleur tapis de course pliable pour appartement", "category": "sport", "keyword": "tapis de course pliable appartement", "products": ["Citysports WP1", "Sportstech F10", "Bluefin Fitness"]},
-  {"slug": "meilleure-creme-solaire-visage-2026", "title": "Meilleure crème solaire visage 2026 : peaux sensibles", "category": "sante", "keyword": "meilleure crème solaire visage", "products": ["Garnier Ambre Solaire SPF50", "La Roche-Posay Anthelios", "Cien Sun SPF50"]},
-  {"slug": "meilleur-budget-telephone-moins-200-euros", "title": "Meilleur téléphone à moins de 200 € en 2026", "category": "tech", "keyword": "meilleur téléphone moins 200 euros", "products": ["Xiaomi Redmi 13", "Samsung Galaxy A14", "Realme C55"]},
-  {"slug": "meilleure-enceinte-bluetooth-exterieur", "title": "Meilleure enceinte Bluetooth d'extérieur 2026", "category": "tech", "keyword": "meilleure enceinte bluetooth exterieur", "products": ["JBL Flip 6", "Ultimate Ears Boom 3", "Tribit StormBox"]},
-  {"slug": "meilleur-aspirateur-balai-pas-cher", "title": "Meilleur aspirateur balai pas cher : comparatif 2026", "category": "maison", "keyword": "meilleur aspirateur balai pas cher", "products": ["Dyson V8", "Rowenta X-Force Flex", "Bosch Unlimited 6"]},
-  {"slug": "meilleur-cuiseur-riz-2026", "title": "Meilleur cuiseur à riz 2026 : riz parfait à tous les coups", "category": "cuisine", "keyword": "meilleur cuiseur riz", "products": ["Russell Hobbs Cook@Home", "Tefal Classic 2", "Yum Asia Panda"]},
-  {"slug": "meilleur-oreiller-dormir-sur-cote", "title": "Meilleur oreiller pour dormir sur le côté", "category": "maison", "keyword": "meilleur oreiller dormir côté", "products": ["Emma Oreiller", "Hypnia Ergonomique", "Utopia Bedding"]},
-  {"slug": "meilleur-kit-panneau-solaire-balcon", "title": "Meilleur kit panneau solaire balcon : réduire sa facture", "category": "maison", "keyword": "kit panneau solaire balcon", "products": ["Beem Energy 420W", "Sunology Play", "Ekwateur Mon Kit"]},
-  {"slug": "meilleure-montre-connectee-moins-100-euros", "title": "Meilleure montre connectée à moins de 100 €", "category": "tech", "keyword": "montre connectée moins 100 euros", "products": ["Amazfit GTS 4 Mini", "Xiaomi Redmi Watch 3", "Huawei Watch Fit 2"]},
-  {"slug": "meilleur-grille-pain-2026", "title": "Meilleur grille-pain 2026 : simple et efficace", "category": "cuisine", "keyword": "meilleur grille pain", "products": ["Russell Hobbs Adventure", "Moulinex Principio", "Philips Daily"]},
-  {"slug": "meilleur-seche-cheveux-pas-cher", "title": "Meilleur sèche-cheveux pas cher mais puissant", "category": "sante", "keyword": "meilleur sèche cheveux pas cher", "products": ["Remington D3012", "Philips DryCare", "Babyliss 2000W"]},
-  {"slug": "meilleur-taxi-bagage-cabine-2026", "title": "Meilleure valise cabine 2026 : solide et légère", "category": "voyage", "keyword": "meilleure valise cabine", "products": ["American Tourister Bon Air", "Samsonite Base Boost", "Delsey Belmont"]},
-  {"slug": "meilleur-chargeur-rapide-usb-c-65w", "title": "Meilleur chargeur rapide USB-C 65W GaN", "category": "tech", "keyword": "meilleur chargeur usb c 65w", "products": ["Anker 735 GaN", "Ugreen Nexode 65W", "Baseus 65W"]},
-  {"slug": "meilleure-lampe-bureau-yeux-fatigues", "title": "Meilleure lampe de bureau pour yeux fatigués", "category": "maison", "keyword": "meilleure lampe bureau yeux", "products": ["BenQ e-Reading", "Xiaomi Mi Desk Lamp", "Philips Hue Go"]},
-  {"slug": "meilleur-robot-patinet-electrique-adulte", "title": "Meilleure trottinette électrique adulte 2026", "category": "sport", "keyword": "meilleure trottinette electrique adulte", "products": ["Xiaomi Pro 2", "Ninebot Max G30", "Pure Air Go"]},
-  {"slug": "meilleur-barbecue-charbon-petit-balcon", "title": "Meilleur barbecue charbon petit balcon", "category": "cuisine", "keyword": "meilleur barbecue charbon petit balcon", "products": ["Weber Compact Kettle", "Tepro Toronto", "Landmann Grill Chef"]},
-  {"slug": "meilleur-mat-tapis-yoga-epais", "title": "Meilleur tapis de yoga épais et antidérapant", "category": "sport", "keyword": "meilleur tapis yoga epais", "products": ["Manduka Pro 6mm", "Domyos Comfort Mat", "AIY Habana"]},
-  {"slug": "meilleur-humidificateur-air-chambre-bebe", "title": "Meilleur humidificateur d'air chambre bébé", "category": "maison", "keyword": "meilleur humidificateur air bebe", "products": ["Philips HU4803", "Babymoov Hygro+", "Levoit Classic 200"]},
-  {"slug": "meilleur-casque-reduction-bruit-avion", "title": "Meilleur casque à réduction de bruit pour l'avion", "category": "voyage", "keyword": "meilleur casque reduction bruit avion", "products": ["Sony WH-1000XM5", "Bose QC45", "Soundcore Space Q45"]},
-  {"slug": "meilleur-sac-dos-voyage-40l", "title": "Meilleur sac à dos voyage 40L cabine", "category": "voyage", "keyword": "meilleur sac dos voyage 40l", "products": ["Osprey Farpoint 40", "Cabin Max Metz", "Hynes Eagle 40L"]}
+  {
+    "slug": "meilleur-aspirateur-robot-2026",
+    "title": "Meilleur aspirateur robot 2026 : comparatif des 3 qui valent vraiment le coup",
+    "category": "maison",
+    "keyword": "meilleur aspirateur robot 2026",
+    "products": [
+      "Roborock Q7 Max",
+      "iRobot Roomba i3",
+      "Ecovacs Deebot N8"
+    ]
+  },
+  {
+    "slug": "meilleure-friteuse-sans-huile-2026",
+    "title": "Meilleure friteuse sans huile 2026 : comparatif airfryer",
+    "category": "cuisine",
+    "keyword": "meilleure friteuse sans huile",
+    "products": [
+      "Philips Airfryer XL",
+      "Ninja AF101",
+      "Moulinex Easy Fry"
+    ]
+  },
+  {
+    "slug": "meilleur-casque-bluetooth-moins-100-euros",
+    "title": "Meilleur casque Bluetooth à moins de 100 € (2026)",
+    "category": "tech",
+    "keyword": "meilleur casque bluetooth moins 100 euros",
+    "products": [
+      "Sony WH-CH520",
+      "JBL Tune 510BT",
+      "Soundcore Life Q30"
+    ]
+  },
+  {
+    "slug": "meilleure-brosse-dent-electrique-2026",
+    "title": "Meilleure brosse à dent électrique 2026 : Oral-B vs Philips",
+    "category": "sante",
+    "keyword": "meilleure brosse à dent électrique",
+    "products": [
+      "Oral-B Pro 3",
+      "Philips Sonicare 3100",
+      "Oral-B iO3"
+    ]
+  },
+  {
+    "slug": "meilleur-matelas-140x190-pas-cher",
+    "title": "Meilleur matelas 140x190 pas cher : comparatif 2026",
+    "category": "maison",
+    "keyword": "matelas 140x190 pas cher",
+    "products": [
+      "Emma Original",
+      "Hypnia Bien-être",
+      "Tediber"
+    ]
+  },
+  {
+    "slug": "meilleur-clavier-sans-fil-bureautique",
+    "title": "Meilleur clavier sans fil bureautique 2026",
+    "category": "tech",
+    "keyword": "meilleur clavier sans fil bureautique",
+    "products": [
+      "Logitech K380",
+      "Logitech MX Keys Mini",
+      "Dell KB500"
+    ]
+  },
+  {
+    "slug": "meilleure-souris-ergonomique-2026",
+    "title": "Meilleure souris ergonomique 2026 : fini le mal de poignet",
+    "category": "tech",
+    "keyword": "meilleure souris ergonomique",
+    "products": [
+      "Logitech MX Vertical",
+      "Anker Ergonomique",
+      "Logitech Lift"
+    ]
+  },
+  {
+    "slug": "meilleur-ssd-externe-1to-2026",
+    "title": "Meilleur SSD externe 1 To 2026 : rapide et fiable",
+    "category": "tech",
+    "keyword": "meilleur ssd externe 1to",
+    "products": [
+      "Samsung T7",
+      "Crucial X8",
+      "SanDisk Extreme"
+    ]
+  },
+  {
+    "slug": "meilleure-machine-cafe-grain-pas-chere",
+    "title": "Meilleure machine à café grain pas chère (2026)",
+    "category": "cuisine",
+    "keyword": "machine à café grain pas chère",
+    "products": [
+      "De'Longhi Magnifica S",
+      "Philips 2200",
+      "Krups Essential"
+    ]
+  },
+  {
+    "slug": "meilleur-ventilateur-silencieux-ete",
+    "title": "Meilleur ventilateur silencieux pour l'été",
+    "category": "maison",
+    "keyword": "meilleur ventilateur silencieux",
+    "products": [
+      "Dyson Cool AM07",
+      "Rowenta Turbo Silence",
+      "Xiaomi Smart Fan 2"
+    ]
+  },
+  {
+    "slug": "meilleur-tapis-course-pliable-appartement",
+    "title": "Meilleur tapis de course pliable pour appartement",
+    "category": "sport",
+    "keyword": "tapis de course pliable appartement",
+    "products": [
+      "Citysports WP1",
+      "Sportstech F10",
+      "Bluefin Fitness"
+    ]
+  },
+  {
+    "slug": "meilleure-creme-solaire-visage-2026",
+    "title": "Meilleure crème solaire visage 2026 : peaux sensibles",
+    "category": "sante",
+    "keyword": "meilleure crème solaire visage",
+    "products": [
+      "Garnier Ambre Solaire SPF50",
+      "La Roche-Posay Anthelios",
+      "Cien Sun SPF50"
+    ]
+  },
+  {
+    "slug": "meilleur-budget-telephone-moins-200-euros",
+    "title": "Meilleur téléphone à moins de 200 € en 2026",
+    "category": "tech",
+    "keyword": "meilleur téléphone moins 200 euros",
+    "products": [
+      "Xiaomi Redmi 13",
+      "Samsung Galaxy A14",
+      "Realme C55"
+    ]
+  },
+  {
+    "slug": "meilleure-enceinte-bluetooth-exterieur",
+    "title": "Meilleure enceinte Bluetooth d'extérieur 2026",
+    "category": "tech",
+    "keyword": "meilleure enceinte bluetooth exterieur",
+    "products": [
+      "JBL Flip 6",
+      "Ultimate Ears Boom 3",
+      "Tribit StormBox"
+    ]
+  },
+  {
+    "slug": "meilleur-aspirateur-balai-pas-cher",
+    "title": "Meilleur aspirateur balai pas cher : comparatif 2026",
+    "category": "maison",
+    "keyword": "meilleur aspirateur balai pas cher",
+    "products": [
+      "Dyson V8",
+      "Rowenta X-Force Flex",
+      "Bosch Unlimited 6"
+    ]
+  },
+  {
+    "slug": "meilleur-cuiseur-riz-2026",
+    "title": "Meilleur cuiseur à riz 2026 : riz parfait à tous les coups",
+    "category": "cuisine",
+    "keyword": "meilleur cuiseur riz",
+    "products": [
+      "Russell Hobbs Cook@Home",
+      "Tefal Classic 2",
+      "Yum Asia Panda"
+    ]
+  },
+  {
+    "slug": "meilleur-oreiller-dormir-sur-cote",
+    "title": "Meilleur oreiller pour dormir sur le côté",
+    "category": "maison",
+    "keyword": "meilleur oreiller dormir côté",
+    "products": [
+      "Emma Oreiller",
+      "Hypnia Ergonomique",
+      "Utopia Bedding"
+    ]
+  },
+  {
+    "slug": "meilleur-kit-panneau-solaire-balcon",
+    "title": "Meilleur kit panneau solaire balcon : réduire sa facture",
+    "category": "maison",
+    "keyword": "kit panneau solaire balcon",
+    "products": [
+      "Beem Energy 420W",
+      "Sunology Play",
+      "Ekwateur Mon Kit"
+    ]
+  },
+  {
+    "slug": "meilleure-montre-connectee-moins-100-euros",
+    "title": "Meilleure montre connectée à moins de 100 €",
+    "category": "tech",
+    "keyword": "montre connectée moins 100 euros",
+    "products": [
+      "Amazfit GTS 4 Mini",
+      "Xiaomi Redmi Watch 3",
+      "Huawei Watch Fit 2"
+    ]
+  },
+  {
+    "slug": "meilleur-grille-pain-2026",
+    "title": "Meilleur grille-pain 2026 : simple et efficace",
+    "category": "cuisine",
+    "keyword": "meilleur grille pain",
+    "products": [
+      "Russell Hobbs Adventure",
+      "Moulinex Principio",
+      "Philips Daily"
+    ]
+  },
+  {
+    "slug": "meilleur-seche-cheveux-pas-cher",
+    "title": "Meilleur sèche-cheveux pas cher mais puissant",
+    "category": "sante",
+    "keyword": "meilleur sèche cheveux pas cher",
+    "products": [
+      "Remington D3012",
+      "Philips DryCare",
+      "Babyliss 2000W"
+    ]
+  },
+  {
+    "slug": "meilleur-taxi-bagage-cabine-2026",
+    "title": "Meilleure valise cabine 2026 : solide et légère",
+    "category": "voyage",
+    "keyword": "meilleure valise cabine",
+    "products": [
+      "American Tourister Bon Air",
+      "Samsonite Base Boost",
+      "Delsey Belmont"
+    ]
+  },
+  {
+    "slug": "meilleur-chargeur-rapide-usb-c-65w",
+    "title": "Meilleur chargeur rapide USB-C 65W GaN",
+    "category": "tech",
+    "keyword": "meilleur chargeur usb c 65w",
+    "products": [
+      "Anker 735 GaN",
+      "Ugreen Nexode 65W",
+      "Baseus 65W"
+    ]
+  },
+  {
+    "slug": "meilleure-lampe-bureau-yeux-fatigues",
+    "title": "Meilleure lampe de bureau pour yeux fatigués",
+    "category": "maison",
+    "keyword": "meilleure lampe bureau yeux",
+    "products": [
+      "BenQ e-Reading",
+      "Xiaomi Mi Desk Lamp",
+      "Philips Hue Go"
+    ]
+  },
+  {
+    "slug": "meilleur-robot-patinet-electrique-adulte",
+    "title": "Meilleure trottinette électrique adulte 2026",
+    "category": "sport",
+    "keyword": "meilleure trottinette electrique adulte",
+    "products": [
+      "Xiaomi Pro 2",
+      "Ninebot Max G30",
+      "Pure Air Go"
+    ]
+  },
+  {
+    "slug": "meilleur-barbecue-charbon-petit-balcon",
+    "title": "Meilleur barbecue charbon petit balcon",
+    "category": "cuisine",
+    "keyword": "meilleur barbecue charbon petit balcon",
+    "products": [
+      "Weber Compact Kettle",
+      "Tepro Toronto",
+      "Landmann Grill Chef"
+    ]
+  },
+  {
+    "slug": "meilleur-mat-tapis-yoga-epais",
+    "title": "Meilleur tapis de yoga épais et antidérapant",
+    "category": "sport",
+    "keyword": "meilleur tapis yoga epais",
+    "products": [
+      "Manduka Pro 6mm",
+      "Domyos Comfort Mat",
+      "AIY Habana"
+    ]
+  },
+  {
+    "slug": "meilleur-humidificateur-air-chambre-bebe",
+    "title": "Meilleur humidificateur d'air chambre bébé",
+    "category": "maison",
+    "keyword": "meilleur humidificateur air bebe",
+    "products": [
+      "Philips HU4803",
+      "Babymoov Hygro+",
+      "Levoit Classic 200"
+    ]
+  },
+  {
+    "slug": "meilleur-casque-reduction-bruit-avion",
+    "title": "Meilleur casque à réduction de bruit pour l'avion",
+    "category": "voyage",
+    "keyword": "meilleur casque reduction bruit avion",
+    "products": [
+      "Sony WH-1000XM5",
+      "Bose QC45",
+      "Soundcore Space Q45"
+    ]
+  },
+  {
+    "slug": "meilleur-sac-dos-voyage-40l",
+    "title": "Meilleur sac à dos voyage 40L cabine",
+    "category": "voyage",
+    "keyword": "meilleur sac dos voyage 40l",
+    "products": [
+      "Osprey Farpoint 40",
+      "Cabin Max Metz",
+      "Hynes Eagle 40L"
+    ]
+  },
+  {
+    "slug": "meilleur-airfryer-grande-famille-2026",
+    "title": "Meilleur airfryer grande famille 2026 : 5L et plus",
+    "category": "cuisine",
+    "keyword": "meilleur airfryer grande famille",
+    "products": [
+      "Ninja Double Stack",
+      "Philips Airfryer XL Connected",
+      "Moulinex Easy Fry Mega"
+    ]
+  },
+  {
+    "slug": "meilleur-robot-patissier-pas-cher",
+    "title": "Meilleur robot pâtissier pas cher qui pétrit vraiment",
+    "category": "cuisine",
+    "keyword": "meilleur robot patissier pas cher",
+    "products": [
+      "Bosch MUM5",
+      "Kenwood Prospero",
+      "Moulinex Masterchef"
+    ]
+  },
+  {
+    "slug": "meilleure-cafetiere-filtre-2026",
+    "title": "Meilleure cafetière filtre 2026 : simple et bonne",
+    "category": "cuisine",
+    "keyword": "meilleure cafetiere filtre",
+    "products": [
+      "Melitta Look",
+      "Philips Daily Collection",
+      "Russell Hobbs Chester"
+    ]
+  },
+  {
+    "slug": "meilleur-couteau-cuisine-set",
+    "title": "Meilleur set de couteaux cuisine : ce qu'il faut vraiment",
+    "category": "cuisine",
+    "keyword": "meilleur set couteaux cuisine",
+    "products": [
+      "Wusthof Classic 3 pièces",
+      "Dick Premier Plus",
+      "Kai Shun Sora"
+    ]
+  },
+  {
+    "slug": "meilleure-poele-induction-2026",
+    "title": "Meilleure poêle induction 2026 qui n'accroche pas",
+    "category": "cuisine",
+    "keyword": "meilleure poele induction",
+    "products": [
+      "Tefal Ingenio",
+      "De Buyer Mineral B",
+      "Cristel Mutine"
+    ]
+  },
+  {
+    "slug": "meilleur-aspirateur-voiture-puissant",
+    "title": "Meilleur aspirateur voiture puissant sans fil",
+    "category": "maison",
+    "keyword": "meilleur aspirateur voiture",
+    "products": [
+      "Black+Decker Dustbuster",
+      "Rowenta X-Touch",
+      "Bosch Move"
+    ]
+  },
+  {
+    "slug": "meilleur-nettoyeur-vapeur-sol",
+    "title": "Meilleur nettoyeur vapeur sol : comparatif 2026",
+    "category": "maison",
+    "keyword": "meilleur nettoyeur vapeur sol",
+    "products": [
+      "Karcher SC3",
+      "Polti Vaporetto",
+      "Black+Decker Steamop"
+    ]
+  },
+  {
+    "slug": "meilleur-deshumidificateur-chambre",
+    "title": "Meilleur déshumidificateur chambre contre l'humidité",
+    "category": "maison",
+    "keyword": "meilleur deshumidificateur chambre",
+    "products": [
+      "Delonghi Tasciugo",
+      "Rowenta Intense Dry",
+      "Pro Breeze 12L"
+    ]
+  },
+  {
+    "slug": "meilleur-purificateur-air-allergies",
+    "title": "Meilleur purificateur d'air allergies et poussières",
+    "category": "maison",
+    "keyword": "meilleur purificateur air allergies",
+    "products": [
+      "Philips 800",
+      "Levoit Core 300",
+      "Xiaomi Air Purifier 4"
+    ]
+  },
+  {
+    "slug": "meilleur-matelas-160x200-2026",
+    "title": "Meilleur matelas 160x200 : comparatif 2026",
+    "category": "maison",
+    "keyword": "meilleur matelas 160x200",
+    "products": [
+      "Emma Hybride",
+      "Hypnia Confort Supreme",
+      "Tediber Grand Tedi"
+    ]
+  },
+  {
+    "slug": "meilleur-sommier-tapissier-140",
+    "title": "Meilleur sommier tapissier 140x190 rapport qualité prix",
+    "category": "maison",
+    "keyword": "meilleur sommier 140x190",
+    "products": [
+      "Hypnia Classic",
+      "Emma Sommier",
+      "Tediber Sommier"
+    ]
+  },
+  {
+    "slug": "meilleure-chaise-bureau-ergonomique-pas-chere",
+    "title": "Meilleure chaise bureau ergonomique pas chère",
+    "category": "maison",
+    "keyword": "meilleure chaise bureau ergonomique pas chere",
+    "products": [
+      "Hbada Ergonomique",
+      "Songmics Racing",
+      "Yaheetech Mesh"
+    ]
+  },
+  {
+    "slug": "meilleur-bureau-assis-debout-electrique",
+    "title": "Meilleur bureau assis debout électrique 2026",
+    "category": "maison",
+    "keyword": "meilleur bureau assis debout electrique",
+    "products": [
+      "Flexispot E7",
+      "Yaheetech Assis Debout",
+      "Songmics Bureau"
+    ]
+  },
+  {
+    "slug": "meilleur-ecran-pc-27-pouces-bureautique",
+    "title": "Meilleur écran PC 27 pouces bureautique 2026",
+    "category": "tech",
+    "keyword": "meilleur ecran pc 27 pouces bureautique",
+    "products": [
+      "Dell P2722H",
+      "Samsung S27C650",
+      "LG 27MP400"
+    ]
+  },
+  {
+    "slug": "meilleur-disque-dur-externe-2to",
+    "title": "Meilleur disque dur externe 2 To fiable",
+    "category": "tech",
+    "keyword": "meilleur disque dur externe 2to",
+    "products": [
+      "Seagate Basic 2To",
+      "WD Elements 2To",
+      "Toshiba Canvio"
+    ]
+  },
+  {
+    "slug": "meilleure-tablette-pas-chere-2026",
+    "title": "Meilleure tablette pas chère 2026 pour Netflix et cours",
+    "category": "tech",
+    "keyword": "meilleure tablette pas chere",
+    "products": [
+      "Samsung Galaxy Tab A9",
+      "Lenovo Tab M11",
+      "Xiaomi Redmi Pad SE"
+    ]
+  },
+  {
+    "slug": "meilleur-casque-gaming-ps5",
+    "title": "Meilleur casque gaming PS5 : son et micro au top",
+    "category": "tech",
+    "keyword": "meilleur casque gaming ps5",
+    "products": [
+      "Sony Pulse 3D",
+      "SteelSeries Arctis Nova 1",
+      "HyperX Cloud III"
+    ]
+  },
+  {
+    "slug": "meilleur-clavier-gamer-pas-cher",
+    "title": "Meilleur clavier gamer pas cher membrane vs mécanique",
+    "category": "tech",
+    "keyword": "meilleur clavier gamer pas cher",
+    "products": [
+      "Logitech G213",
+      "Redragon K552",
+      "Mars Gaming MK422"
+    ]
+  },
+  {
+    "slug": "meilleure-souris-gamer-pas-chere",
+    "title": "Meilleure souris gamer pas chère et précise",
+    "category": "tech",
+    "keyword": "meilleure souris gamer pas chere",
+    "products": [
+      "Logitech G203",
+      "Razer DeathAdder Essential",
+      "SteelSeries Rival 3"
+    ]
+  },
+  {
+    "slug": "meilleur-ventilateur-pc-portable-refroidisseur",
+    "title": "Meilleur refroidisseur PC portable ventilé",
+    "category": "tech",
+    "keyword": "meilleur refroidisseur pc portable",
+    "products": [
+      "KLIM Wind",
+      "TopMate C5",
+      "Havit HV-F2056"
+    ]
+  },
+  {
+    "slug": "meilleur-tensiometre-bras-2026",
+    "title": "Meilleur tensiomètre bras précis 2026",
+    "category": "sante",
+    "keyword": "meilleur tensiometre bras",
+    "products": [
+      "Omron M3 Comfort",
+      "Beurer BM 27",
+      "Withings BPM Connect"
+    ]
+  },
+  {
+    "slug": "meilleure-balance-connectee-2026",
+    "title": "Meilleure balance connectée précise 2026",
+    "category": "sante",
+    "keyword": "meilleure balance connectee",
+    "products": [
+      "Withings Body Smart",
+      "Xiaomi Body Composition S400",
+      "Beurer BF 600"
+    ]
+  },
+  {
+    "slug": "meilleur-halteres-reglables-maison",
+    "title": "Meilleurs haltères réglables pour la maison",
+    "category": "sport",
+    "keyword": "meilleurs halteres reglables maison",
+    "products": [
+      "Bowflex 552",
+      "Ativafit 27,5kg",
+      "Songmics 2x24kg"
+    ]
+  },
+  {
+    "slug": "meilleur-velo-elliptique-appartement",
+    "title": "Meilleur vélo elliptique appartement silencieux",
+    "category": "sport",
+    "keyword": "meilleur velo elliptique appartement",
+    "products": [
+      "Domyos EL 500",
+      "Sportstech CX625",
+      "Bluefin Fitness Curv"
+    ]
+  },
+  {
+    "slug": "meilleur-sac-couchage-froid-extreme",
+    "title": "Meilleur sac de couchage grand froid : ne pas se geler",
+    "category": "voyage",
+    "keyword": "meilleur sac couchage grand froid",
+    "products": [
+      "Quechua SH500",
+      "Coleman Biker",
+      "Vaude Sioux 800"
+    ]
+  },
+  {
+    "slug": "meilleure-valise-grande-taille-solide",
+    "title": "Meilleure grande valise solide soute 100L+",
+    "category": "voyage",
+    "keyword": "meilleure grande valise soute",
+    "products": [
+      "Samsonite S'Cure",
+      "American Tourister Linex",
+      "Delsey Montmartre"
+    ]
+  },
+  {
+    "slug": "meilleur-oreiller-voyage-avion",
+    "title": "Meilleur oreiller de voyage avion : dormir assis",
+    "category": "voyage",
+    "keyword": "meilleur oreiller voyage avion",
+    "products": [
+      "Cabeau Evolution S3",
+      "Trtl Pillow Plus",
+      "Samsonite Confort"
+    ]
+  },
+  {
+    "slug": "meilleur-kit-demarrage-bebe-2026",
+    "title": "Meilleur kit démarrage bébé : l'essentiel sans se ruiner",
+    "category": "maison",
+    "keyword": "kit demarrage bebe essentiel",
+    "products": [
+      "Babymoov Kit Naissance",
+      "Tigex Set Repas",
+      "Philips Avent Starter"
+    ]
+  },
+  {
+    "slug": "meilleur-biberon-anti-colique",
+    "title": "Meilleur biberon anti-colique : comparatif mamans",
+    "category": "maison",
+    "keyword": "meilleur biberon anti colique",
+    "products": [
+      "MAM Easy Start",
+      "Philips Avent Natural",
+      "Dodie Initiation"
+    ]
+  },
+  {
+    "slug": "meilleur-chauffe-biberon-rapide",
+    "title": "Meilleur chauffe-biberon rapide maison et voiture",
+    "category": "maison",
+    "keyword": "meilleur chauffe biberon",
+    "products": [
+      "Philips Avent Rapide",
+      "Babymoov Milky Now",
+      "Beaba Bib Expresso"
+    ]
+  }
 ]

@@ -51,9 +51,11 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <title>{esc(title)} — {site}</title>
 <meta name="description" content="{esc(meta_desc)}">
 <meta name="theme-color" content="#0d1120">
+<meta name="google-site-verification" content="{esc(cfg.get('google_site_verification',''))}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
 <link rel="canonical" href="{esc(canon)}">
 <link rel="stylesheet" href="{prefix}style.css">
+{cfg.get('analytics_script','')}
 </head>
 <body>
 <header class="site"><div class="wrap topbar">
@@ -275,9 +277,22 @@ def build():
     with open(os.path.join(PUBLIC, "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, cfg["site_name"] + " — outils gratuits & comparatifs", cfg["site_description"], index_body, ""))
 
+    # Page premium (Stripe/PayPal -> encaissement auto)
+    m = cfg.get("monetization", {})
+    prem_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">Pack Malin : 50 templates factures + devis + budget — {esc(m.get('premium_price','9,90 €'))}</h1>
+<p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','50 templates'))}. Paiement Stripe/PayPal, accès immédiat, sans abonnement.</p>
+<div class="card-section"><h2>✅ Ce que tu reçois</h2>
+<div class="guide"><div><b>🧾 20 factures/devis</b><br>Excel + PDF, TVA auto, numérotation.</div><div><b>📊 Suivi budget</b><br>Tableau revenus/dépenses 12 mois.</div><div><b>📦 30 bonus</b><br>Relances, CGV, reçus, checklists.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement après paiement.</div></div>
+<div class="actions"><a class="btn" href="{esc(m.get('stripe_pro_link',''))}">💳 Acheter {esc(m.get('premium_price','9,90 €'))} avec Stripe →</a><a class="btn ghost" style="color:#111;border-color:#ddd;background:#fff" href="{esc(m.get('paypal_link',''))}">Payer avec PayPal</a></div>
+<p class="hint">Paiement sécurisé. Si les liens contiennent encore VOTRE-LIEN, remplace-les dans config.json.</p></div>"""
+    os.makedirs(os.path.join(PUBLIC, "premium"), exist_ok=True)
+    with open(os.path.join(PUBLIC, "premium", "index.html"), "w", encoding="utf-8") as f:
+        f.write(base_page(cfg, "Pack premium " + m.get('premium_price',''), "Pack templates factures devis budget Excel PDF.", prem_body, "premium/", prefix="../"))
+
     # Sitemap + robots + RSS
     url = cfg["site_url"].rstrip("/")
-    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles]
+    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/"]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join([f"<url><loc>{esc(u)}</loc><changefreq>weekly</changefreq></url>" for u in urls]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
