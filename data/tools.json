@@ -106,5 +106,32 @@
     "pitch": "Estime les droits et émoluments selon le prix du bien et le type (ancien ~7-8 %, neuf ~2-3 %, terrain). Barèmes moyens indicatifs, hors négociation et prêt.",
     "ui_html": "<label>Prix du bien (€)<input id='px' type='number' value='250000'></label><label>Type de bien<select id='tb'><option value='0.075'>Ancien (~7,5 %)</option><option value='0.025'>Neuf (~2,5 %)</option><option value='0.06'>Terrain (~6 %)</option></select></label><button class='action' onclick='calcN()'>Estimer</button><div id='res' class='res'></div><p class='hint'>Estimation indicative : droits ~5,8 % + émoluments + déboursés dans l'ancien.</p>",
     "js": "function calcN(){var p=parseFloat(document.getElementById('px').value)||0;var t=parseFloat(document.getElementById('tb').value)||0.075;var f=p*t;document.getElementById('res').innerHTML='Frais de notaire estimés : <b>'+f.toFixed(0)+' €</b><br>Budget total : <b>'+(p+f).toFixed(0)+' €</b>';}calcN();"
+  },
+  {
+    "slug": "jours-entre-deux-dates",
+    "title": "Jours entre deux dates : calculateur gratuit",
+    "meta": "Calculez le nombre de jours entre deux dates : grossesse, congés, âge, échéances.",
+    "h1": "Nombre de jours entre deux dates",
+    "pitch": "Compte à rebours ou durée écoulée entre deux dates : jours, semaines, mois et jours ouvrés. Idéal congés, grossesse, projets, anniversaires.",
+    "ui_html": "<label>Date de début<input id='d1' type='date' value='2026-01-01'></label><label>Date de fin<input id='d2' type='date' value='2026-12-31'></label><button class='action' onclick='calcJ()'>Calculer</button><div id='res' class='res'></div>",
+    "js": "function calcJ(){var a=new Date(document.getElementById('d1').value);var b=new Date(document.getElementById('d2').value);if(isNaN(a)||isNaN(b))return;var d=Math.round((b-a)/86400000);var s=(d/7).toFixed(1);var ouvr=0;var c=new Date(a);var step=d>0?1:-1;for(var i=0;i<Math.abs(d);i++){c.setDate(c.getDate()+step);var j=c.getDay();if(j!==0&&j!==6)ouvr++;}document.getElementById('res').innerHTML=(d>=0?'Écart : <b>'+d+' jours</b> ('+s+' semaines)':'Passé : il y a <b>'+Math.abs(d)+' jours</b>')+'<br>Jours ouvrés : <b>'+ouvr+'</b>';}calcJ();"
+  },
+  {
+    "slug": "tirage-au-sort",
+    "title": "Tirage au sort gratuit : gagnant aléatoire en ligne",
+    "meta": "Tirez un gagnant au hasard : concours, Secret Santa, équipes. Gratuit et impartial.",
+    "h1": "Tirage au sort aléatoire gratuit",
+    "pitch": "Colle tes participants (un par ligne), choisis le nombre de gagnants, lance le tirage. Aléatoire cryptographique, parfait pour concours Instagram, Secret Santa et équipes.",
+    "ui_html": "<textarea id='plist' rows='6' placeholder='Alice\\nBob\\nCharlie...'></textarea><label>Nombre de gagnants<input id='nb' type='number' value='1' min='1'></label><button class='action' onclick='tirage()'>🎲 Tirer au sort</button><div id='res' class='res'></div>",
+    "js": "function tirage(){var p=document.getElementById('plist').value.split('\\n').map(function(x){return x.trim();}).filter(Boolean);var n=Math.min(parseInt(document.getElementById('nb').value)||1,p.length);if(!p.length){document.getElementById('res').innerHTML='Ajoute des participants !';return;}var a=new Uint32Array(n);crypto.getRandomValues(a);var pool=p.slice();var g=[];for(var i=0;i<n;i++){g.push(pool.splice(a[i]%pool.length,1)[0];}document.getElementById('res').innerHTML='🎉 Gagnant(s) : <b>'+g.join(', ')+'</b>';}"
+  },
+  {
+    "slug": "calcul-ovulation-grossesse",
+    "title": "Calcul ovulation et grossesse : calendrier gratuit",
+    "meta": "Estimez ovulation, période fertile et date d'accouchement. Indicatif.",
+    "h1": "Calendrier ovulation et grossesse",
+    "pitch": "À partir du 1er jour de tes dernières règles et de ta durée de cycle, estime l'ovulation, la fenêtre fertile et la date d'accouchement probable. Indicatif uniquement, jamais un moyen de contraception.",
+    "ui_html": "<label>1er jour des dernières règles<input id='dr' type='date' value='2026-09-01'></label><label>Durée du cycle (jours)<input id='cy' type='number' value='28' min='21' max='40'></label><button class='action' onclick='calcO()'>Calculer</button><div id='res' class='res'></div><p class='hint'>Indicatif : chaque cycle varie. Ne convient pas comme contraception.</p>",
+    "js": "function calcO(){var d=new Date(document.getElementById('dr').value);var c=parseInt(document.getElementById('cy').value)||28;if(isNaN(d))return;function fmt(x){return x.toLocaleDateString('fr-FR');}var ov=new Date(d);ov.setDate(ov.getDate()+c-14);var f1=new Date(ov);f1.setDate(f1.getDate()-5);var f2=new Date(ov);f2.setDate(f2.getDate()+1);var acc=new Date(d);acc.setDate(acc.getDate()+280);document.getElementById('res').innerHTML='Ovulation estimée : <b>'+fmt(ov)+'</b><br>Fenêtre fertile : <b>'+fmt(f1)+' → '+fmt(f2)+'</b><br>Accouchement probable : <b>'+fmt(acc)+'</b>';}calcO();"
   }
 ]

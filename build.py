@@ -299,8 +299,24 @@ def build():
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(article_html(cfg, a, rel))
 
+    # Pages catégories (hubs SEO : 1 page par univers)
+    cat_labels = {"maison": "Maison", "cuisine": "Cuisine", "tech": "Tech", "sante": "Santé & bien-être", "sport": "Sport", "voyage": "Voyage"}
+    hubs = sorted({a["category"] for a in articles})
+    for cat in hubs:
+        items = [a for a in articles if a["category"] == cat]
+        label = cat_labels.get(cat, cat)
+        cards = "".join([f"<a class='art-card' href='../../comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(cat)}</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>" for a in reversed(items)])
+        hbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a></p>
+<h1 class="page">Comparatifs {esc(label)} ({len(items)})</h1>
+<p class="lead">Tous nos guides d'achat {esc(label.lower())} : {esc(', '.join([x['keyword'] for x in items[:5]]))}… mis à jour en continu.</p>
+<div class="grid">{cards}</div>"""
+        d = os.path.join(PUBLIC, "categorie", cat)
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
+            f.write(base_page(cfg, f"Comparatifs {label}", f"Tous nos comparatifs {label.lower()} : guides d'achat et meilleurs prix.", hbody, f"categorie/{cat}/", prefix="../../"))
+
     # Index
-    icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠"}
+    icons = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸"}
     cards_outils = "".join([f"<a class='tool-card' data-name='{esc(t['h1'] + ' ' + t['meta'])}' href='outils/{esc(t['slug'])}/'><span class='ico'>{icons.get(t['slug'], '🧰')}</span><span><b>{esc(t['h1'])}</b><span>{esc(t['meta'])}</span></span><span class='go'>→</span></a>" for t in tools])
     cards_articles = "".join([f"<a class='art-card' href='comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>mis à jour • 2 min</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>" for a in reversed(articles)])
     index_body = f"""<div class="hero"><div class="wrap">
@@ -315,6 +331,7 @@ def build():
 <div class="grid" id="tools-grid">{cards_outils}</div>
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
 <div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Pages « meilleur X » qui génèrent les commissions affiliation en automatique.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
 <div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">Un nouveau guide d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
@@ -393,7 +410,7 @@ def build():
 
     # Sitemap + robots + RSS
     url = cfg["site_url"].rstrip("/")
-    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/", url + "/a-propos/", url + "/contact/", url + "/confidentialite/"]
+    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/", url + "/a-propos/", url + "/contact/", url + "/confidentialite/"] + [f"{url}/categorie/{c}/" for c in sorted({a['category'] for a in articles})]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join([f"<url><loc>{esc(u)}</loc><changefreq>weekly</changefreq></url>" for u in urls]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
