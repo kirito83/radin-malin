@@ -83,7 +83,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 </main>
 <footer class="site"><div class="wrap"><div class="foot-grid">
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 1 comparatif publié chaque jour en automatique. On finance le site avec l'affiliation et la pub, sans surcoût pour toi.</p></div>
-<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a></div>
+<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
 </body>
@@ -284,7 +284,7 @@ def build():
 <span class="badge"><span class="pulse"></span> +1 comparatif publié chaque jour en auto • 100% gratuit</span>
 <h1>Économise chaque jour<br><span>sans y penser.</span></h1>
 <p class="lead">{esc(cfg['site_description'])} Outils instantanés + comparatifs malins avec meilleur prix.</p>
-<div class="actions"><a class="btn" href="#outils">🧰 Utiliser un outil gratuit</a><a class="btn ghost" href="#comparatifs">⭐ Voir les comparatifs</a></div>
+<div class="actions"><a class="btn" href="#outils">🧰 Utiliser un outil gratuit</a><a class="btn ghost" href="#comparatifs">⭐ Voir les comparatifs</a>{'<a class="btn ghost" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Bons plans sur Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
 <div class="stats"><div class="stat"><b>{len(tools)}</b>outils gratuits</div><div class="stat"><b>{len(articles)}</b>comparatifs en ligne</div><div class="stat"><b>+1/jour</b>publication auto</div><div class="stat"><b>0 €</b>sans inscription</div></div>
 </div></div>
 <div class="card-section"><h2 id="outils">🧰 Outils gratuits</h2><p class="sub">Les pages qui ramènent le trafic Google stable. Clique, utilise, repars.</p>
