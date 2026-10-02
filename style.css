@@ -83,4 +83,7 @@ footer.site a{color:#dbe2ef}
 .search{position:relative;margin:12px 0 4px}
 .search input{padding-left:44px;border-radius:999px}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
+.sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
+body{padding-bottom:0}
 @media(max-width:640px){.foot-grid{grid-template-columns:1fr}nav.main a{padding:7px 11px;font-size:13px}.hero{padding:40px 0 30px}}
