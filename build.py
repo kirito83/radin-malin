@@ -22,7 +22,7 @@ def amazon_link(query, tag):
         return f"https://www.amazon.fr/s?k={q}&tag={tag}"
     return f"https://www.amazon.fr/s?k={q}"
 
-def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
+def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow"):
     site = esc(cfg["site_name"])
     url = cfg["site_url"].rstrip("/")
     canon = f"{url}/{canonical_path.lstrip('/')}" if canonical_path else url + "/"
@@ -53,6 +53,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} — {site}</title>
 <meta name="description" content="{esc(meta_desc)}">
+<meta name="robots" content="{esc(robots)}">
 <meta name="theme-color" content="#0d1120">
 <meta name="google-site-verification" content="{esc(cfg.get('google_site_verification',''))}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
@@ -363,7 +364,7 @@ def build():
 <p class="hint">💡 Astuce : ouvre les fichiers dans Excel, LibreOffice (gratuit) ou Google Sheets. Commence par l'onglet Guide du budget, puis remplis ta 1ère facture avec le modèle.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
-        f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../"))
+        f.write(base_page(cfg, "Merci ! Télécharge ton pack", "Téléchargement du pack templates.", merci_body, "premium/merci/", prefix="../../", robots="noindex, nofollow"))
 
     # Pages légales (exigées pour AdSense + confiance)
     tg = cfg.get("telegram_channel", "")
@@ -397,7 +398,7 @@ def build():
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
     with open(os.path.join(PUBLIC, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(f"User-agent: *\nAllow: /\nSitemap: {url}/sitemap.xml\n")
+        f.write(f"User-agent: *\nAllow: /\nDisallow: /radin-malin/premium/merci/\nDisallow: /radin-malin/premium/telechargement/\nSitemap: {url}/sitemap.xml\n")
     rss_items = "".join([f"<item><title>{esc(a['title'])}</title><link>{esc(url)}/comparatifs/{esc(a['slug'])}/</link><description>{esc(a['title'])}</description></item>" for a in reversed(articles[-10:])])
     rss = f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{esc(cfg["site_name"])}</title><link>{esc(url)}/</link><description>{esc(cfg["site_description"])}</description>{rss_items}</channel></rss>'
     with open(os.path.join(PUBLIC, "rss.xml"), "w", encoding="utf-8") as f:

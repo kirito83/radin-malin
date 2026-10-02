@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Dépendances build
-        run: pip install openpyxl
+        run: pip install "openpyxl==3.1.5"
       - name: Publier 1 article + rebuild
         run: |
           python daily.py
