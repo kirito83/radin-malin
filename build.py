@@ -32,14 +32,15 @@ def split_ads(raw):
     """Separe la vignette (a plafonner 1x/24h) des autres tags."""
     import re
     vign, rest = "", raw or ""
-    m = re.search(r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>", raw or "")
-    if m and "vignette" in m.group(2):
-        vign = (f"<script>(function(){{try{{var k='rm_vign',t=Date.now();"
-                f"if(t-parseInt(localStorage.getItem(k)||'0',10)<864e5)return;"
-                f"localStorage.setItem(k,String(t));var s=document.createElement('script');"
-                f"s.dataset.zone='{m.group(1)}';s.src='{m.group(2)}';"
-                f"document.body.appendChild(s);}}catch(e){{}}})();</script>")
-        rest = raw.replace(m.group(0), "")
+    for m in re.finditer(r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>", raw or ""):
+        if "vignette" in m.group(2):
+            zone, src = m.group(1), m.group(2)
+            vign = ("<script>(function(){try{var k='rm_vign',t=Date.now();"
+                    "if(t-parseInt(localStorage.getItem(k)||'0',10)<864e5)return;"
+                    "localStorage.setItem(k,String(t));var s=document.createElement('script');"
+                    "s.dataset.zone='" + zone + "';s.src='" + src + "';"
+                    "document.body.appendChild(s);}catch(e){}})();</script>")
+            rest = raw.replace(m.group(0), "")
     return rest, vign
 
 def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image=""):
