@@ -242,6 +242,8 @@ def article_html(cfg, item, related=None):
     body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a> <span class="cat">{esc(item['category'])}</span> <span class="hint">publié le {esc(fr_date(item.get('pub_date', '')))}</span></p>
 <h1 class="page">{esc(item['title'])}</h1>
 <p class="lead">Tu cherches <b>{esc(item['keyword'])}</b> ? Voici les 3 modèles qui reviennent le plus dans les avis positifs en France, classés par rapport qualité/prix.</p>
+<div class="card-section"><h2>⚡ L'essentiel en 20 secondes</h2>
+<ul style="margin:0"><li><b>Meilleur choix :</b> {esc(item['products'][0])} — le meilleur rapport qualité/prix.</li><li><b>Alternative :</b> {esc(item['products'][1])} si le n°1 est trop cher ou en rupture.</li><li><b>Promo :</b> les prix bougent chaque jour, clique « Voir le prix » pour le tarif actuel.</li></ul></div>
 <div class="podium">{podium}</div>
 <div class="card-section"><h2>⚡ Comparatif express</h2><p class="sub">Clique pour vérifier la promo du jour — les prix bougent vite. Fais défiler → sur mobile.</p>
 <div class="tscroll"><table><tr><th>Modèle</th><th>Note</th><th>Budget</th><th>Offre</th></tr>{rows}</table></div></div>
@@ -254,6 +256,7 @@ def article_html(cfg, item, related=None):
 <div class="grid">{"".join([art_card(r, "../../") for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
 <div style="height:64px"></div>
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": cfg['site_url'].rstrip('/') + "/"}, {"@type": "ListItem", "position": 2, "name": item["category"], "item": cfg['site_url'].rstrip('/') + f"/categorie/{item['category']}/"}, {"@type": "ListItem", "position": 3, "name": item["title"]}]}, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
     return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{item['slug']}.png")
@@ -428,8 +431,13 @@ def build():
 
     # Sitemap + robots + RSS
     url = cfg["site_url"].rstrip("/")
-    urls = [url + "/"] + [f"{url}/outils/{t['slug']}/" for t in tools] + [f"{url}/comparatifs/{a['slug']}/" for a in articles] + [url + "/premium/", url + "/premium/merci/", url + "/a-propos/", url + "/contact/", url + "/confidentialite/"] + [f"{url}/categorie/{c}/" for c in sorted({a['category'] for a in articles})]
-    sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join([f"<url><loc>{esc(u)}</loc><changefreq>weekly</changefreq></url>" for u in urls]) + "</urlset>"
+    entries = [(url + "/", today_iso())]
+    entries += [(f"{url}/outils/{t['slug']}/", "") for t in tools]
+    entries += [(f"{url}/comparatifs/{a['slug']}/", a.get("pub_date", "")) for a in articles]
+    entries += [(url + pp, "") for pp in ["/premium/", "/premium/merci/", "/a-propos/", "/contact/", "/confidentialite/"]]
+    entries += [(f"{url}/categorie/{c}/", today_iso()) for c in sorted({a['category'] for a in articles})]
+    sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
+        [f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "<changefreq>weekly</changefreq></url>" for u, d in entries]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sm)
     with open(os.path.join(PUBLIC, "robots.txt"), "w", encoding="utf-8") as f:
@@ -438,6 +446,24 @@ def build():
     rss = f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{esc(cfg["site_name"])}</title><link>{esc(url)}/</link><description>{esc(cfg["site_description"])}</description>{rss_items}</channel></rss>'
     with open(os.path.join(PUBLIC, "rss.xml"), "w", encoding="utf-8") as f:
         f.write(rss)
+
+    # 404 utile (GitHub Pages l'affiche pour toute URL inconnue)
+    notfound = """<p style="margin-top:6px"><a class="breadcrumb" href="./">← Retour accueil</a></p>
+<h1 class="page">Oups, cette page n'existe plus (404)</h1>
+<p class="lead">Le comparatif a peut-être déménagé. Voici les raccourcis les plus utiles :</p>
+<div class="actions"><a class="btn" href="./#outils">🧰 Outils gratuits</a><a class="btn ghost" style="color:#111;background:#fff;border:1px solid #ddd;box-shadow:none" href="./#comparatifs">⭐ Comparatifs</a></div>"""
+    with open(os.path.join(PUBLIC, "404.html"), "w", encoding="utf-8") as f:
+        f.write(base_page(cfg, "Page introuvable", "Erreur 404 : cette page n'existe pas.", notfound, "404.html"))
+
+    # llms.txt : resume machine pour les IA (GEO)
+    lines = [f"# {cfg['site_name']}", "", f"> {cfg['site_description']}", "",
+             f"Accueil : {url}/", "", "## Outils gratuits"]
+    lines += [f"- [{t['h1']}]({url}/outils/{t['slug']}/) : {t['meta']}" for t in tools]
+    lines += ["", "## Derniers comparatifs"]
+    lines += [f"- [{a['title']}]({url}/comparatifs/{a['slug']}/) ({a['keyword']})" for a in reversed(articles[-15:])]
+    lines += ["", "## Premium", f"- [Pack Excel]({url}/premium/) : {m.get('premium_product', '')}"]
+    with open(os.path.join(PUBLIC, "llms.txt"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
     # Visuels Pinterest 1000x1500 (1 par article, ignores si Pillow absent)
     try:
