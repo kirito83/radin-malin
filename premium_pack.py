@@ -216,7 +216,6 @@ def build_pack(dl_dir):
         ws.cell(ws.max_row + 2, 1, t).font = Font(size=9, color="64748B")
     wb.save(os.path.join(dl_dir, "modele-facture.xlsx"))
     # ---------- 4. MODELE DEVIS (clone de la facture, mentions devis) ----------
-    from copy import copy as _copy
     from openpyxl import load_workbook as _load
     wd = _load(os.path.join(dl_dir, "modele-facture.xlsx"))
     ws = wd["Facture"]
