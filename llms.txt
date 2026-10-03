@@ -1,0 +1,42 @@
+# Radin Malin
+
+> Outils gratuits et comparatifs malins pour économiser chaque jour : calculatrices, convertisseurs, bons plans.
+
+Accueil : https://kirito83.github.io/radin-malin/
+
+## Outils gratuits
+- [Calcul TVA, remise et pourcentage](https://kirito83.github.io/radin-malin/outils/calcul-tva-remise/) : Calculez TVA, prix HT/TTC et remises en % en 1 clic. Outil gratuit, sans inscription.
+- [Calcul mensualité de prêt](https://kirito83.github.io/radin-malin/outils/calcul-pret-mensualite/) : Simulez votre mensualité de crédit : montant, taux, durée. Outil gratuit pour emprunt immobilier ou conso.
+- [Calcul IMC gratuit](https://kirito83.github.io/radin-malin/outils/calcul-imc/) : Calculez votre IMC gratuitement : poids, taille, interprétation OMS et poids idéal.
+- [Convertisseur de devises](https://kirito83.github.io/radin-malin/outils/convertisseur-devises/) : Convertissez euros, dollars, livres en 1 clic. Taux indicatifs, outil gratuit.
+- [Générateur de mot de passe fort](https://kirito83.github.io/radin-malin/outils/generateur-mot-de-passe/) : Générez un mot de passe fort et unique en 1 clic. 100 % local, rien n'est envoyé.
+- [Compteur de mots et caractères](https://kirito83.github.io/radin-malin/outils/compteur-mots-caracteres/) : Comptez mots, caractères, phrases et temps de lecture gratuitement.
+- [Générateur QR Code gratuit](https://kirito83.github.io/radin-malin/outils/generateur-qr-code/) : Créez un QR code gratuit pour lien, wifi, texte. Téléchargeable en image.
+- [Convertisseur d'unités](https://kirito83.github.io/radin-malin/outils/convertisseur-unites/) : Convertissez poids, tailles, distances et températures. Outil gratuit.
+- [Calcul d'âge exact](https://kirito83.github.io/radin-malin/outils/calcul-age/) : Calculez votre âge exact en ans, mois et jours. Gratuit.
+- [Générateur facture / devis gratuit](https://kirito83.github.io/radin-malin/outils/generateur-facture/) : Créez une facture ou un devis gratuit et imprimez en PDF. Sans inscription.
+- [Salaire brut en net : simulateur 2026](https://kirito83.github.io/radin-malin/outils/salaire-brut-net/) : Convertissez salaire brut en net (et inversement) : cadre, non-cadre, fonction publique. Gratuit.
+- [Simulateur frais de notaire 2026](https://kirito83.github.io/radin-malin/outils/frais-notaire/) : Estimez vos frais de notaire 2026 : ancien, neuf, terrain. Gratuit.
+- [Nombre de jours entre deux dates](https://kirito83.github.io/radin-malin/outils/jours-entre-deux-dates/) : Calculez le nombre de jours entre deux dates : grossesse, congés, âge, échéances.
+- [Tirage au sort aléatoire gratuit](https://kirito83.github.io/radin-malin/outils/tirage-au-sort/) : Tirez un gagnant au hasard : concours, Secret Santa, équipes. Gratuit et impartial.
+- [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
+
+## Derniers comparatifs
+- [Meilleur bureau assis debout électrique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-bureau-assis-debout-electrique/) (meilleur bureau assis debout electrique)
+- [Meilleure chaise bureau ergonomique pas chère](https://kirito83.github.io/radin-malin/comparatifs/meilleure-chaise-bureau-ergonomique-pas-chere/) (meilleure chaise bureau ergonomique pas chere)
+- [Meilleur sommier tapissier 140x190 rapport qualité prix](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sommier-tapissier-140/) (meilleur sommier 140x190)
+- [Meilleur matelas 160x200 : comparatif 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-matelas-160x200-2026/) (meilleur matelas 160x200)
+- [Meilleur purificateur d'air allergies et poussières](https://kirito83.github.io/radin-malin/comparatifs/meilleur-purificateur-air-allergies/) (meilleur purificateur air allergies)
+- [Meilleur déshumidificateur chambre contre l'humidité](https://kirito83.github.io/radin-malin/comparatifs/meilleur-deshumidificateur-chambre/) (meilleur deshumidificateur chambre)
+- [Meilleur nettoyeur vapeur sol : comparatif 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-nettoyeur-vapeur-sol/) (meilleur nettoyeur vapeur sol)
+- [Meilleur aspirateur voiture puissant sans fil](https://kirito83.github.io/radin-malin/comparatifs/meilleur-aspirateur-voiture-puissant/) (meilleur aspirateur voiture)
+- [Meilleure poêle induction 2026 qui n'accroche pas](https://kirito83.github.io/radin-malin/comparatifs/meilleure-poele-induction-2026/) (meilleure poele induction)
+- [Meilleur set de couteaux cuisine : ce qu'il faut vraiment](https://kirito83.github.io/radin-malin/comparatifs/meilleur-couteau-cuisine-set/) (meilleur set couteaux cuisine)
+- [Meilleure cafetière filtre 2026 : simple et bonne](https://kirito83.github.io/radin-malin/comparatifs/meilleure-cafetiere-filtre-2026/) (meilleure cafetiere filtre)
+- [Meilleur robot pâtissier pas cher qui pétrit vraiment](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-patissier-pas-cher/) (meilleur robot patissier pas cher)
+- [Meilleur airfryer grande famille 2026 : 5L et plus](https://kirito83.github.io/radin-malin/comparatifs/meilleur-airfryer-grande-famille-2026/) (meilleur airfryer grande famille)
+- [Meilleur sac à dos voyage 40L cabine](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sac-dos-voyage-40l/) (meilleur sac dos voyage 40l)
+- [Meilleur casque à réduction de bruit pour l'avion](https://kirito83.github.io/radin-malin/comparatifs/meilleur-casque-reduction-bruit-avion/) (meilleur casque reduction bruit avion)
+
+## Premium
+- [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
