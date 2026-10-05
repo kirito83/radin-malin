@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Generateur site statique - 100% stdlib, 0 dependance. Cout hebergement: 0 EUR."""
-import json, os, html, datetime, shutil, urllib.parse
+import json, os, html, re, datetime, shutil, urllib.parse
 from lib import load, load_published, save_published, today_iso
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +19,12 @@ def fr_date(iso):
     except (ValueError, AttributeError):
         return iso
 
+def slugify(text):
+    import unicodedata
+    t = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    t = re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+    return t or "produit"
+
 def esc(s):
     return html.escape(str(s), quote=True)
 
@@ -30,7 +36,6 @@ def amazon_link(query, tag):
 
 def split_ads(raw):
     """Separe la vignette (a plafonner 1x/24h) des autres tags."""
-    import re
     vign, rest = "", raw or ""
     for m in re.finditer(r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>", raw or ""):
         if "vignette" in m.group(2):
@@ -230,7 +235,7 @@ h1.page{margin-top:10px}
 @media(max-width:400px){.foot-grid{grid-template-columns:1fr}}
 """
 
-def article_html(cfg, item, related=None):
+def article_html(cfg, item, related=None, duel=None):
     tag = cfg["monetization"].get("amazon_tag", "")
     rows = ""
     podium = ""
@@ -269,6 +274,7 @@ def article_html(cfg, item, related=None):
 <div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (1 message/jour max, zéro spam).</p>
 <div class="actions">{'<a class="btn" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Recevoir les alertes prix →</a>' if cfg.get('telegram_channel') else '<a class="btn" href="../../#comparatifs">⭐ Voir les autres comparatifs →</a>'}</div></div>
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
+{('<p>⚔️ Hésitation entre les deux favoris ? Lis le duel : <a href="../../versus/' + esc(duel[0]) + '/"><b>' + esc(duel[1]) + ' vs ' + esc(duel[2]) + '</b> →</a></p>') if duel else ''}
 <div class="grid">{"".join([art_card(r, "../../") for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
 <div style="height:64px"></div>
@@ -276,6 +282,30 @@ def article_html(cfg, item, related=None):
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
     return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{item['slug']}.png")
+
+def versus_html(cfg, item):
+    """Page duel P1 vs P2 : requetes 'X vs Y' a forte intention d'achat."""
+    tag = cfg["monetization"].get("amazon_tag", "")
+    p1, p2 = item["products"][0], item["products"][1]
+    l1, l2 = amazon_link(p1, tag), amazon_link(p2, tag)
+    dslug = f"{slugify(p1)}-vs-{slugify(p2)}"
+    title = f"{p1} vs {p2} : lequel choisir en 2026 ?"
+    body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a> <a class="breadcrumb" href="../../comparatifs/{esc(item['slug'])}/">Comparatif complet</a></p>
+<h1 class="page">{esc(title)}</h1>
+<p class="lead">Hésitation entre <b>{esc(p1)}</b> et <b>{esc(p2)}</b> ? Voici le duel en 1 minute, puis les prix du jour.</p>
+<div class="card-section"><h2>⚡ Verdict en 20 secondes</h2>
+<ul style="margin:0"><li><b>Choisis {esc(p1)}</b> si tu veux le meilleur compromis global.</li><li><b>Choisis {esc(p2)}</b> si ton budget est serré ou pour un usage simple.</li><li><b>Prix :</b> vérifie les deux boutons, l'écart change selon les promos.</li></ul></div>
+<div class="podium"><div class="pick first"><span class="rank gold">🥇 {esc(p1)}</span><br><b style="font-size:16px">Le meilleur choix</b><div class="hint">Rapport qualité/prix n°1 du comparatif</div><a class="btn small" href="{esc(l1)}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div><div class="pick"><span class="rank">🥈 {esc(p2)}</span><br><b style="font-size:16px">L'alternative maline</b><div class="hint">Souvent moins cher en promo</div><a class="btn small" href="{esc(l2)}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div></div>
+<div class="card-section"><h2>⚔️ Face à face</h2><p class="sub">Fais défiler → sur mobile.</p>
+<div class="tscroll"><table><tr><th>Critère</th><th>{esc(p1)}</th><th>{esc(p2)}</th></tr>
+<tr><td><b>Notre avis</b></td><td>🥇 Choix de la rédaction</td><td>🥈 Bon plan</td></tr>
+<tr><td><b>Idéal pour</b></td><td>Usage exigeant et durable</td><td>Petit budget, usage simple</td></tr>
+<tr><td><b>Prix du jour</b></td><td><a class='btn small' href='{esc(l1)}' rel='nofollow sponsored noopener' target='_blank'>Voir →</a></td><td><a class='btn small' href='{esc(l2)}' rel='nofollow sponsored noopener' target='_blank'>Voir →</a></td></tr></table></div></div>
+<h2>Questions fréquentes</h2>
+<details open><summary>Lequel choisir, {esc(p1)} ou {esc(p2)} ?</summary><p>{esc(p1)} pour le meilleur rapport qualité/prix, {esc(p2)} pour économiser. Compare les prix du jour via les boutons.</p></details>
+<details><summary>Lequel est le moins cher ?</summary><p>En général {esc(p2)}, mais les promos inversent parfois l'écart : clique les deux boutons.</p></details>
+<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": cfg['site_url'].rstrip('/') + "/"}, {"@type": "ListItem", "position": 2, "name": item["title"], "item": cfg['site_url'].rstrip('/') + f"/comparatifs/{item['slug']}/"}, {"@type": "ListItem", "position": 3, "name": title}]}, ensure_ascii=False)}</script>"""
+    return dslug, base_page(cfg, title, title + " Duel, avis et meilleurs prix.", body, f"versus/{dslug}/", prefix="../../")
 
 def tool_page(cfg, t, all_tools=None):
     # Boutons avec la bonne classe moderne
@@ -328,14 +358,21 @@ def build():
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(tool_page(cfg, t, tools))
 
-    # Pages articles
+    # Pages articles + duels versus (X vs Y)
+    duels = []
     for a in articles:
         rel = [x for x in articles if x["slug"] != a["slug"] and x["category"] == a["category"]]
         rel += [x for x in articles if x["slug"] != a["slug"] and x["category"] != a["category"]]
+        dslug, dhtml = versus_html(cfg, a)
+        duels.append((a, dslug))
+        d = os.path.join(PUBLIC, "versus", dslug)
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
+            f.write(dhtml)
         d = os.path.join(PUBLIC, "comparatifs", a["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(article_html(cfg, a, rel))
+            f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1])))
 
     # Pages catégories (hubs SEO : 1 page par univers)
     cat_labels = {"maison": "Maison", "cuisine": "Cuisine", "tech": "Tech", "sante": "Santé & bien-être", "sport": "Sport", "voyage": "Voyage"}
@@ -452,6 +489,7 @@ def build():
     entries += [(f"{url}/comparatifs/{a['slug']}/", a.get("pub_date", "")) for a in articles]
     entries += [(url + pp, "") for pp in ["/premium/", "/premium/merci/", "/a-propos/", "/contact/", "/confidentialite/"]]
     entries += [(f"{url}/categorie/{c}/", today_iso()) for c in sorted({a['category'] for a in articles})]
+    entries += [(f"{url}/versus/{dslug}/", a.get("pub_date", "")) for a, dslug in duels]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
         [f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "<changefreq>weekly</changefreq></url>" for u, d in entries]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:

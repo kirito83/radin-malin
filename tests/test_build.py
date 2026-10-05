@@ -125,5 +125,46 @@ class TestLib(unittest.TestCase):
         self.assertIsNone(daily.select_next(kws, {"a": "x", "b": "x", "c": "x"}))
 
 
+class TestVersus(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import build as bmod
+        with open(os.path.join(ROOT, "config.json"), encoding="utf-8") as f:
+            cls.cfg = json.load(f)
+        with open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8") as f:
+            cls.by_slug = {k["slug"]: k for k in json.load(f)}
+        import lib as libmod
+        pub = libmod.load_published()
+        cls.slugs = list(pub.keys()) if isinstance(pub, dict) else pub
+        cls.duels = [(s, bmod.slugify(cls.by_slug[s]["products"][0]) + "-vs-" + bmod.slugify(cls.by_slug[s]["products"][1])) for s in cls.slugs]
+
+    def test_slugify_sain(self):
+        import build as bmod
+        self.assertEqual(bmod.slugify("Roborock Q7 Max"), "roborock-q7-max")
+        self.assertRegex(bmod.slugify("L'Oréal Crème"), r"^[a-z0-9-]+$")
+
+    def test_pages_duels(self):
+        tag = self.cfg["monetization"]["amazon_tag"]
+        for s, dslug in self.duels:
+            with self.subTest(duel=dslug):
+                html = read_pub(f"versus/{dslug}/index.html")
+                p1, p2 = self.by_slug[s]["products"][:2]
+                self.assertIn(p1, html)
+                self.assertIn(p2, html)
+                self.assertIn(f"tag={tag}", html)
+                self.assertIn("BreadcrumbList", html)
+
+    def test_lien_duel_depuis_article(self):
+        for s, dslug in self.duels[:5]:
+            with self.subTest(article=s):
+                self.assertIn(f"versus/{dslug}/", read_pub(f"comparatifs/{s}/index.html"))
+
+    def test_duels_dans_sitemap(self):
+        with open(os.path.join(PUBLIC, "sitemap.xml"), encoding="utf-8") as f:
+            sm = f.read()
+        for _, dslug in self.duels:
+            self.assertIn(f"/versus/{dslug}/", sm)
+
+
 if __name__ == "__main__":
     unittest.main()
