@@ -92,6 +92,9 @@ class TestTools(unittest.TestCase):
                     self.assertIn(ref, ids_ui, f"id '{ref}' introuvable dans ui_html")
                 for ref in set(re.findall(r'getElementById\("([^"]+)"\)', t["js"])):
                     self.assertIn(ref, ids_ui, f'id "{ref}" introuvable dans ui_html')
+                for pre in set(re.findall(r"getElementById\('([A-Za-z]+)'\s*\+", t["js"])):
+                    couverts = [i for i in ids_ui if re.match(r"^" + pre + r"\d+$", i)]
+                    self.assertTrue(couverts, f"ids dynamiques '{pre}'+N sans base dans ui_html")
 
     def test_handlers_definis(self):
         for t in self.tools:

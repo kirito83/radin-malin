@@ -15,7 +15,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STUB = """
 var __els = {}, __printed = false, __alerted = null, __copied = null;
-function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}, addEventListener: function(){}}; if(val !== undefined) __els[id].value = val; return __els[id]; }
+function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}, addEventListener: function(){}, appendChild: function(){}}; if(val !== undefined) __els[id].value = val; return __els[id]; }
 var document = {
   getElementById: function(id){ if(!__els[id]) throw new Error("id introuvable: " + id); return __els[id]; },
   createElement: function(t){ return {href: "", download: "", click: function(){}, remove: function(){}, style: {}, setAttribute: function(){}}; },
@@ -185,6 +185,12 @@ class TestFonctionnel(unittest.TestCase):
         self.assertIn("1321", r)
         self.assertIn("Taux moyen", r)
 
+    def test_impot_reduction(self):
+        t = self.tools["simulateur-impot-revenu"]
+        r = run_tool(t, {"ri": "35000", "pd": "0", "red": "1000", "cred": "0"},
+                     raw_lines=['__el("parts").value="2";'])
+        self.assertIn("321", r)
+
     def test_moyenne(self):
         t = self.tools["calcul-moyenne-notes"]
         r = run_tool(t, {"n1": "14", "c1": "3", "n2": "11", "c2": "2", "n3": "16", "c3": "1"})
@@ -192,12 +198,30 @@ class TestFonctionnel(unittest.TestCase):
         self.assertIn("13.33", r)
         self.assertIn("Assez bien", r)
 
+    def test_moyenne_ajout_dynamique(self):
+        t = self.tools["calcul-moyenne-notes"]
+        r = run_tool(t, {"n1": "10", "c1": "1", "n2": "10", "c2": "1", "n3": "10", "c3": "1"},
+                     raw_lines=['__el("n4","");', '__el("c4","1");', '__el("n5","");', '__el("c5","1");',
+                                'addNote();', 'addNote();',
+                                '__els["n4"].value="20";', '__els["n5"].value="20";'],
+                     call="calcMoy();")
+        # (10+10+10+20+20)/5 = 14.00
+        self.assertIn("14.00", r)
+
     def test_cv_apercu(self):
         t = self.tools["generateur-cv-gratuit"]
         r = run_tool(t, {"cvn": "Jean Test", "cvt": "Dev", "cve": "j@t.fr", "cvp": "0600", "cvx": "X", "cvf": "F", "cvs": "S"},
                      call="cvUpdate();", tail='__els["cvprev"].innerHTML')
         self.assertIn("Jean Test", r)
         self.assertIn("cv-print", r)
+
+    def test_cv_sections_conditionnelles(self):
+        t = self.tools["generateur-cv-gratuit"]
+        r = run_tool(t, {"cvn": "J", "cvt": "D", "cve": "e", "cvp": "p", "cvv": "V", "cvl": "", "cvr": "", "cvx": "X", "cvf": "F", "cvs": "A, B", "cvg": "", "cvh": ""},
+                     call="cvUpdate();", tail='__els["cvprev"].innerHTML')
+        self.assertIn("cv-pill", r)
+        self.assertNotIn("Loisirs", r)
+        self.assertNotIn("Langues", r)
 
     def test_calories(self):
         t = self.tools["calcul-calories"]
