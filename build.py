@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Generateur site statique - 100% stdlib, 0 dependance. Cout hebergement: 0 EUR."""
 import json, os, html, re, datetime, shutil, urllib.parse, unicodedata
-from lib import load, load_published, save_published, today_iso
+from lib import load, load_published, save_published, today_iso, active_promos, days_left, next_promo
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
@@ -404,14 +404,37 @@ def build():
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1]), qz["slug"] if qz else None))
 
-    # Hub saisonnier cadeaux (SEO Q4, auto-alimente)
+    # Page promos en cours (calendrier : ajout/retrait automatiques par dates)
+    promos = active_promos(load("data/promos.json", []))
+    by_slug = {k["slug"]: k for k in keywords}
+    psections = ""
+    for ev in promos:
+        picks = [dict(by_slug[s], pub_date=published.get(s, today_iso()))
+                 for s in ev.get("picks", []) if s in published and s in by_slug]
+        if not picks:
+            continue
+        left = days_left(ev["end"])
+        cards = "".join([art_card(a, "../") for a in picks])
+        psections += f"""<div class="card-section"><h2>{esc(ev['emoji'])} {esc(ev['title'])}</h2><p class="sub">Jusqu'au {esc(fr_date(ev['end']))} — plus que {left} jour(s). {esc(ev['text'])}</p><div class="grid">{cards}</div></div>"""
+    if not psections:
+        nxt = next_promo(load("data/promos.json", []))
+        suite = f"Prochaine vague : <b>{esc(nxt['emoji'])} {esc(nxt['title'])}</b> dès le {esc(fr_date(nxt['start']))}." if nxt else "De nouvelles promos arrivent très vite."
+        psections = f"""<div class="card-section"><h2>😴 Aucune promo en ce moment</h2><p class="sub">{suite} En attendant, nos comparatifs affichent déjà les meilleurs prix du jour.</p></div>"""
+    pbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">🔥 Promos en cours</h1>
+<p class="lead">Les opérations du moment avec notre sélection au meilleur rapport qualité/prix. Page mise à jour chaque jour : les promos terminées disparaissent toutes seules.</p>
+{psections}"""
+    os.makedirs(os.path.join(PUBLIC, "promos"), exist_ok=True)
+    with open(os.path.join(PUBLIC, "promos", "index.html"), "w", encoding="utf-8") as f:
+        f.write(base_page(cfg, "Promos en cours", "Promotions du moment : sélection au meilleur rapport qualité/prix.", pbody, "promos/", prefix="../"))
+    n_promos = len(promos)
     def is_gift(a):
         blob = (a["slug"] + " " + a["keyword"]).lower()
         return any(w in blob for w in ["noel", "cadeau", "avent", "black-friday"])
     gifts = [a for a in articles if is_gift(a)]
     if gifts:
-        gcards = "".join([art_card(a, "../../") for a in reversed(gifts)])
-        gbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a></p>
+        gcards = "".join([art_card(a, "../") for a in reversed(gifts)])
+        gbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">🎄 Idées cadeaux & promos ({len(gifts)})</h1>
 <p class="lead">Guides cadeaux de Noël, calendriers de l'Avent et bons plans Black Friday : le bon choix au meilleur prix.</p>
 <div class="grid">{gcards}</div>"""
@@ -451,7 +474,7 @@ def build():
 <div class="grid" id="tools-grid">{cards_outils}</div>
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
 <div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Nos guides « meilleur X » : le bon choix au meilleur prix du jour.</p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">{('<a class=\'cat\' style=\'text-decoration:none\' href=\'promos/\'>🔥 Promos en cours</a>') if n_promos else ''}<a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
 <div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">2 nouveaux guides d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
@@ -537,6 +560,7 @@ def build():
     entries += [(f"{url}/versus/{dslug}/", a.get("pub_date", "")) for a, dslug in duels]
     entries += [(f"{url}/quiz/{q['slug']}/", today_iso()) for q in load("data/quizzes.json", [])]
     entries += [(url + "/idees-cadeaux/", today_iso())]
+    entries += [(url + "/promos/", today_iso())]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
         [f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "<changefreq>weekly</changefreq></url>" for u, d in entries]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:

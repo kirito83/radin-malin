@@ -282,5 +282,34 @@ class TestQuiz(unittest.TestCase):
                 self.assertIn("/idees-cadeaux/", f.read())
 
 
+class TestPromos(unittest.TestCase):
+    def test_actives_bornes(self):
+        import lib as libmod
+        evs = [{"id": "a", "start": "2026-01-01", "end": "2026-01-31"},
+               {"id": "b", "start": "2026-02-01", "end": "2026-02-28"}]
+        self.assertEqual([e["id"] for e in libmod.active_promos(evs, "2026-01-01")], ["a"])
+        self.assertEqual([e["id"] for e in libmod.active_promos(evs, "2026-01-31")], ["a"])
+        self.assertEqual(libmod.active_promos(evs, "2026-03-01"), [])
+        self.assertEqual(libmod.days_left("2026-01-31", "2026-01-28"), 3)
+        self.assertIsNotNone(libmod.next_promo(evs, "2026-01-15"))
+
+    def test_page_promos_coherente(self):
+        import lib as libmod
+        with open(os.path.join(ROOT, "data", "promos.json"), encoding="utf-8") as f:
+            evs = json.load(f)
+        with open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8") as f:
+            kws = {k["slug"] for k in json.load(f)}
+        for ev in evs:
+            self.assertLessEqual(ev["start"], ev["end"], f"dates inverses : {ev['id']}")
+            for s in ev["picks"]:
+                self.assertIn(s, kws, f"pick inconnu : {s} dans {ev['id']}")
+        html = read_pub("promos/index.html")
+        attendu = libmod.active_promos(evs)
+        if attendu:
+            self.assertIn(attendu[0]["title"], html)
+        with open(os.path.join(PUBLIC, "sitemap.xml"), encoding="utf-8") as f:
+            self.assertIn("/promos/", f.read())
+
+
 if __name__ == "__main__":
     unittest.main()

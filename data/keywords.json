@@ -1648,5 +1648,115 @@
       "Lexibook Disney",
       "Tommee Tippee Groclock"
     ]
+  },
+  {
+    "slug": "idee-cadeau-collegue-secret-santa",
+    "title": "Idée cadeau collègue Secret Santa à moins de 20 €",
+    "category": "cuisine",
+    "keyword": "idee cadeau collegue secret santa",
+    "products": [
+      "Mug thermos personnalisable",
+      "Coffret chocolats Jeff de Bruges",
+      "Plante verte facile"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-naissance-bebe",
+    "title": "Idée cadeau de naissance qui fait vraiment plaisir",
+    "category": "maison",
+    "keyword": "idee cadeau naissance bebe",
+    "products": [
+      "Doudou plat Jellycat",
+      "Coffret soins Tidoo",
+      "Mobile musical Pabobo"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-mariage-couple",
+    "title": "Idée cadeau de mariage pour les mariés",
+    "category": "cuisine",
+    "keyword": "idee cadeau mariage couple",
+    "products": [
+      "Coffret champagne",
+      "Set verres à vin",
+      "Cagnotte voyage"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-cremaillere-appartement",
+    "title": "Idée cadeau crémaillère : utile dès le 1er jour",
+    "category": "maison",
+    "keyword": "idee cadeau cremaillere",
+    "products": [
+      "Set ustensiles Joseph",
+      "Bougie parfumée maison",
+      "Plante Monstera"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-maitresse-fin-annee",
+    "title": "Idée cadeau maîtresse fin d'année (petit budget)",
+    "category": "maison",
+    "keyword": "idee cadeau maitresse fin annee",
+    "products": [
+      "Coffret thé Dammann",
+      "Bougie senteur douce",
+      "Carte cadeau librairie"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-papy-mamie-noel",
+    "title": "Idée cadeau papy et mamie : simple et touchant",
+    "category": "maison",
+    "keyword": "idee cadeau papy mamie",
+    "products": [
+      "Cadre photo numérique",
+      "Plaid tout doux",
+      "Coffret gourmand terroir"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-sportif-course",
+    "title": "Idée cadeau sportif : course et fitness",
+    "category": "sport",
+    "keyword": "idee cadeau sportif",
+    "products": [
+      "Montre Garmin Forerunner 55",
+      "Ceinture cardio",
+      "Coffret compléments"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-cuisinier-amateur",
+    "title": "Idée cadeau cuisinier amateur qui a déjà tout",
+    "category": "cuisine",
+    "keyword": "idee cadeau cuisinier",
+    "products": [
+      "Couteau chef Wusthof",
+      "Pierre à aiguiser",
+      "Coffret épices du monde"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-lecteur-livre",
+    "title": "Idée cadeau lecteur : au-delà du livre",
+    "category": "tech",
+    "keyword": "idee cadeau lecteur",
+    "products": [
+      "Liseuse Kindle",
+      "Lampe de lecture",
+      "Marque-pages cuir"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-jardinier-balcon",
+    "title": "Idée cadeau jardinier balcon et plantes d'intérieur",
+    "category": "maison",
+    "keyword": "idee cadeau jardinier",
+    "products": [
+      "Kit rempotage",
+      "Arrosoir design",
+      "Graines potager balcon"
+    ]
   }
 ]

@@ -41,3 +41,20 @@ def read_json(path, default=None):
 def write_json(path, obj):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
+
+def active_promos(events, today=None):
+    """Promos en cours (start <= aujourd'hui <= end). Pur, teste."""
+    t = today or today_iso()
+    return [e for e in events if e.get("start", "") <= t <= e.get("end", "9999")]
+
+def days_left(end_iso, today=None):
+    t = today or today_iso()
+    try:
+        return (datetime.date.fromisoformat(end_iso) - datetime.date.fromisoformat(t)).days
+    except ValueError:
+        return 0
+
+def next_promo(events, today=None):
+    t = today or today_iso()
+    fut = sorted([e for e in events if e.get("start", "") > t], key=lambda e: e["start"])
+    return fut[0] if fut else None
