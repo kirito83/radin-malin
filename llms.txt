@@ -29,6 +29,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Où en es-tu dans ta grossesse ?](https://kirito83.github.io/radin-malin/outils/semaines-grossesse/) : Calculez vos semaines d'aménorrhée, trimestre et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleure TV 55 pouces Black Friday : OLED vs QLED](https://kirito83.github.io/radin-malin/comparatifs/meilleure-tv-55-pouces-black-friday/) (tv 55 pouces black friday)
 - [Casque audio Black Friday : les promos qui valent le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-casque-black-friday-2026/) (casque black friday)
 - [Aspirateur robot Black Friday : les vraies bonnes affaires](https://kirito83.github.io/radin-malin/comparatifs/meilleur-aspirateur-robot-black-friday/) (aspirateur robot black friday)
 - [Meilleur coffret chocolat pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chocolat-noel-coffret/) (meilleur coffret chocolat noel)
@@ -43,7 +44,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Idée cadeau ado gamer à moins de 60 €](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-ado-gamer-noel/) (idee cadeau ado gamer)
 - [Idée cadeau enfant 8 ans : ce qui marche vraiment](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-enfant-8-ans-noel/) (idee cadeau enfant 8 ans)
 - [Idée cadeau femme à moins de 50 € pour Noël](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-femme-50-euros-noel/) (idee cadeau femme 50 euros noel)
-- [Idée cadeau homme à moins de 50 € pour Noël](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-homme-50-euros-noel/) (idee cadeau homme 50 euros noel)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
