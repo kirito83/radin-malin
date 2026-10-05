@@ -58,9 +58,9 @@
     "title": "Générateur QR Code gratuit",
     "meta": "Créez un QR code gratuit pour lien, wifi, texte. Téléchargeable en image.",
     "h1": "Générateur QR Code gratuit",
-    "pitch": "Transformez un lien, un texte ou un contact en QR code téléchargeable. Pratique pour menus, cartes de visite, wifi invité. Image générée via API gratuite.",
+    "pitch": "Transformez un lien, un texte ou un contact en QR code PNG à télécharger. Valable à vie : vos données sont encodées dans le motif, sans compte ni expiration.",
     "ui_html": "<label>Texte / lien<input id='qrtext' type='text' value='https://example.com' style='width:100%'></label><button onclick='genQR()'>Générer QR</button><div id='res' class='res'></div>",
-    "js": "function genQR(){var t=encodeURIComponent(document.getElementById('qrtext').value||'test');document.getElementById('res').innerHTML='<img alt=\"QR\" src=\"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+t+'\"><br><a href=\"https://api.qrserver.com/v1/create-qr-code/?size=600x600&data='+t+'\" download>Clic droit > Enregistrer pour télécharger</a>';}genQR();"
+    "js": "function genQR(){var t=encodeURIComponent(document.getElementById(\"qrtext\").value||\"test\");var small=\"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=\"+t;var big=\"https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=\"+t;document.getElementById(\"res\").innerHTML=\"<img id=\\\"qr-img\\\" alt=\\\"QR code\\\" src=\\\"\"+small+\"\\\" style=\\\"background:#fff;padding:8px;border-radius:8px;max-width:100%\\\"><br><br><button class=\\\"action\\\" onclick=\\\"dlQR()\\\">Télécharger le QR (PNG)</button>\";window.__qrBig=big;}\nfunction dlQR(){var u=window.__qrBig||\"\";if(!u){return;}if(typeof fetch===\"function\"){fetch(u).then(function(r){return r.blob();}).then(function(b){var a=document.createElement(\"a\");a.href=URL.createObjectURL(b);a.download=\"qrcode.png\";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}).catch(function(){window.open(u,\"_blank\");});}else{window.open(u,\"_blank\");}}\ngenQR();"
   },
   {
     "slug": "convertisseur-unites",

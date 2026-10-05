@@ -22,7 +22,7 @@ var document = {
   body: {appendChild: function(){}},
   addEventListener: function(){}
 };
-var window = {print: function(){ __printed = true; }};
+var window = {print: function(){ __printed = true; }, open: function(){ return null; }};
 var location = {href: "http://test/"};
 var navigator = {clipboard: {writeText: function(t){ __copied = t; return {then: function(f){ f(); }}; }}};
 var crypto = {getRandomValues: function(a){ for(var i = 0; i < a.length; i++) a[i] = (i * 7919 + 13) % 4294967296; return a; }};
@@ -113,6 +113,12 @@ class TestFonctionnel(unittest.TestCase):
         r = run_tool(t, {"qrtext": "https://example.com"})
         self.assertIn("api.qrserver.com", r)
         self.assertIn("example.com", r)
+        self.assertIn("dlQR()", r)
+
+    def test_qr_telechargement_sans_fetch(self):
+        t = self.tools["generateur-qr-code"]
+        run_tool(t, {"qrtext": "https://example.com"}, call="dlQR();",
+                 tail='"ok"')  # repli window.open, ne doit pas lever
 
     def test_unites(self):
         t = self.tools["convertisseur-unites"]
