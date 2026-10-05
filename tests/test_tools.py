@@ -107,6 +107,15 @@ class TestTools(unittest.TestCase):
             with self.subTest(outil=t["slug"]):
                 self.assertTrue(balanced(t["js"]), "accolades/parentheses desequilibrees")
 
+    def test_js_sans_guillemets_pieges(self):
+        for t in self.tools:
+            with self.subTest(outil=t["slug"]):
+                for attr in ["class='", "id='", "href='", "style='", "src='",
+                             "onclick='", "download='", "type='", "value='",
+                             "name='", "target='", "rel='"]:
+                    self.assertNotIn(attr, t["js"],
+                        f"attribut HTML en quotes simples dans du JS (casse le script) : {attr}")
+
     def test_boutons_presents(self):
         for t in self.tools:
             with self.subTest(outil=t["slug"]):
