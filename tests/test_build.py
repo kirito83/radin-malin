@@ -181,6 +181,14 @@ class TestLiens(unittest.TestCase):
                     problemes.append(f"{os.path.relpath(p, PUBLIC)} contient « {w} »")
         self.assertEqual(problemes, [], f"messages internes : {problemes[:5]}")
 
+    def test_textes_sources_propres(self):
+        interdits = ["dans le code", "TODO", "FIXME", "VOTRE", "Lorem", "config.json"]
+        for fname in ["data/tools.json", "data/quizzes.json", "data/keywords.json"]:
+            with open(os.path.join(ROOT, fname), encoding="utf-8") as f:
+                contenu = f.read()
+            for w in interdits:
+                self.assertNotIn(w, contenu, f"« {w} » dans {fname}")
+
 
 class TestLib(unittest.TestCase):
     def test_migration_liste_vers_dict(self):
