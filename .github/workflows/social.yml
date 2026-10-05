@@ -7,7 +7,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   telegram:
@@ -22,3 +22,41 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python social_post.py
+  bluesky:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Post Bluesky (skip si non configuré)
+        env:
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+        run: python post_bsky.py
+      - name: Mémoriser les posts
+        run: |
+          git config user.name "cash-bot"
+          git config user.email "cash-bot@users.noreply.github.com"
+          git add data/posted_bsky.json
+          git commit -m "auto: posts Bluesky $(date -u +%F)" || echo "rien à commiter"
+          git push || echo "push ignore"
+  mastodon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Toot Mastodon (skip si non configuré)
+        env:
+          MASTO_INSTANCE: ${{ secrets.MASTO_INSTANCE }}
+          MASTO_TOKEN: ${{ secrets.MASTO_TOKEN }}
+        run: python post_masto.py
+      - name: Mémoriser les toots
+        run: |
+          git config user.name "cash-bot"
+          git config user.email "cash-bot@users.noreply.github.com"
+          git add data/posted_masto.json
+          git commit -m "auto: toots Mastodon $(date -u +%F)" || echo "rien à commiter"
+          git push || echo "push ignore"
