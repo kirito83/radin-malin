@@ -4,7 +4,7 @@
 import os, sys, unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from social_text import build_text, link_facet
+from social_text import build_text, link_facet, pick_todo
 
 
 class TestSocialText(unittest.TestCase):
@@ -35,6 +35,15 @@ class TestSocialText(unittest.TestCase):
     def test_tags_optionnels(self):
         t = build_text("Titre", "https://e.com/", tags=["#bonplan"])
         self.assertIn("#bonplan", t)
+
+    def test_pick_todo_anti_flood(self):
+        slugs = [f"a{i}" for i in range(10)]
+        todo, skipped = pick_todo(slugs, [], limit=3)
+        self.assertEqual(todo, ["a7", "a8", "a9"])
+        self.assertEqual(len(skipped), 7)
+        todo2, skipped2 = pick_todo(slugs, ["a%d" % i for i in range(8)], limit=3)
+        self.assertEqual(todo2, ["a8", "a9"])
+        self.assertEqual(skipped2, [])
 
 
 if __name__ == "__main__":

@@ -8,6 +8,8 @@
   "analytics_script": "<!-- Google tag (gtag.js) --><script async src=\"https://www.googletagmanager.com/gtag/js?id=G-VHM284ZNV5\"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VHM284ZNV5');</script>",
   "head_extra": "<meta name=\"monetag\" content=\"daa189d9cc8ec4b32e475c1f16ae39c7\"><meta name=\"msvalidate.01\" content=\"77C56D0DC5F4BC1117751D712C09869F\" />",
   "telegram_channel": "https://t.me/radinmalin_bonsplans",
+  "social_bsky": "",
+  "social_masto": "",
   "monetization": {
     "adsense_client": "",
     "monetag_tag": "<script>(function(s){s.dataset.zone='11940431',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script><script>(function(s){s.dataset.zone='11940433',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>",

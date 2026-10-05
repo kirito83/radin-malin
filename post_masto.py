@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Toote les nouveaux articles sur Mastodon (API gratuite). SKIP sans secrets. Stdlib."""
 import json, os, urllib.request, urllib.error
-from social_text import build_text
+from social_text import build_text, pick_todo
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,7 +19,10 @@ def main():
     state = os.path.join(ROOT, "data", "posted_masto.json")
     posted = json.load(open(state, encoding="utf-8")) if os.path.exists(state) else []
     base = cfg["site_url"].rstrip("/")
-    for slug in [s for s in slugs if s in kws and s not in posted]:
+    todo, skipped = pick_todo(slugs, posted)
+    posted = posted + [s for s in skipped if s in kws]
+    json.dump(posted, open(state, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    for slug in [s for s in todo if s in kws]:
         a = kws[slug]
         link = f"{base}/comparatifs/{slug}/"
         text = build_text(a["title"], link, tags=["#bonplan"], max_len=480)

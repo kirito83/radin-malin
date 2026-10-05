@@ -24,3 +24,10 @@ def link_facet(text, url):
         return None
     return {"index": {"byteStart": start, "byteEnd": start + len(url.encode("utf-8"))},
             "features": [{"$type": "app.bsky.richtext.facet#link", "uri": url}]}
+
+def pick_todo(slugs, posted, limit=3):
+    """Les `limit` plus recents a publier + le vieux stock a ignorer (anti-flood)."""
+    fresh = [s for s in slugs if s not in set(posted)]
+    if len(fresh) <= limit:
+        return fresh, []
+    return fresh[-limit:], fresh[:-limit]

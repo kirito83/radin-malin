@@ -115,7 +115,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 </main>
 <footer class="site"><div class="wrap"><div class="foot-grid">
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 2 nouveaux comparatifs chaque jour. Le site est financé par l'affiliation et la pub, sans surcoût pour toi.</p></div>
-<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}</div>
+<div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}{'<a href="' + esc(cfg.get('social_bsky','')) + '">🦋 Bluesky</a>' if cfg.get('social_bsky') else ''}{'<a href="' + esc(cfg.get('social_masto','')) + '">🐘 Mastodon</a>' if cfg.get('social_masto') else ''}</div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
 <div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
