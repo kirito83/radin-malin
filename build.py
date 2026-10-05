@@ -86,9 +86,12 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={esc(ads['adsense_client'])}" crossorigin="anonymous"></script>
 <ins class="adsbygoogle" style="display:block" data-ad-client="{esc(ads['adsense_client'])}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script></div>"""
-    elif ads.get("monetag_tag"):
+    elif ads.get("monetag_tag") or ads.get("monetag_inpage_enabled") or ads.get("monetag_vignette_enabled"):
+        inpage = ads.get("monetag_inpage", "") if ads.get("monetag_inpage_enabled") else ""
+        if not inpage and ads.get("monetag_tag") and "vignette" not in ads.get("monetag_tag"):
+            inpage = ads["monetag_tag"]
         vign = vignette_loader(ads.get("monetag_vignette", "")) if ads.get("monetag_vignette_enabled") else ""
-        ad_top = f"""<div class="ad"><small>Publicité</small>{ads['monetag_tag']}{vign}</div>"""
+        ad_top = f"""<div class="ad"><small>Publicité</small>{inpage}{vign}</div>""" if (inpage or vign) else ""
 
     stripe_box = ""
     if ads.get("stripe_pro_link") and "VOTRE" not in ads["stripe_pro_link"]:
