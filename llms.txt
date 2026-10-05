@@ -22,6 +22,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleur sac de couchage grand froid : ne pas se geler](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sac-couchage-froid-extreme/) (meilleur sac couchage grand froid)
 - [Meilleur vélo elliptique appartement silencieux](https://kirito83.github.io/radin-malin/comparatifs/meilleur-velo-elliptique-appartement/) (meilleur velo elliptique appartement)
 - [Meilleurs haltères réglables pour la maison](https://kirito83.github.io/radin-malin/comparatifs/meilleur-halteres-reglables-maison/) (meilleurs halteres reglables maison)
 - [Meilleure balance connectée précise 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleure-balance-connectee-2026/) (meilleure balance connectee)
@@ -36,7 +37,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur bureau assis debout électrique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-bureau-assis-debout-electrique/) (meilleur bureau assis debout electrique)
 - [Meilleure chaise bureau ergonomique pas chère](https://kirito83.github.io/radin-malin/comparatifs/meilleure-chaise-bureau-ergonomique-pas-chere/) (meilleure chaise bureau ergonomique pas chere)
 - [Meilleur sommier tapissier 140x190 rapport qualité prix](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sommier-tapissier-140/) (meilleur sommier 140x190)
-- [Meilleur matelas 160x200 : comparatif 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-matelas-160x200-2026/) (meilleur matelas 160x200)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
