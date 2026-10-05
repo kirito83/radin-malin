@@ -100,6 +100,14 @@ class TestBuild(unittest.TestCase):
         self.assertIn("G-VHM284ZNV5", html)
         self.assertIn('name="monetag"', html)
 
+    def test_acces_promos_quiz_depuis_accueil(self):
+        html = read_pub("index.html")
+        self.assertIn("href='promos/'", html)
+        self.assertIn("Quiz 30 secondes", html)
+        with open(os.path.join(ROOT, "data", "quizzes.json"), encoding="utf-8") as f:
+            for q in json.load(f):
+                self.assertIn(f"quiz/{q['slug']}/", html)
+
     def test_routage_outils_vers_comparatifs(self):
         with open(os.path.join(ROOT, "data", "tools.json"), encoding="utf-8") as f:
             slugs = [t["slug"] for t in json.load(f)]

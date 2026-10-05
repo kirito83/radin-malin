@@ -116,7 +116,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 2 nouveaux comparatifs chaque jour. Le site est financé par l'affiliation et la pub, sans surcoût pour toi.</p></div>
 <div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}{'<a href="' + esc(cfg.get('social_bsky','')) + '">🦋 Bluesky</a>' if cfg.get('social_bsky') else ''}{'<a href="' + esc(cfg.get('social_masto','')) + '">🐘 Mastodon</a>' if cfg.get('social_masto') else ''}</div>
 <div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
-<div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a></div>
+<div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a><a href="{prefix}promos/">Promos en cours</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
 </body>
 </html>"""
@@ -427,7 +427,6 @@ def build():
     os.makedirs(os.path.join(PUBLIC, "promos"), exist_ok=True)
     with open(os.path.join(PUBLIC, "promos", "index.html"), "w", encoding="utf-8") as f:
         f.write(base_page(cfg, "Promos en cours", "Promotions du moment : sélection au meilleur rapport qualité/prix.", pbody, "promos/", prefix="../"))
-    n_promos = len(promos)
     def is_gift(a):
         blob = (a["slug"] + " " + a["keyword"]).lower()
         return any(w in blob for w in ["noel", "cadeau", "avent", "black-friday"])
@@ -474,8 +473,10 @@ def build():
 <div class="grid" id="tools-grid">{cards_outils}</div>
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
 <div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Nos guides « meilleur X » : le bon choix au meilleur prix du jour.</p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">{('<a class=\'cat\' style=\'text-decoration:none\' href=\'promos/\'>🔥 Promos en cours</a>') if n_promos else ''}<a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><a class='cat' style='text-decoration:none' href='promos/'>🔥 Promos en cours</a><a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
+<div class="card-section"><h2>🎯 Quiz 30 secondes</h2><p class="sub">3 questions et on te désigne le bon modèle. Rapide, gratuit, partageable.</p>
+<div class="grid">{"".join([f"<a class='tool-card' href='quiz/{esc(q['slug'])}/'><span class='ico'>🎯</span><span><b>{esc(q['title'])}</b><span>{esc(q['intro'])}</span></span><span class='go'>→</span></a>" for q in load("data/quizzes.json", [])])}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
 <div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">2 nouveaux guides d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
 <p class="hint"><b>Ajoute-nous à tes favoris :</b> un nouvel outil ou comparatif t'attend chaque jour.</p></div>"""
