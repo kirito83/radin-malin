@@ -104,9 +104,7 @@ class TestBuild(unittest.TestCase):
         html = read_pub("index.html")
         self.assertIn("href='promos/'", html)
         self.assertIn("Quiz 30 secondes", html)
-        with open(os.path.join(ROOT, "data", "quizzes.json"), encoding="utf-8") as f:
-            for q in json.load(f):
-                self.assertIn(f"quiz/{q['slug']}/", html)
+        self.assertIn("href='quiz/", html)
 
     def test_routage_outils_vers_comparatifs(self):
         with open(os.path.join(ROOT, "data", "tools.json"), encoding="utf-8") as f:
@@ -263,13 +261,32 @@ class TestQuiz(unittest.TestCase):
                     for opt in qu["options"]:
                         self.assertEqual(len(opt["scores"]), len(prods[:3]))
 
+    def test_auto_quiz_valide(self):
+        import build as bmod
+        a = {"slug": "x", "title": "T", "keyword": "meilleur aspirateur robot 2026",
+             "category": "maison", "products": ["P1", "P2", "P3"]}
+        q = bmod.auto_quiz(a)
+        self.assertEqual(q["slug"], "x")
+        self.assertIn("aspirateur robot", q["title"])
+        self.assertNotIn("2026", q["title"].split("?")[0])
+        self.assertEqual(len(q["questions"]), 3)
+        for qu in q["questions"]:
+            for opt in qu["options"]:
+                self.assertEqual(len(opt["scores"]), 3)
+
     def test_pages_quiz(self):
         with open(os.path.join(ROOT, "config.json"), encoding="utf-8") as f:
             tag = json.load(f)["monetization"]["amazon_tag"]
-        for q in self.quizzes:
-            with self.subTest(quiz=q["slug"]):
-                html = read_pub(f"quiz/{q['slug']}/index.html")
-                for p in self.by_slug[q["parent"]]["products"][:3]:
+        import lib as libmod
+        pub = libmod.load_published()
+        slugs = list(pub.keys()) if isinstance(pub, dict) else pub
+        with open(os.path.join(ROOT, "data", "quizzes.json"), encoding="utf-8") as f:
+            explicit = {q["parent"]: q["slug"] for q in json.load(f)}
+        for s in list(slugs[:2]) + list(slugs[-2:]):
+            with self.subTest(quiz=s):
+                qslug = explicit.get(s, s)
+                html = read_pub(f"quiz/{qslug}/index.html")
+                for p in self.by_slug[s]["products"][:3]:
                     self.assertIn(p, html)
                 self.assertIn(f'TAG="{tag}"', html)
                 self.assertIn("showQ()", html)

@@ -24,6 +24,34 @@ def slugify(text):
     t = re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
     return t or "produit"
 
+QUIZ_BANKS = {
+    "maison": ("Ton logement ?", [("Petit appartement", [0, 2, 1]), ("Maison familiale", [2, 1, 0]), ("Grand espace exigeant", [1, 0, 2])]),
+    "cuisine": ("Tu cuisines… ?", [("Rarement, simple et rapide", [0, 2, 1]), ("Tous les jours en famille", [2, 1, 0]), ("Comme un chef", [1, 0, 2])]),
+    "tech": ("Ton usage ?", [("Occasionnel", [0, 2, 1]), ("Quotidien polyvalent", [2, 1, 0]), ("Intensif / pro", [1, 0, 2])]),
+    "sante": ("Ton besoin ?", [("Découverte petit prix", [0, 2, 1]), ("Usage régulier fiable", [2, 1, 0]), ("Le plus performant", [1, 0, 2])]),
+    "sport": ("Ton niveau ?", [("Débutant en douceur", [0, 2, 1]), ("Régulier motivé", [2, 1, 0]), ("Confirmé exigeant", [1, 0, 2])]),
+    "voyage": ("Tes voyages ?", [("Week-ends légers", [0, 2, 1]), ("Vacances en famille", [2, 1, 0]), ("Grands voyages fréquents", [1, 0, 2])]),
+}
+QUIZ_BUDGET = ("Ton budget ?", [("Serré au maximum", [0, 2, 1]), ("Bon rapport qualité/prix", [2, 1, 0]), ("Le meilleur, peu importe le prix", [1, 0, 2])])
+QUIZ_PRIO = ("Ta priorité ?", [("Efficacité maximale", [2, 0, 1]), ("Simplicité d'usage", [1, 2, 0]), ("Durable et premium", [1, 0, 2])])
+
+def quiz_base_name(keyword):
+    t = re.sub(r"^(meilleur|meilleure|top)\s+", "", keyword.strip(), flags=re.IGNORECASE)
+    t = re.sub(r"\s*20\d{2}\s*$", "", t).strip()
+    return t or keyword
+
+def auto_quiz(article):
+    base = quiz_base_name(article["keyword"])
+    usage_q, usage_opts = QUIZ_BANKS.get(article["category"], QUIZ_BANKS["maison"])
+    def mk(q, opts):
+        return {"q": q, "options": [{"label": l, "scores": s} for l, s in opts]}
+    return {"slug": article["slug"],
+            "title": f"Quel {base} pour toi ? Quiz 30 secondes",
+            "keyword": f"quel {base} choisir quiz",
+            "parent": article["slug"],
+            "intro": f"3 questions, 30 secondes : on te désigne le bon modèle parmi « {article['title']} ».",
+            "questions": [mk(usage_q, usage_opts), mk(*QUIZ_BUDGET), mk(*QUIZ_PRIO)]}
+
 def esc(s):
     return html.escape(str(s), quote=True)
 
@@ -381,9 +409,10 @@ def build():
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(tool_page(cfg, t, tools, list(reversed(articles[-6:]))))
 
-    # Pages articles + duels versus (X vs Y)
+    # Pages articles + duels versus (X vs Y) + quiz (manuel prioritaire, auto sinon)
     duels = []
     quizzes = {q["parent"]: q for q in load("data/quizzes.json", [])}
+    quiz_slugs = []
     for a in articles:
         rel = [x for x in articles if x["slug"] != a["slug"] and x["category"] == a["category"]]
         rel += [x for x in articles if x["slug"] != a["slug"] and x["category"] != a["category"]]
@@ -393,16 +422,16 @@ def build():
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(dhtml)
-        qz = quizzes.get(a["slug"])
-        if qz:
-            qd = os.path.join(PUBLIC, "quiz", qz["slug"])
-            os.makedirs(qd, exist_ok=True)
-            with open(os.path.join(qd, "index.html"), "w", encoding="utf-8") as f:
-                f.write(quiz_html(cfg, qz, a["products"][:3], cfg["monetization"].get("amazon_tag", "")))
+        qz = quizzes.get(a["slug"]) or auto_quiz(a)
+        quiz_slugs.append(qz["slug"])
+        qd = os.path.join(PUBLIC, "quiz", qz["slug"])
+        os.makedirs(qd, exist_ok=True)
+        with open(os.path.join(qd, "index.html"), "w", encoding="utf-8") as f:
+            f.write(quiz_html(cfg, qz, a["products"][:3], cfg["monetization"].get("amazon_tag", "")))
         d = os.path.join(PUBLIC, "comparatifs", a["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1]), qz["slug"] if qz else None))
+            f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1]), qz["slug"]))
 
     # Page promos en cours (calendrier : ajout/retrait automatiques par dates)
     promos = active_promos(load("data/promos.json", []))
@@ -459,6 +488,7 @@ def build():
             f.write(base_page(cfg, f"Comparatifs {label}", f"Tous nos comparatifs {label.lower()} : guides d'achat et meilleurs prix.", hbody, f"categorie/{cat}/", prefix="../../"))
 
     # Index
+    qmap = {q["parent"]: q["slug"] for q in load("data/quizzes.json", [])}
     cards_outils = "".join([f"<a class='tool-card' data-name='{esc(t['h1'] + ' ' + t['meta'])}' href='outils/{esc(t['slug'])}/'><span class='ico'>{ICONS.get(t['slug'], '🧰')}</span><span><b>{esc(t['h1'])}</b><span>{esc(t['meta'])}</span></span><span class='go'>→</span></a>" for t in tools])
     cards_articles = "".join([art_card(a) for a in reversed(articles)])
     index_body = f"""<div class="hero"><div class="wrap">
@@ -476,7 +506,7 @@ def build():
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><a class='cat' style='text-decoration:none' href='promos/'>🔥 Promos en cours</a><a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
 <div class="card-section"><h2>🎯 Quiz 30 secondes</h2><p class="sub">3 questions et on te désigne le bon modèle. Rapide, gratuit, partageable.</p>
-<div class="grid">{"".join([f"<a class='tool-card' href='quiz/{esc(q['slug'])}/'><span class='ico'>🎯</span><span><b>{esc(q['title'])}</b><span>{esc(q['intro'])}</span></span><span class='go'>→</span></a>" for q in load("data/quizzes.json", [])])}</div></div>
+<div class="grid">{"".join([f"<a class='tool-card' href='quiz/{esc(qmap.get(a['slug'], a['slug']))}/'><span class='ico'>🎯</span><span><b>Quel {esc(quiz_base_name(a['keyword']))} pour toi ?</b><span>Trouve ton modèle en 30 secondes chrono.</span></span><span class='go'>→</span></a>" for a in reversed(articles[-3:])])}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
 <div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">2 nouveaux guides d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
 <p class="hint"><b>Ajoute-nous à tes favoris :</b> un nouvel outil ou comparatif t'attend chaque jour.</p></div>"""
@@ -559,7 +589,7 @@ def build():
     entries += [(url + pp, "") for pp in ["/premium/", "/premium/merci/", "/a-propos/", "/contact/", "/confidentialite/"]]
     entries += [(f"{url}/categorie/{c}/", today_iso()) for c in sorted({a['category'] for a in articles})]
     entries += [(f"{url}/versus/{dslug}/", a.get("pub_date", "")) for a, dslug in duels]
-    entries += [(f"{url}/quiz/{q['slug']}/", today_iso()) for q in load("data/quizzes.json", [])]
+    entries += [(f"{url}/quiz/{s}/", today_iso()) for s in quiz_slugs]
     entries += [(url + "/idees-cadeaux/", today_iso())]
     entries += [(url + "/promos/", today_iso())]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
