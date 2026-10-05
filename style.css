@@ -88,7 +88,14 @@ footer.site a{color:#dbe2ef}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
 .tscroll table{margin:0;min-width:560px}
-@media print{body *{visibility:hidden}#facture-print,#facture-print *{visibility:visible}#facture-print{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000}}
+.inv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;color:#111}
+.inv-top{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:18px;margin-bottom:10px}
+.inv-cols{display:flex;gap:16px;margin-bottom:10px;font-size:14px}
+.inv-table{width:100%;border-collapse:collapse;font-size:14px}
+.inv-table th,.inv-table td{border:1px solid #ddd;padding:8px;text-align:left}
+.inv-total td{font-weight:900;background:#fff8d6}
+@page{size:A4;margin:11mm}
+@media print{body *{visibility:hidden}#facture-print,#facture-print *{visibility:visible}#facture-print{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card{border:0;padding:0}}
 @media(max-width:640px){
 .foot-grid{grid-template-columns:1fr 1fr}
 .topbar{flex-direction:column;align-items:stretch;padding:10px 0}
