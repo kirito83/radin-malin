@@ -95,7 +95,7 @@ footer.site a{color:#dbe2ef}
 .inv-table th,.inv-table td{border:1px solid #ddd;padding:8px;text-align:left}
 .inv-total td{font-weight:900;background:#fff8d6}
 @page{size:A4;margin:11mm}
-@media print{body *{visibility:hidden}#facture-print,#facture-print *{visibility:visible}#facture-print{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card{border:0;padding:0}}
+@media print{header.site,footer.site,.ad,.pro,.disc,.breadcrumb,h1.page,.lead,.card-section,.toolbox>label,.toolbox>button{display:none!important}.toolbox{box-shadow:none!important;border:0!important;padding:0!important}.res{background:#fff!important;color:#000!important;border:0!important}#facture-print{position:static;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card{border:0;padding:0}}
 @media(max-width:640px){
 .foot-grid{grid-template-columns:1fr 1fr}
 .topbar{flex-direction:column;align-items:stretch;padding:10px 0}
