@@ -5,6 +5,9 @@ import json, os, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
+def build_link(site_url, slug, source="telegram"):
+    return f"{site_url.rstrip('/')}/comparatifs/{slug}/?utm_source={source}&utm_medium=social"
+
 def main():
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat = os.environ.get("TELEGRAM_CHAT_ID", "")
@@ -22,7 +25,7 @@ def main():
     if not last:
         print("SKIP : dernier slug introuvable.")
         return
-    url = cfg["site_url"].rstrip("/") + f"/comparatifs/{last['slug']}/"
+    url = build_link(cfg["site_url"], last['slug'])
     text = f"⭐ Nouveau comparatif : {last['title']}\n\n👉 {url}\n\n#bonplan #comparatif"
     api = f"https://api.telegram.org/bot{token}/sendMessage"
     data = urllib.parse.urlencode({"chat_id": chat, "text": text}).encode()

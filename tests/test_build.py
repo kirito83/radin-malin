@@ -133,6 +133,12 @@ class TestLib(unittest.TestCase):
         self.assertEqual(daily.select_next(kws, ["a", "b"])["slug"], "c")
         self.assertIsNone(daily.select_next(kws, {"a": "x", "b": "x", "c": "x"}))
 
+    def test_lien_telegram_trace(self):
+        import social_post
+        u = social_post.build_link("https://kirito83.github.io/radin-malin", "mon-article")
+        self.assertIn("/comparatifs/mon-article/", u)
+        self.assertIn("utm_source=telegram", u)
+
 
 class TestVersus(unittest.TestCase):
     @classmethod
