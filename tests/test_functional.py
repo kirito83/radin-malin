@@ -15,7 +15,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STUB = """
 var __els = {}, __printed = false, __alerted = null, __copied = null;
-function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}, addEventListener: function(){}, appendChild: function(){}}; if(val !== undefined) __els[id].value = val; return __els[id]; }
+function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}, addEventListener: function(){}, children: [], appendChild: function(c){ this.children.push(c); return c; }, removeChild: function(c){ var i = this.children.indexOf(c); if(i >= 0) this.children.splice(i, 1); return c; }}; if(val !== undefined) __els[id].value = val; return __els[id]; }
 var document = {
   getElementById: function(id){ if(!__els[id]) throw new Error("id introuvable: " + id); return __els[id]; },
   createElement: function(t){ return {href: "", download: "", click: function(){}, remove: function(){}, style: {}, setAttribute: function(){}}; },
@@ -205,6 +205,15 @@ class TestFonctionnel(unittest.TestCase):
                      call="addNote();addNote();__els[\"n4\"].value=\"20\";__els[\"n5\"].value=\"20\";calcMoy();")
         # (10+10+10+20+20)/5 = 14.00
         self.assertIn("14.00", r)
+
+    def test_moyenne_suppression(self):
+        t = self.tools["calcul-moyenne-notes"]
+        r = run_tool(t, {"n1": "10", "c1": "1", "n2": "10", "c2": "1", "n3": "10", "c3": "1"},
+                     raw_lines=['__el("n4","");', '__el("c4","1");'],
+                     call="addNote();delNote();calcMoy();")
+        # retour a 3 matieres : 10.00
+        self.assertIn("10.00", r)
+        self.assertIn("3 mati", r)
 
     def test_cv_apercu(self):
         t = self.tools["generateur-cv-gratuit"]
