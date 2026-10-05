@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Autopost Telegram du dernier article. 0 action si secrets absents. 100% stdlib."""
 import json, os, urllib.parse, urllib.request
+from lib import read_json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -14,9 +15,9 @@ def main():
     if not token or not chat or "VOTRE" in token:
         print("SKIP : secrets Telegram absents (normal tant que non configuré).")
         return
-    cfg = json.load(open(os.path.join(ROOT, "config.json"), encoding="utf-8"))
-    kws = {k["slug"]: k for k in json.load(open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8"))}
-    pub = json.load(open(os.path.join(ROOT, "data", "published.json"), encoding="utf-8"))
+    cfg = read_json(os.path.join(ROOT, "config.json"), {})
+    kws = {k["slug"]: k for k in read_json(os.path.join(ROOT, "data", "keywords.json"), [])}
+    pub = read_json(os.path.join(ROOT, "data", "published.json"), {})
     slugs = list(pub.keys()) if isinstance(pub, dict) else pub
     if not slugs:
         print("SKIP : rien de publié.")

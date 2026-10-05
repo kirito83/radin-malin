@@ -6,11 +6,7 @@ import json, os, datetime
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 def load(name, default=None):
-    p = os.path.join(ROOT, name)
-    if not os.path.exists(p):
-        return default
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
+    return read_json(os.path.join(ROOT, name), default)
 
 def today_iso():
     return datetime.date.today().isoformat()
@@ -34,5 +30,14 @@ def load_published():
     return pub
 
 def save_published(pub):
-    with open(os.path.join(ROOT, "data", "published.json"), "w", encoding="utf-8") as f:
-        json.dump(pub, f, ensure_ascii=False, indent=2)
+    write_json(os.path.join(ROOT, "data", "published.json"), pub)
+
+def read_json(path, default=None):
+    if not os.path.exists(path):
+        return default
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+def write_json(path, obj):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)

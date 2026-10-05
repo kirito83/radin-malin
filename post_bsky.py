@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Poste les nouveaux articles sur Bluesky (API gratuite). SKIP sans secrets. Stdlib."""
 import datetime, json, os, urllib.request, urllib.error
+from lib import read_json, write_json
 from social_text import build_text, link_facet, pick_todo
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -25,16 +26,16 @@ def main():
     ses = api(host, "/xrpc/com.atproto.server.createSession",
               payload={"identifier": handle, "password": password})
     token, did = ses["accessJwt"], ses["did"]
-    cfg = json.load(open(os.path.join(ROOT, "config.json"), encoding="utf-8"))
-    kws = {k["slug"]: k for k in json.load(open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8"))}
-    pub = json.load(open(os.path.join(ROOT, "data", "published.json"), encoding="utf-8"))
+    cfg = read_json(os.path.join(ROOT, "config.json"), {})
+    kws = {k["slug"]: k for k in read_json(os.path.join(ROOT, "data", "keywords.json"), [])}
+    pub = read_json(os.path.join(ROOT, "data", "published.json"), {})
     slugs = list(pub.keys()) if isinstance(pub, dict) else pub
     state = os.path.join(ROOT, "data", "posted_bsky.json")
-    posted = json.load(open(state, encoding="utf-8")) if os.path.exists(state) else []
+    posted = read_json(state, [])
     base = cfg["site_url"].rstrip("/")
     todo, skipped = pick_todo(slugs, posted)
     posted = posted + [s for s in skipped if s in kws]
-    json.dump(posted, open(state, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    write_json(state, posted)
     for slug in [s for s in todo if s in kws]:
         a = kws[slug]
         link = f"{base}/comparatifs/{slug}/"
@@ -59,7 +60,7 @@ def main():
             r = api(host, "/xrpc/com.atproto.repo.createRecord", token,
                     payload={"repo": did, "collection": "app.bsky.feed.post", "record": record})
             posted.append(slug)
-            json.dump(posted, open(state, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+            write_json(state, posted)
             print(f"BSKY OK : {slug} -> {r.get('uri')}")
         except urllib.error.HTTPError as e:
             print(f"BSKY KO : {slug} -> {e.code}")

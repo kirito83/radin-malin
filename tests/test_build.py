@@ -110,6 +110,57 @@ class TestBuild(unittest.TestCase):
                 self.assertIn("comparatifs/", html)
 
 
+class TestLiens(unittest.TestCase):
+    """Integrite des liens : aucun lien interne mort, formats affiliés valides."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(ROOT, "config.json"), encoding="utf-8") as f:
+            cls.tag = json.load(f)["monetization"]["amazon_tag"]
+        cls.pages = []
+        for dirpath, _, files in os.walk(PUBLIC):
+            for fn in files:
+                if fn.endswith(".html"):
+                    cls.pages.append(os.path.join(dirpath, fn))
+
+    def test_liens_internes_resolvent(self):
+        morts = []
+        for page in self.pages:
+            with open(page, encoding="utf-8") as f:
+                html = f.read()
+            base = os.path.dirname(page)
+            for h in set(re.findall(r'href="([^"]+)"', html)):
+                if h.startswith(("http", "mailto:", "data:", "#", "//")):
+                    continue
+                if any(c in h for c in ["+", "(", ")", "'", " "]):
+                    continue  # URL construite en JS, pas un lien statique
+                target = os.path.normpath(os.path.join(base, h.split("#")[0]))
+                if os.path.isdir(target):
+                    target = os.path.join(target, "index.html")
+                if not os.path.exists(target):
+                    morts.append(f"{os.path.relpath(page, PUBLIC)} -> {h}")
+        self.assertEqual(morts, [], f"liens morts : {morts[:5]}")
+
+    def test_liens_amazon_tagges(self):
+        n = 0
+        for page in self.pages:
+            with open(page, encoding="utf-8") as f:
+                html = f.read()
+            for m in re.findall(r"https://www\.amazon\.fr/s\?k=[^\"'<> ]+", html):
+                self.assertIn(f"tag={self.tag}", m)
+                n += 1
+        self.assertGreater(n, 50, "pas assez de liens affilies trouves")
+
+    def test_pas_de_placeholders_liens(self):
+        tout = []
+        for p in self.pages:
+            with open(p, encoding="utf-8") as f:
+                tout.append(f.read())
+        tout = "".join(tout)
+        self.assertNotIn("VOTRE-", tout)
+        self.assertNotIn("votre-tag-21", tout)
+
+
 class TestLib(unittest.TestCase):
     def test_migration_liste_vers_dict(self):
         import tempfile

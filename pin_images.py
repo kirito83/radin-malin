@@ -80,10 +80,10 @@ def build_all(articles, site_name, pins_dir):
     return n
 
 if __name__ == "__main__":
-    import json
+    from lib import read_json
     here = os.path.dirname(os.path.abspath(__file__))
-    kws = {k["slug"]: k for k in json.load(open(os.path.join(here, "data", "keywords.json"), encoding="utf-8"))}
-    pub = json.load(open(os.path.join(here, "data", "published.json"), encoding="utf-8"))
+    kws = {k["slug"]: k for k in read_json(os.path.join(here, "data", "keywords.json"), [])}
+    pub = read_json(os.path.join(here, "data", "published.json"), {})
     slugs = list(pub.keys()) if isinstance(pub, dict) else pub
     arts = [kws[s] for s in slugs if s in kws]
     print(build_all(arts, "Radin Malin", os.path.join(here, "public", "pins")), "visuels")

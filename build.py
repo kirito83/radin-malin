@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Generateur site statique - 100% stdlib, 0 dependance. Cout hebergement: 0 EUR."""
-import json, os, html, re, datetime, shutil, urllib.parse
+import json, os, html, re, datetime, shutil, urllib.parse, unicodedata
 from lib import load, load_published, save_published, today_iso
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +20,6 @@ def fr_date(iso):
         return iso
 
 def slugify(text):
-    import unicodedata
     t = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
     t = re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
     return t or "produit"
@@ -152,7 +151,6 @@ main.sheet{background:transparent;margin:0 auto 28px;padding:0}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#111;font-weight:800;padding:12px 18px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-size:15px;box-shadow:0 8px 20px rgba(255,214,10,.3);transition:.18s;min-height:44px}
 .btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(255,214,10,.38)}
 .btn.ghost{background:rgba(255,255,255,.08);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.16)}
-.btn.dark{background:#0f172a;color:#fff;box-shadow:var(--shadow-sm)}
 .btn.small{padding:9px 14px;font-size:14px;border-radius:10px}
 .card-section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:22px;margin:18px 0}
 .card-section h2{font-size:22px;letter-spacing:-.5px;margin:0 0 4px}
@@ -212,7 +210,6 @@ footer.site a{color:#dbe2ef}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
-body{padding-bottom:0}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
 .tscroll table{margin:0;min-width:560px}
 @media(max-width:640px){
@@ -328,7 +325,7 @@ function showR(){{var w=sc.indexOf(Math.max.apply(null,sc));var p=QUIZ.products[
 document.getElementById('qbar').textContent='Résultat 🎉';document.getElementById('qbox').innerHTML='';
 document.getElementById('qres').innerHTML='<div class="res">Ton modèle : <b>'+p+'</b><br><br><a class="btn" href="'+amazonQ(p)+'" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a> <a class="btn ghost" style="color:#111;background:#fff;border:1px solid #ddd;box-shadow:none" href="https://t.me/share/url?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('Ce quiz a trouvé mon modèle !')+'">Partager le quiz ✈️</a></div>';}}
 showQ();</script>"""
-    return base_page(cfg, quiz["title"], quiz["title"] + " : trouve ton modèle en 30 secondes.", body, f"quiz/{quiz['slug']}/", prefix="../../")
+    return base_page(cfg, quiz["title"], quiz["title"] + " : trouve ton modèle en 30 secondes.", body, f"quiz/{quiz['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{quiz['parent']}.png")
 
 def tool_page(cfg, t, all_tools=None, top_articles=None):
     # Boutons avec la bonne classe moderne
@@ -490,7 +487,6 @@ def build():
     fichiers = {
         "budget-mensuel.csv": "Mois;Catégorie;Prévu (€);Réel (€);Écart (€)\nJanvier;Loyer;800;800;0\nJanvier;Courses;350;0;350\nJanvier;Transport;75;0;75\nJanvier;Loisirs;100;0;100\nJanvier;Épargne;150;0;150\n",
         "suivi-factures.csv": "N°;Date;Client;Objet;HT (€);TVA (%);TTC (€);Statut\n2026-001;02/10/2026;Exemple;Prestation design;500;20;600;Payée\n",
-        "epargne-objectifs.csv": "Objectif;Montant visé (€);Épargné (€);Échéance;Progression (%)\nFond urgence;3000;0;31/12/2026;0\nVacances;1200;0;01/07/2027;0\n",
     }
     for nom, contenu in fichiers.items():
         with open(os.path.join(dl_dir, nom), "w", encoding="utf-8") as f:
@@ -500,7 +496,7 @@ def build():
 <p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
 <div class="card-section"><h2>📦 Tes 4 fichiers Excel (formules incluses)</h2>
 <div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories + tableau de bord graphique + chasse aux abonnements.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div><div><b>📝 modele-devis.xlsx</b><br>Devis pro valable 3 mois, acompte 30 %.<br><a class="btn small" href="../telechargement/modele-devis.xlsx" download>Télécharger →</a></div></div>
-<p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a> · <a href="../telechargement/epargne-objectifs.csv" download>épargne.csv</a></p>
+<p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a></p>
 <p class="hint">💡 Astuce : ouvre les fichiers dans Excel, LibreOffice (gratuit) ou Google Sheets. Commence par l'onglet Guide du budget, puis remplis ta 1ère facture avec le modèle.</p></div>"""
     os.makedirs(os.path.join(PUBLIC, "premium", "merci"), exist_ok=True)
     with open(os.path.join(PUBLIC, "premium", "merci", "index.html"), "w", encoding="utf-8") as f:
