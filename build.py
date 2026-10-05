@@ -61,9 +61,9 @@ def amazon_link(query, tag):
         return f"https://www.amazon.fr/s?k={q}&tag={tag}"
     return f"https://www.amazon.fr/s?k={q}"
 
-def split_ads(raw):
-    """Separe la vignette (a plafonner 1x/24h) des autres tags."""
-    vign, rest = "", raw or ""
+def vignette_loader(raw):
+    """Extrait le script vignette et le plafonne a 1x/24h. "" si absent."""
+    vign = ""
     for m in re.finditer(r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>", raw or ""):
         if "vignette" in m.group(2):
             zone, src = m.group(1), m.group(2)
@@ -72,8 +72,7 @@ def split_ads(raw):
                     "localStorage.setItem(k,String(t));var s=document.createElement('script');"
                     "s.dataset.zone='" + zone + "';s.src='" + src + "';"
                     "document.body.appendChild(s);}catch(e){}})();</script>")
-            rest = raw.replace(m.group(0), "")
-    return rest, vign
+    return vign
 
 def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image=""):
     site = esc(cfg["site_name"])
@@ -88,8 +87,8 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <ins class="adsbygoogle" style="display:block" data-ad-client="{esc(ads['adsense_client'])}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script></div>"""
     elif ads.get("monetag_tag"):
-        rest, vign = split_ads(ads["monetag_tag"])
-        ad_top = f"""<div class="ad"><small>Publicité</small>{rest}{vign}</div>"""
+        vign = vignette_loader(ads.get("monetag_vignette", "")) if ads.get("monetag_vignette_enabled") else ""
+        ad_top = f"""<div class="ad"><small>Publicité</small>{ads['monetag_tag']}{vign}</div>"""
 
     stripe_box = ""
     if ads.get("stripe_pro_link") and "VOTRE" not in ads["stripe_pro_link"]:

@@ -99,6 +99,7 @@ class TestBuild(unittest.TestCase):
         html = read_pub("index.html")
         self.assertIn("G-VHM284ZNV5", html)
         self.assertIn('name="monetag"', html)
+        self.assertNotIn("vignette.min.js", html)
 
     def test_acces_promos_quiz_depuis_accueil(self):
         html = read_pub("index.html")
