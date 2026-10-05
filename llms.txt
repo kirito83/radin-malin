@@ -22,6 +22,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleur tensiomètre bras précis 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tensiometre-bras-2026/) (meilleur tensiometre bras)
 - [Meilleur refroidisseur PC portable ventilé](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ventilateur-pc-portable-refroidisseur/) (meilleur refroidisseur pc portable)
 - [Meilleure souris gamer pas chère et précise](https://kirito83.github.io/radin-malin/comparatifs/meilleure-souris-gamer-pas-chere/) (meilleure souris gamer pas chere)
 - [Meilleur clavier gamer pas cher membrane vs mécanique](https://kirito83.github.io/radin-malin/comparatifs/meilleur-clavier-gamer-pas-cher/) (meilleur clavier gamer pas cher)
@@ -36,7 +37,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur purificateur d'air allergies et poussières](https://kirito83.github.io/radin-malin/comparatifs/meilleur-purificateur-air-allergies/) (meilleur purificateur air allergies)
 - [Meilleur déshumidificateur chambre contre l'humidité](https://kirito83.github.io/radin-malin/comparatifs/meilleur-deshumidificateur-chambre/) (meilleur deshumidificateur chambre)
 - [Meilleur nettoyeur vapeur sol : comparatif 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-nettoyeur-vapeur-sol/) (meilleur nettoyeur vapeur sol)
-- [Meilleur aspirateur voiture puissant sans fil](https://kirito83.github.io/radin-malin/comparatifs/meilleur-aspirateur-voiture-puissant/) (meilleur aspirateur voiture)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
