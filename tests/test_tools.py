@@ -122,6 +122,11 @@ class TestTools(unittest.TestCase):
                 self.assertIn("<button", t["ui_html"])
                 self.assertIn("id='res'", t["ui_html"].replace('"', "'"))
 
+    def test_devises_api_valide(self):
+        t = next(x for x in self.tools if x["slug"] == "convertisseur-devises")
+        self.assertIn("api.frankfurter.dev", t["js"])
+        self.assertNotIn("frankfurter.app", t["js"])
+
 
 if __name__ == "__main__":
     unittest.main()
