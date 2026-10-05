@@ -22,6 +22,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleur oreiller de voyage avion : dormir assis](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oreiller-voyage-avion/) (meilleur oreiller voyage avion)
 - [Meilleure grande valise solide soute 100L+](https://kirito83.github.io/radin-malin/comparatifs/meilleure-valise-grande-taille-solide/) (meilleure grande valise soute)
 - [Meilleur sac de couchage grand froid : ne pas se geler](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sac-couchage-froid-extreme/) (meilleur sac couchage grand froid)
 - [Meilleur vélo elliptique appartement silencieux](https://kirito83.github.io/radin-malin/comparatifs/meilleur-velo-elliptique-appartement/) (meilleur velo elliptique appartement)
@@ -36,7 +37,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur disque dur externe 2 To fiable](https://kirito83.github.io/radin-malin/comparatifs/meilleur-disque-dur-externe-2to/) (meilleur disque dur externe 2to)
 - [Meilleur écran PC 27 pouces bureautique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ecran-pc-27-pouces-bureautique/) (meilleur ecran pc 27 pouces bureautique)
 - [Meilleur bureau assis debout électrique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-bureau-assis-debout-electrique/) (meilleur bureau assis debout electrique)
-- [Meilleure chaise bureau ergonomique pas chère](https://kirito83.github.io/radin-malin/comparatifs/meilleure-chaise-bureau-ergonomique-pas-chere/) (meilleure chaise bureau ergonomique pas chere)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
