@@ -60,6 +60,15 @@ Sans les IDs, les boutons pointent vers la recherche Amazon simple (0 commission
 - `public/` — site généré (ne pas éditer à la main)
 - `.github/workflows/daily.yml` — cron + deploy Pages
 
+## 🧪 Tests (obligatoires)
+
+```powershell
+python -m unittest discover -s tests -v   # 22 tests : outils JS, pages, sitemap, packs, migration
+```
+
+Règles : aucun push si un test échoue (la CI bloque aussi le déploiement).
+Toute nouvelle fonctionnalité arrive avec ses tests (`tests/test_*.py`).
+
 ## ⚠️ Honnêteté
 
 Pas de magie : sans mise en ligne + indexation Google, gain = 0. Ce repo maximise les probas avec 0 € : SEO programmatic, contenu quotidien auto, 5 leviers de revenus cumulés. Prochaine étape après premiers centimes : Search Console + 100 articles + Pinterest auto.

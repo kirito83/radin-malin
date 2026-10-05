@@ -4,14 +4,21 @@
 from lib import load, load_published, save_published, today_iso
 from build import build
 
+def select_next(keywords, published):
+    """Rend le prochain mot-cle non publie (pur, testable)."""
+    done = set(published.keys()) if isinstance(published, dict) else set(published)
+    for k in keywords:
+        if k["slug"] not in done:
+            return k
+    return None
+
 def main():
     keywords = load("data/keywords.json", [])
     published = load_published()
-    remaining = [k for k in keywords if k["slug"] not in published]
-    if not remaining:
+    nxt = select_next(keywords, published)
+    if not nxt:
         print("STOCK EPUISE : tous les mots-cles sont publies. Ajoutez-en dans data/keywords.json.")
     else:
-        nxt = remaining[0]
         published[nxt["slug"]] = today_iso()
         save_published(published)
         print(f"NOUVEL ARTICLE PUBLIE : {nxt['slug']} ({len(published)}/{len(keywords)})")
