@@ -22,6 +22,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleure bougie parfumée ambiance Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleure-bougie-parfumee-noel/) (meilleure bougie parfumee noel)
 - [Meilleur plaid chaud et doux pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-plaid-noel-chaud-doux/) (meilleur plaid chaud doux)
 - [Meilleur jeu de société famille pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-jeu-societe-famille-noel/) (meilleur jeu societe famille noel)
 - [Meilleur calendrier de l'Avent adulte 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-calendrier-avent-2026-adulte/) (meilleur calendrier avent adulte)
@@ -36,7 +37,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleurs haltères réglables pour la maison](https://kirito83.github.io/radin-malin/comparatifs/meilleur-halteres-reglables-maison/) (meilleurs halteres reglables maison)
 - [Meilleure balance connectée précise 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleure-balance-connectee-2026/) (meilleure balance connectee)
 - [Meilleur tensiomètre bras précis 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tensiometre-bras-2026/) (meilleur tensiometre bras)
-- [Meilleur refroidisseur PC portable ventilé](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ventilateur-pc-portable-refroidisseur/) (meilleur refroidisseur pc portable)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
