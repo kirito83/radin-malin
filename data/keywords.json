@@ -1208,5 +1208,170 @@
       "Samsung DV90",
       "Candy RapidÓ"
     ]
+  },
+  {
+    "slug": "idee-cadeau-homme-50-euros-noel",
+    "title": "Idée cadeau homme à moins de 50 € pour Noël",
+    "category": "tech",
+    "keyword": "idee cadeau homme 50 euros noel",
+    "products": [
+      "Echo Dot 5",
+      "Coffret rasage Philips",
+      "Enceinte JBL Go 3"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-femme-50-euros-noel",
+    "title": "Idée cadeau femme à moins de 50 € pour Noël",
+    "category": "maison",
+    "keyword": "idee cadeau femme 50 euros noel",
+    "products": [
+      "Bougie Diptyque mini",
+      "Coffret thé Kusmi",
+      "Brosse nettoyante Foreo Play"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-enfant-8-ans-noel",
+    "title": "Idée cadeau enfant 8 ans : ce qui marche vraiment",
+    "category": "maison",
+    "keyword": "idee cadeau enfant 8 ans",
+    "products": [
+      "Lego Classic 10696",
+      "Jeu Dobble",
+      "Trottinette 2 roues Oxelo"
+    ]
+  },
+  {
+    "slug": "idee-cadeau-ado-gamer-noel",
+    "title": "Idée cadeau ado gamer à moins de 60 €",
+    "category": "tech",
+    "keyword": "idee cadeau ado gamer",
+    "products": [
+      "Carte PSN 50€",
+      "Souris Logitech G203",
+      "Lampe LED bureau RGB"
+    ]
+  },
+  {
+    "slug": "meilleur-calendrier-avent-2026-adulte",
+    "title": "Meilleur calendrier de l'Avent adulte 2026",
+    "category": "cuisine",
+    "keyword": "meilleur calendrier avent adulte",
+    "products": [
+      "Calendrier Bonne Maman",
+      "Dammann Frères 24 thés",
+      "Calendrier bières Une Petite Mousse"
+    ]
+  },
+  {
+    "slug": "meilleur-jeu-societe-famille-noel",
+    "title": "Meilleur jeu de société famille pour Noël",
+    "category": "maison",
+    "keyword": "meilleur jeu societe famille noel",
+    "products": [
+      "Skyjo",
+      "Codenames",
+      "Les Aventuriers du Rail"
+    ]
+  },
+  {
+    "slug": "meilleur-plaid-noel-chaud-doux",
+    "title": "Meilleur plaid chaud et doux pour l'hiver",
+    "category": "maison",
+    "keyword": "meilleur plaid chaud doux",
+    "products": [
+      "Plaid polaire Utopia",
+      "Plaid Sherpa Homcom",
+      "Plaid XXL Douce Nuit"
+    ]
+  },
+  {
+    "slug": "meilleure-bougie-parfumee-noel",
+    "title": "Meilleure bougie parfumée ambiance Noël",
+    "category": "maison",
+    "keyword": "meilleure bougie parfumee noel",
+    "products": [
+      "Yankee Candle Baies",
+      "Diptyque Feu de bois 70g",
+      "Bougie Durance Cannelle"
+    ]
+  },
+  {
+    "slug": "meilleur-coffret-vin-noel",
+    "title": "Meilleur coffret vin à offrir pour Noël",
+    "category": "cuisine",
+    "keyword": "meilleur coffret vin noel",
+    "products": [
+      "Coffret 3 Bordeaux",
+      "Coffret Rhône Guigal",
+      "Box My VitiBox 3 mois"
+    ]
+  },
+  {
+    "slug": "meilleur-pyjama-homme-chaud-hiver",
+    "title": "Meilleur pyjama homme chaud pour l'hiver",
+    "category": "maison",
+    "keyword": "meilleur pyjama homme chaud",
+    "products": [
+      "Pyjama pilou Damart",
+      "Pyjama flanelle Athena",
+      "Pyjama Eminence"
+    ]
+  },
+  {
+    "slug": "meilleur-robot-cuiseur-noel",
+    "title": "Meilleur robot cuiseur à offrir pour Noël",
+    "category": "cuisine",
+    "keyword": "meilleur robot cuiseur noel",
+    "products": [
+      "Moulinex Companion",
+      "Kenwood kCook",
+      "Magimix Cook Expert"
+    ]
+  },
+  {
+    "slug": "meilleure-montre-homme-moins-100-euros-noel",
+    "title": "Meilleure montre homme à moins de 100 € (cadeau Noël)",
+    "category": "tech",
+    "keyword": "montre homme moins 100 euros noel",
+    "products": [
+      "Casio Vintage",
+      "Timex Weekender",
+      "Festina Acier"
+    ]
+  },
+  {
+    "slug": "meilleur-casque-enfant-noel",
+    "title": "Meilleur casque audio enfant à offrir",
+    "category": "tech",
+    "keyword": "meilleur casque enfant noel",
+    "products": [
+      "JBL JR310BT",
+      "Pogs Petit",
+      "Belkin SoundForm"
+    ]
+  },
+  {
+    "slug": "meilleure-doudoune-femme-pas-chere-hiver",
+    "title": "Meilleure doudoune femme pas chère pour l'hiver",
+    "category": "maison",
+    "keyword": "meilleure doudoune femme pas chere",
+    "products": [
+      "Doudoune Quechua SH100",
+      "Only Onlnewlife",
+      "Veste Cimalp"
+    ]
+  },
+  {
+    "slug": "meilleur-chocolat-noel-coffret",
+    "title": "Meilleur coffret chocolat pour Noël",
+    "category": "cuisine",
+    "keyword": "meilleur coffret chocolat noel",
+    "products": [
+      "Lindt Création",
+      "Jeff de Bruges Ballotin",
+      "Patrick Roger Coffret"
+    ]
   }
 ]
