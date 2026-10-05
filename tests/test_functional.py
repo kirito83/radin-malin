@@ -201,10 +201,8 @@ class TestFonctionnel(unittest.TestCase):
     def test_moyenne_ajout_dynamique(self):
         t = self.tools["calcul-moyenne-notes"]
         r = run_tool(t, {"n1": "10", "c1": "1", "n2": "10", "c2": "1", "n3": "10", "c3": "1"},
-                     raw_lines=['__el("n4","");', '__el("c4","1");', '__el("n5","");', '__el("c5","1");',
-                                'addNote();', 'addNote();',
-                                '__els["n4"].value="20";', '__els["n5"].value="20";'],
-                     call="calcMoy();")
+                     raw_lines=['__el("n4","");', '__el("c4","1");', '__el("n5","");', '__el("c5","1");'],
+                     call="addNote();addNote();__els[\"n4\"].value=\"20\";__els[\"n5\"].value=\"20\";calcMoy();")
         # (10+10+10+20+20)/5 = 14.00
         self.assertIn("14.00", r)
 
