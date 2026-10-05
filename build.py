@@ -307,11 +307,13 @@ def versus_html(cfg, item):
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": cfg['site_url'].rstrip('/') + "/"}, {"@type": "ListItem", "position": 2, "name": item["title"], "item": cfg['site_url'].rstrip('/') + f"/comparatifs/{item['slug']}/"}, {"@type": "ListItem", "position": 3, "name": title}]}, ensure_ascii=False)}</script>"""
     return dslug, base_page(cfg, title, title + " Duel, avis et meilleurs prix.", body, f"versus/{dslug}/", prefix="../../")
 
-def tool_page(cfg, t, all_tools=None):
+def tool_page(cfg, t, all_tools=None, top_articles=None):
     # Boutons avec la bonne classe moderne
     ui = t['ui_html'].replace('<button', '<button class="action"')
     others = [x for x in (all_tools or []) if x["slug"] != t["slug"]][:3]
     others_html = "".join([f"<a class='tool-card' href='../../outils/{esc(x['slug'])}/'><span class='ico'>{ICONS.get(x['slug'], '🧰')}</span><span><b>{esc(x['h1'])}</b><span>{esc(x['meta'])}</span></span><span class='go'>→</span></a>" for x in others])
+    promos = "".join([art_card(a, "../../") for a in (top_articles or [])[:3]])
+    promos_block = f"""<div class="card-section"><h2>⭐ Comparatifs du moment</h2><p class="sub">Les guides d'achat les plus lus cette semaine.</p><div class="grid">{promos}</div></div>""" if promos else ""
     body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Tous les outils</a></p>
 <h1 class="page">{esc(t['h1'])}</h1>
 <p class="lead">{esc(t['pitch'])}</p>
@@ -319,7 +321,8 @@ def tool_page(cfg, t, all_tools=None):
 <script>{t['js']}</script>
 <div class="card-section"><h2>Pourquoi utiliser cet outil ?</h2>
 <div class="guide"><div><b>⚡ Instantané</b><br>Calcul direct dans ton navigateur.</div><div><b>🔒 Privé</b><br>Rien n'est envoyé ni stocké.</div><div><b>📱 Mobile</b><br>Fonctionne sur téléphone et PC.</div><div><b>🆓 Gratuit</b><br>Sans inscription, pour toujours.</div></div></div>
-<div class="card-section"><h2>🧰 Autres outils gratuits</h2><div class="grid">{others_html}</div></div>"""
+<div class="card-section"><h2>🧰 Autres outils gratuits</h2><div class="grid">{others_html}</div></div>
+{promos_block}"""
     return base_page(cfg, t["title"], t["meta"], body, f"outils/{t['slug']}/", prefix="../../")
 
 def build():
@@ -356,7 +359,7 @@ def build():
         d = os.path.join(PUBLIC, "outils", t["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(tool_page(cfg, t, tools))
+            f.write(tool_page(cfg, t, tools, list(reversed(articles[-6:]))))
 
     # Pages articles + duels versus (X vs Y)
     duels = []

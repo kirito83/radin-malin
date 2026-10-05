@@ -100,6 +100,15 @@ class TestBuild(unittest.TestCase):
         self.assertIn("G-VHM284ZNV5", html)
         self.assertIn('name="monetag"', html)
 
+    def test_routage_outils_vers_comparatifs(self):
+        with open(os.path.join(ROOT, "data", "tools.json"), encoding="utf-8") as f:
+            slugs = [t["slug"] for t in json.load(f)]
+        for s in slugs[:3]:
+            with self.subTest(outil=s):
+                html = read_pub(f"outils/{s}/index.html")
+                self.assertIn("Comparatifs du moment", html)
+                self.assertIn("comparatifs/", html)
+
 
 class TestLib(unittest.TestCase):
     def test_migration_liste_vers_dict(self):
