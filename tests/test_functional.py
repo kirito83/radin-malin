@@ -90,6 +90,13 @@ class TestFonctionnel(unittest.TestCase):
         r = run_tool(t, {"mnt": "100"}, raw_lines=['__el("de").value="EUR";', '__el("vers").value="USD";'], call="conv();")
         self.assertIn("108.00", r)
 
+    def test_devises_note_suit_conversion(self):
+        t = self.tools["convertisseur-devises"]
+        r = run_tool(t, {"mnt": "100"}, raw_lines=['__el("de").value="EUR";', '__el("vers").value="GBP";'],
+                     call="conv();", tail='__els["src"].textContent')
+        self.assertIn("GBP", r)
+        self.assertIn("0.85", r)
+
     def test_mot_de_passe_longueur(self):
         t = self.tools["generateur-mot-de-passe"]
         r = run_tool(t, {"len": "16"}, raw_lines=["__el(\"sym\").checked=true;"], call="genMDP();", tail="String(last.length)")
