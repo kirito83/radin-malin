@@ -242,7 +242,14 @@ footer.site a{color:#dbe2ef}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
 .tscroll table{margin:0;min-width:560px}
-@media print{body *{visibility:hidden}#facture-print,#facture-print *{visibility:visible}#facture-print{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000}}
+.inv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;color:#111}
+.inv-top{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:18px;margin-bottom:10px}
+.inv-cols{display:flex;gap:16px;margin-bottom:10px;font-size:14px}
+.inv-table{width:100%;border-collapse:collapse;font-size:14px}
+.inv-table th,.inv-table td{border:1px solid #ddd;padding:8px;text-align:left}
+.inv-total td{font-weight:900;background:#fff8d6}
+@page{size:A4;margin:11mm}
+@media print{body *{visibility:hidden}#facture-print,#facture-print *{visibility:visible}#facture-print{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card{border:0;padding:0}}
 @media(max-width:640px){
 .foot-grid{grid-template-columns:1fr 1fr}
 .topbar{flex-direction:column;align-items:stretch;padding:10px 0}
@@ -299,7 +306,7 @@ def article_html(cfg, item, related=None, duel=None, quiz=None):
 <div class="card-section"><h2>🧭 Guide d'achat express (2 min)</h2>
 <div class="guide"><div><b>1. Budget</b><br>Fixe un plafond AVANT de cliquer.</div><div><b>2. Usage réel</b><br>Liste tes 3 critères non-négociables.</div><div><b>3. Avis</b><br>Lis 5 avis 3-4 étoiles, les plus honnêtes.</div><div><b>4. Prix</b><br>Clique « Voir le prix » pour la promo du jour.</div></div></div>
 {faq}
-<div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (1 message/jour max, zéro spam).</p>
+<div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (quelques messages par jour max, zéro spam).</p>
 <div class="actions">{'<a class="btn" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Recevoir les alertes prix →</a>' if cfg.get('telegram_channel') else '<a class="btn" href="../../#comparatifs">⭐ Voir les autres comparatifs →</a>'}</div></div>
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
 {('<p>🎯 30 secondes chrono : <a href="../../quiz/' + esc(quiz) + '/"><b>trouve ton modèle avec le quiz →</b></a></p>') if quiz else ''}
@@ -519,7 +526,7 @@ def build():
     # Page premium (Stripe/PayPal -> encaissement auto)
     m = cfg.get("monetization", {})
     prem_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
-<h1 class="page">Pack Malin : 50 templates factures + devis + budget — {esc(m.get('premium_price','9,90 €'))}</h1>
+<h1 class="page">Pack Excel auto-entrepreneur — {esc(m.get('premium_price','9,90 €'))}</h1>
 <p class="lead">Tu as aimé le générateur de facture gratuit ? Passe au pack complet : {esc(m.get('premium_product','pack Excel'))}. {'Paiement Stripe ou PayPal' if m.get('paypal_link') and 'VOTRE' not in m.get('paypal_link') else 'Paiement Stripe sécurisé'}, accès immédiat, sans abonnement.</p>
 <div class="card-section"><h2>✅ Ce que tu reçois</h2>
 <div class="guide"><div><b>📊 Budget 12 mois</b><br>96 lignes pré-remplies, écarts rouge/vert + tableau de bord graphique + traqueur d'abonnements.</div><div><b>🧾 Suivi 50 factures</b><br>TTC auto, statuts, reste à encaisser calculé seul.</div><div><b>🖨️ Facture + devis A4</b><br>Modèles pro prêts à imprimer, TVA auto, mentions légales.</div><div><b>⚡ Accès immédiat</b><br>Lien de téléchargement dès le paiement, sans abonnement.</div></div>
@@ -550,7 +557,7 @@ def build():
             f.write(contenu)
     merci_body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">✅ Merci ! Voici ton pack ({esc(m.get('premium_price','9,90 €'))})</h1>
-<p class="lead">Paiement confirmé ? Télécharge tes fichiers ci-dessous (CSV compatibles Excel, séparateur point-virgule). Astuce : dans Excel > Ouvrir > choisir le fichier.</p>
+<p class="lead">Paiement confirmé ? Télécharge tes fichiers Excel ci-dessous (avec versions CSV universelles plus bas). Astuce : commence par l'onglet Guide du budget.</p>
 <div class="card-section"><h2>📦 Tes 4 fichiers Excel (formules incluses)</h2>
 <div class="guide"><div><b>📊 budget-mensuel.xlsx</b><br>12 mois × 8 catégories + tableau de bord graphique + chasse aux abonnements.<br><a class="btn small" href="../telechargement/budget-mensuel.xlsx" download>Télécharger →</a></div><div><b>🧾 suivi-factures.xlsx</b><br>50 lignes, TTC auto, statuts, reste à encaisser.<br><a class="btn small" href="../telechargement/suivi-factures.xlsx" download>Télécharger →</a></div><div><b>🖨️ modele-facture.xlsx</b><br>Facture pro prête à imprimer (A4), TVA auto.<br><a class="btn small" href="../telechargement/modele-facture.xlsx" download>Télécharger →</a></div><div><b>📝 modele-devis.xlsx</b><br>Devis pro valable 3 mois, acompte 30 %.<br><a class="btn small" href="../telechargement/modele-devis.xlsx" download>Télécharger →</a></div></div>
 <p class="hint">Version universelle (sans Excel) : <a href="../telechargement/budget-mensuel.csv" download>budget.csv</a> · <a href="../telechargement/suivi-factures.csv" download>factures.csv</a></p>
@@ -569,7 +576,7 @@ def build():
 <div class="card-section"><h2>🧭 Notre méthode</h2><div class="guide"><div><b>Indépendance</b><br>Classement par rapport qualité/prix, jamais vendu aux marques.</div><div><b>Transparence</b><br>Liens affiliés signalés, sans surcoût pour toi.</div><div><b>Pratique</b><br>Outils sans inscription, comparatifs de 2 minutes.</div><div><b>Régularité</b><br>Contenu frais chaque jour, prix vérifiés au clic.</div></div></div>"""),
         "contact": ("Contact", "Une erreur, une idée, un partenariat ? Écris-nous.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Contact</h1>
-<p class="lead">Prix cassé, lien mort, idée d'outil ou proposition de partenariat : on lit tout, réponse sous 48 h ouvrées.</p>
+<p class="lead">Prix cassé, lien mort, idée d'outil ou proposition de partenariat : on lit tout et on répond au plus vite.</p>
 <div class="card-section"><h2>✈️ Le plus rapide : Telegram</h2><p class="sub">Canal + messages directs, sans spam.</p>{contact_cta}</div>"""),
         "confidentialite": ("Politique de confidentialité", "Cookies, affiliation et données : ce que fait ce site.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Politique de confidentialité</h1>

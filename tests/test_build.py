@@ -168,6 +168,19 @@ class TestLiens(unittest.TestCase):
         self.assertNotIn("VOTRE-", tout)
         self.assertNotIn("votre-tag-21", tout)
 
+    def test_pas_de_message_interne(self):
+        interdits = ["config.json", "GitHub Actions", "cron", "rebuild",
+                     "en automatique", "50 templates", "1 message/jour",
+                     "48 h ouvrées", "VOTRE-", "TODO", "Lorem"]
+        problemes = []
+        for p in self.pages:
+            with open(p, encoding="utf-8") as f:
+                html = f.read()
+            for w in interdits:
+                if w in html:
+                    problemes.append(f"{os.path.relpath(p, PUBLIC)} contient « {w} »")
+        self.assertEqual(problemes, [], f"messages internes : {problemes[:5]}")
+
 
 class TestLib(unittest.TestCase):
     def test_migration_liste_vers_dict(self):
