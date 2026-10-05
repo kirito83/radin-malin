@@ -22,6 +22,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Calendrier ovulation et grossesse](https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/) : Estimez ovulation, période fertile et date d'accouchement. Indicatif.
 
 ## Derniers comparatifs
+- [Meilleur coffret chocolat pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chocolat-noel-coffret/) (meilleur coffret chocolat noel)
 - [Meilleur casque audio enfant à offrir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-casque-enfant-noel/) (meilleur casque enfant noel)
 - [Meilleure montre homme à moins de 100 € (cadeau Noël)](https://kirito83.github.io/radin-malin/comparatifs/meilleure-montre-homme-moins-100-euros-noel/) (montre homme moins 100 euros noel)
 - [Meilleur robot cuiseur à offrir pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-cuiseur-noel/) (meilleur robot cuiseur noel)
@@ -36,7 +37,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Idée cadeau homme à moins de 50 € pour Noël](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-homme-50-euros-noel/) (idee cadeau homme 50 euros noel)
 - [Meilleur oreiller de voyage avion : dormir assis](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oreiller-voyage-avion/) (meilleur oreiller voyage avion)
 - [Meilleure grande valise solide soute 100L+](https://kirito83.github.io/radin-malin/comparatifs/meilleure-valise-grande-taille-solide/) (meilleure grande valise soute)
-- [Meilleur sac de couchage grand froid : ne pas se geler](https://kirito83.github.io/radin-malin/comparatifs/meilleur-sac-couchage-froid-extreme/) (meilleur sac couchage grand froid)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4

@@ -61,6 +61,7 @@ button.action{background:#0f172a;color:#fff;padding:12px 18px;border-radius:12px
 button.action:hover{transform:translateY(-1px);background:#1e293b}
 .res{background:linear-gradient(180deg,#0f172a,#1a2440);color:#fff;border-radius:14px;padding:16px;margin-top:12px;font-size:16px;border:1px solid #26314f}
 .res b{color:var(--brand)}
+.res a{color:var(--brand);font-weight:700}
 table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14.5px}
 th,td{padding:12px;text-align:left}th{background:#0f172a;color:#fff;font-size:13px;letter-spacing:.3px}tr+tr td{border-top:1px solid var(--line)}tr:nth-child(even) td{background:#f8faff}
 .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
