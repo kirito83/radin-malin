@@ -15,7 +15,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STUB = """
 var __els = {}, __printed = false, __alerted = null, __copied = null;
-function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}}; if(val !== undefined) __els[id].value = val; return __els[id]; }
+function __el(id, val){ if(!(__els[id])) __els[id] = {value: "", innerHTML: "", textContent: "", checked: true, style: {}, scrollIntoView: function(){}, addEventListener: function(){}}; if(val !== undefined) __els[id].value = val; return __els[id]; }
 var document = {
   getElementById: function(id){ if(!__els[id]) throw new Error("id introuvable: " + id); return __els[id]; },
   createElement: function(t){ return {href: "", download: "", click: function(){}, remove: function(){}, style: {}, setAttribute: function(){}}; },
@@ -177,6 +177,52 @@ class TestFonctionnel(unittest.TestCase):
         r = run_tool(t, {"dr": "2026-01-01", "cy": "28"})
         self.assertIn("2026", r)
         self.assertIn("fertile", r)
+
+    def test_impot(self):
+        t = self.tools["simulateur-impot-revenu"]
+        r = run_tool(t, {"ri": "35000"}, raw_lines=['__el("parts").value="2";'])
+        # quotient 17500 : 11497 a 0% + (17500-11497)*11% = 660.33 x2 = 1320.66
+        self.assertIn("1321", r)
+        self.assertIn("Taux moyen", r)
+
+    def test_moyenne(self):
+        t = self.tools["calcul-moyenne-notes"]
+        r = run_tool(t, {"n1": "14", "c1": "3", "n2": "11", "c2": "2", "n3": "16", "c3": "1"})
+        # (42+22+16)/6 = 13.33
+        self.assertIn("13.33", r)
+        self.assertIn("Assez bien", r)
+
+    def test_cv_apercu(self):
+        t = self.tools["generateur-cv-gratuit"]
+        r = run_tool(t, {"cvn": "Jean Test", "cvt": "Dev", "cve": "j@t.fr", "cvp": "0600", "cvx": "X", "cvf": "F", "cvs": "S"},
+                     call="cvUpdate();", tail='__els["cvprev"].innerHTML')
+        self.assertIn("Jean Test", r)
+        self.assertIn("cv-print", r)
+
+    def test_calories(self):
+        t = self.tools["calcul-calories"]
+        r = run_tool(t, {"wp": "70", "wh": "175", "wa": "30"},
+                     raw_lines=['__el("sx").value="h";', '__el("ac").value="1.55";'])
+        # TMB = 700+1093.75-150+5 = 1648.75 ; maintien x1.55 = 2555.56
+        self.assertIn("1649", r)
+        self.assertIn("2556", r)
+
+    def test_cups(self):
+        t = self.tools["convertisseur-cups-grammes"]
+        r = run_tool(t, {"qc": "2"}, raw_lines=['__el("sens").value="cg";', '__el("ing").value="120";'])
+        self.assertIn("240", r)
+
+    def test_grossesse(self):
+        t = self.tools["semaines-grossesse"]
+        r = run_tool(t, {"gd": "2020-01-01"})
+        self.assertIn("SA</b>", r)
+        self.assertIn("Trimestre", r)
+
+    def test_qr_wifi(self):
+        t = self.tools["generateur-qr-code"]
+        r = run_tool(t, {"qrtext": "x"}, raw_lines=['__el("qtype").value="wifi";', '__el("ssid").value="MaBox";', '__el("wpass").value="secret";'])
+        self.assertIn("WIFI", r)
+        self.assertIn("MaBox", r)
 
 
 if __name__ == "__main__":

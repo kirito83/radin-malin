@@ -7,7 +7,7 @@ from lib import load, load_published, save_published, today_iso, active_promos, 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
 
-ICONS = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸"}
+ICONS = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸", "simulateur-impot-revenu": "📊", "calcul-moyenne-notes": "🎓", "generateur-cv-gratuit": "📄", "compresseur-image": "🖼️", "calcul-calories": "🔥", "convertisseur-cups-grammes": "🥄", "semaines-grossesse": "🤰"}
 
 def art_card(a, href_prefix=""):
     return f"<a class='art-card' href='{href_prefix}comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>publié le {esc(fr_date(a.get('pub_date', '')))}</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>"
@@ -250,7 +250,7 @@ footer.site a{color:#dbe2ef}
 .inv-table th,.inv-table td{border:1px solid #ddd;padding:8px;text-align:left}
 .inv-total td{font-weight:900;background:#fff8d6}
 @page{size:A4;margin:11mm}
-@media print{header.site,footer.site,.ad,.pro,.disc,.breadcrumb,h1.page,.lead,.card-section,.toolbox>label,.toolbox>button{display:none!important}.toolbox{box-shadow:none!important;border:0!important;padding:0!important}.res{background:#fff!important;color:#000!important;border:0!important}#facture-print{position:static;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card{border:0;padding:0}}
+@media print{header.site,footer.site,.ad,.pro,.disc,.breadcrumb,h1.page,.lead,.card-section,.toolbox>label,.toolbox>button,.toolbox>h2,.toolbox>.hint{display:none!important}.toolbox{box-shadow:none!important;border:0!important;padding:0!important}.res{background:#fff!important;color:#000!important;border:0!important}#facture-print,#cv-print{position:static;width:100%;background:#fff;color:#000;font-size:13px}#facture-print .inv-card,#cv-print{border:0;padding:0}}
 @media(max-width:640px){
 .foot-grid{grid-template-columns:1fr 1fr}
 .topbar{flex-direction:column;align-items:stretch;padding:10px 0}

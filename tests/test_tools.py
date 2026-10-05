@@ -120,7 +120,9 @@ class TestTools(unittest.TestCase):
         for t in self.tools:
             with self.subTest(outil=t["slug"]):
                 self.assertIn("<button", t["ui_html"])
-                self.assertIn("id='res'", t["ui_html"].replace('"', "'"))
+                ui = t["ui_html"].replace('"', "'")
+                self.assertTrue("id='res'" in ui or "id='cvprev'" in ui,
+                                "aucun conteneur de resultat")
 
     def test_devises_api_valide(self):
         t = next(x for x in self.tools if x["slug"] == "convertisseur-devises")
