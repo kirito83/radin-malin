@@ -133,6 +133,11 @@ class TestLib(unittest.TestCase):
         self.assertEqual(daily.select_next(kws, ["a", "b"])["slug"], "c")
         self.assertIsNone(daily.select_next(kws, {"a": "x", "b": "x", "c": "x"}))
 
+    def test_select_next_saisonnier_dabord(self):
+        import daily
+        kws = [{"slug": "a"}, {"slug": "idee-cadeau-x-noel"}, {"slug": "b"}]
+        self.assertEqual(daily.select_next(kws, {})["slug"], "idee-cadeau-x-noel")
+
     def test_lien_telegram_trace(self):
         import social_post
         u = social_post.build_link("https://kirito83.github.io/radin-malin", "mon-article")
@@ -179,6 +184,51 @@ class TestVersus(unittest.TestCase):
             sm = f.read()
         for _, dslug in self.duels:
             self.assertIn(f"/versus/{dslug}/", sm)
+
+
+class TestQuiz(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(ROOT, "data", "quizzes.json"), encoding="utf-8") as f:
+            cls.quizzes = json.load(f)
+        with open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8") as f:
+            cls.by_slug = {k["slug"]: k for k in json.load(f)}
+
+    def test_quizzes_valides(self):
+        for q in self.quizzes:
+            with self.subTest(quiz=q["slug"]):
+                self.assertIn(q["parent"], self.by_slug)
+                prods = self.by_slug[q["parent"]]["products"]
+                self.assertGreaterEqual(len(prods), 2)
+                for qu in q["questions"]:
+                    for opt in qu["options"]:
+                        self.assertEqual(len(opt["scores"]), len(prods[:3]))
+
+    def test_pages_quiz(self):
+        with open(os.path.join(ROOT, "config.json"), encoding="utf-8") as f:
+            tag = json.load(f)["monetization"]["amazon_tag"]
+        for q in self.quizzes:
+            with self.subTest(quiz=q["slug"]):
+                html = read_pub(f"quiz/{q['slug']}/index.html")
+                for p in self.by_slug[q["parent"]]["products"][:3]:
+                    self.assertIn(p, html)
+                self.assertIn(f'TAG="{tag}"', html)
+                self.assertIn("showQ()", html)
+
+    def test_hub_cadeaux(self):
+        import lib as libmod
+        pub = libmod.load_published()
+        slugs = list(pub.keys()) if isinstance(pub, dict) else pub
+        with open(os.path.join(ROOT, "data", "keywords.json"), encoding="utf-8") as f:
+            kws = {k["slug"]: k for k in json.load(f)}
+        gifts_pub = [s for s in slugs if any(w in s for w in ["noel", "cadeau", "avent", "black-friday"])]
+        gifts_stock = [s for s in kws if any(w in s for w in ["noel", "cadeau", "avent", "black-friday"])]
+        self.assertGreater(len(gifts_stock), 0, "aucun contenu saisonnier en stock")
+        if gifts_pub:
+            html = read_pub("idees-cadeaux/index.html")
+            self.assertIn(kws[gifts_pub[0]]["keyword"].lower(), html.lower())
+            with open(os.path.join(PUBLIC, "sitemap.xml"), encoding="utf-8") as f:
+                self.assertIn("/idees-cadeaux/", f.read())
 
 
 if __name__ == "__main__":

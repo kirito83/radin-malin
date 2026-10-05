@@ -235,7 +235,7 @@ h1.page{margin-top:10px}
 @media(max-width:400px){.foot-grid{grid-template-columns:1fr}}
 """
 
-def article_html(cfg, item, related=None, duel=None):
+def article_html(cfg, item, related=None, duel=None, quiz=None):
     tag = cfg["monetization"].get("amazon_tag", "")
     rows = ""
     podium = ""
@@ -274,6 +274,7 @@ def article_html(cfg, item, related=None, duel=None):
 <div class="card-section"><h2>📉 Alerte baisse de prix</h2><p class="sub">Les promos sur ce produit partent vite. On les signale sur notre canal (1 message/jour max, zéro spam).</p>
 <div class="actions">{'<a class="btn" href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Recevoir les alertes prix →</a>' if cfg.get('telegram_channel') else '<a class="btn" href="../../#comparatifs">⭐ Voir les autres comparatifs →</a>'}</div></div>
 <div class="card-section"><h2>🔗 Comparatifs similaires</h2><p class="sub">Pour continuer à comparer avant d'acheter.</p>
+{('<p>🎯 30 secondes chrono : <a href="../../quiz/' + esc(quiz) + '/"><b>trouve ton modèle avec le quiz →</b></a></p>') if quiz else ''}
 {('<p>⚔️ Hésitation entre les deux favoris ? Lis le duel : <a href="../../versus/' + esc(duel[0]) + '/"><b>' + esc(duel[1]) + ' vs ' + esc(duel[2]) + '</b> →</a></p>') if duel else ''}
 <div class="grid">{"".join([art_card(r, "../../") for r in (related or [])[:3]])}</div></div>
 <div class="sticky-cta"><span>🔥 {esc(item['products'][0])} — vérifie la promo du jour :</span><a class="btn small" href="{esc(amazon_link(item['products'][0], tag))}" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a></div>
@@ -306,6 +307,28 @@ def versus_html(cfg, item):
 <details><summary>Lequel est le moins cher ?</summary><p>En général {esc(p2)}, mais les promos inversent parfois l'écart : clique les deux boutons.</p></details>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": cfg['site_url'].rstrip('/') + "/"}, {"@type": "ListItem", "position": 2, "name": item["title"], "item": cfg['site_url'].rstrip('/') + f"/comparatifs/{item['slug']}/"}, {"@type": "ListItem", "position": 3, "name": title}]}, ensure_ascii=False)}</script>"""
     return dslug, base_page(cfg, title, title + " Duel, avis et meilleurs prix.", body, f"versus/{dslug}/", prefix="../../")
+
+def quiz_html(cfg, quiz, products, tag):
+    data = json.dumps({"questions": quiz["questions"], "products": products}, ensure_ascii=False)
+    body = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a> <a class="breadcrumb" href="../../comparatifs/{esc(quiz['parent'])}/">Comparatif complet</a></p>
+<h1 class="page">{esc(quiz['title'])}</h1>
+<p class="lead">{esc(quiz['intro'])}</p>
+<div class="toolbox"><div id="qbar" class="hint">Question 1/{len(quiz['questions'])}</div>
+<div id="qbox"></div><div id="qres"></div></div>
+<script>
+var QUIZ={data};var TAG={json.dumps(tag)};
+function amazonQ(p){{return "https://www.amazon.fr/s?k="+encodeURIComponent(p)+"&tag="+TAG;}}
+var qi=0,sc=[0,0,0];
+function showQ(){{var q=QUIZ.questions[qi];document.getElementById('qbar').textContent='Question '+(qi+1)+'/'+QUIZ.questions.length;
+var h='<h2 style="margin-top:6px">'+q.q+'</h2>';q.options.forEach(function(o,i){{h+='<button class="action" style="display:block;width:100%;margin:8px 0" onclick="answer('+i+')">'+o.label+'</button>';}});
+document.getElementById('qbox').innerHTML=h;document.getElementById('qres').innerHTML='';}}
+function answer(i){{var o=QUIZ.questions[qi].options[i];o.scores.forEach(function(p,k){{sc[k]+=p;}});qi++;
+if(qi<QUIZ.questions.length)showQ();else showR();}}
+function showR(){{var w=sc.indexOf(Math.max.apply(null,sc));var p=QUIZ.products[w];
+document.getElementById('qbar').textContent='Résultat 🎉';document.getElementById('qbox').innerHTML='';
+document.getElementById('qres').innerHTML='<div class="res">Ton modèle : <b>'+p+'</b><br><br><a class="btn" href="'+amazonQ(p)+'" rel="nofollow sponsored noopener" target="_blank">Voir le prix →</a> <a class="btn ghost" style="color:#111;background:#fff;border:1px solid #ddd;box-shadow:none" href="https://t.me/share/url?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('Ce quiz a trouvé mon modèle !')+'">Partager le quiz ✈️</a></div>';}}
+showQ();</script>"""
+    return base_page(cfg, quiz["title"], quiz["title"] + " : trouve ton modèle en 30 secondes.", body, f"quiz/{quiz['slug']}/", prefix="../../")
 
 def tool_page(cfg, t, all_tools=None, top_articles=None):
     # Boutons avec la bonne classe moderne
@@ -363,6 +386,7 @@ def build():
 
     # Pages articles + duels versus (X vs Y)
     duels = []
+    quizzes = {q["parent"]: q for q in load("data/quizzes.json", [])}
     for a in articles:
         rel = [x for x in articles if x["slug"] != a["slug"] and x["category"] == a["category"]]
         rel += [x for x in articles if x["slug"] != a["slug"] and x["category"] != a["category"]]
@@ -372,10 +396,32 @@ def build():
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(dhtml)
+        qz = quizzes.get(a["slug"])
+        if qz:
+            qd = os.path.join(PUBLIC, "quiz", qz["slug"])
+            os.makedirs(qd, exist_ok=True)
+            with open(os.path.join(qd, "index.html"), "w", encoding="utf-8") as f:
+                f.write(quiz_html(cfg, qz, a["products"][:3], cfg["monetization"].get("amazon_tag", "")))
         d = os.path.join(PUBLIC, "comparatifs", a["slug"])
         os.makedirs(d, exist_ok=True)
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
-            f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1])))
+            f.write(article_html(cfg, a, rel, (dslug, a["products"][0], a["products"][1]), qz["slug"] if qz else None))
+
+    # Hub saisonnier cadeaux (SEO Q4, auto-alimente)
+    def is_gift(a):
+        blob = (a["slug"] + " " + a["keyword"]).lower()
+        return any(w in blob for w in ["noel", "cadeau", "avent", "black-friday"])
+    gifts = [a for a in articles if is_gift(a)]
+    if gifts:
+        gcards = "".join([art_card(a, "../../") for a in reversed(gifts)])
+        gbody = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../../">← Retour accueil</a></p>
+<h1 class="page">🎄 Idées cadeaux & promos ({len(gifts)})</h1>
+<p class="lead">Guides cadeaux de Noël, calendriers de l'Avent et bons plans Black Friday : le bon choix au meilleur prix.</p>
+<div class="grid">{gcards}</div>"""
+        gd = os.path.join(PUBLIC, "idees-cadeaux")
+        os.makedirs(gd, exist_ok=True)
+        with open(os.path.join(gd, "index.html"), "w", encoding="utf-8") as f:
+            f.write(base_page(cfg, "Idées cadeaux Noël & Black Friday", "Guides cadeaux, calendriers de l'Avent et promos Black Friday.", gbody, "idees-cadeaux/", prefix="../"))
 
     # Pages catégories (hubs SEO : 1 page par univers)
     cat_labels = {"maison": "Maison", "cuisine": "Cuisine", "tech": "Tech", "sante": "Santé & bien-être", "sport": "Sport", "voyage": "Voyage"}
@@ -408,7 +454,7 @@ def build():
 <div class="grid" id="tools-grid">{cards_outils}</div>
 <script>function filtrer(){{var q=document.getElementById('q').value.toLowerCase();document.querySelectorAll('#tools-grid .tool-card').forEach(function(c){{c.style.display=c.getAttribute('data-name').toLowerCase().includes(q)?'flex':'none';}});}}</script></div>
 <div class="card-section"><h2 id="comparatifs">⭐ Derniers comparatifs ({len(articles)} publiés)</h2><p class="sub">Nos guides « meilleur X » : le bon choix au meilleur prix du jour.</p>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"><a class='cat' style='text-decoration:none' href='idees-cadeaux/'>🎄 Idées cadeaux</a>{"".join([f"<a class='cat' style='text-decoration:none' href='categorie/{esc(c)}/'>{esc({'maison':'🏠 Maison','cuisine':'🍳 Cuisine','tech':'💻 Tech','sante':'💚 Santé','sport':'⚽ Sport','voyage':'✈️ Voyage'}.get(c, c))}</a>" for c in sorted({a['category'] for a in articles})])}</div>
 <div class="grid">{cards_articles}</div></div>
 <div class="card-section" id="methode"><h2>⚙️ Notre méthode : simple et indépendante</h2><p class="sub">Des outils gratuits qui servent vraiment, des comparatifs mis à jour chaque jour.</p>
 <div class="steps"><div class="step"><i>1</i><br><b>Outils gratuits</b><br><span class="hint">Calculs instantanés, sans inscription.</span></div><div class="step"><i>2</i><br><b>Comparatifs quotidiens</b><br><span class="hint">2 nouveaux guides d'achat chaque jour.</span></div><div class="step"><i>3</i><br><b>Avis indépendants</b><br><span class="hint">Classement par rapport qualité/prix, pas par sponsor.</span></div><div class="step"><i>4</i><br><b>100% gratuit pour toi</b><br><span class="hint">Le site vit de l'affiliation, sans surcoût sur tes achats.</span></div></div>
@@ -493,6 +539,8 @@ def build():
     entries += [(url + pp, "") for pp in ["/premium/", "/premium/merci/", "/a-propos/", "/contact/", "/confidentialite/"]]
     entries += [(f"{url}/categorie/{c}/", today_iso()) for c in sorted({a['category'] for a in articles})]
     entries += [(f"{url}/versus/{dslug}/", a.get("pub_date", "")) for a, dslug in duels]
+    entries += [(f"{url}/quiz/{q['slug']}/", today_iso()) for q in load("data/quizzes.json", [])]
+    entries += [(url + "/idees-cadeaux/", today_iso())]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
         [f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "<changefreq>weekly</changefreq></url>" for u, d in entries]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:

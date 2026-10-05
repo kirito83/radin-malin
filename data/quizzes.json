@@ -1,0 +1,64 @@
+[
+  {
+    "slug": "quel-aspirateur-robot-pour-toi",
+    "title": "Quel aspirateur robot pour toi ? Quiz 30 secondes",
+    "keyword": "quel aspirateur robot choisir quiz",
+    "parent": "meilleur-aspirateur-robot-2026",
+    "intro": "3 questions, 30 secondes, et on te désigne le bon modèle parmi notre top 3.",
+    "questions": [
+      {"q": "Ton logement, c'est plutôt…", "options": [
+        {"label": "Studio / 2 pièces", "scores": [1, 2, 0]},
+        {"label": "Appartement familial", "scores": [2, 1, 1]},
+        {"label": "Grande maison + étages", "scores": [2, 0, 2]}]},
+      {"q": "Ton budget max ?", "options": [
+        {"label": "Moins de 300 €", "scores": [0, 2, 1]},
+        {"label": "300 à 500 €", "scores": [2, 1, 0]},
+        {"label": "Peu importe si c'est le meilleur", "scores": [2, 0, 2]}]},
+      {"q": "Ta priorité n°1 ?", "options": [
+        {"label": "Aspiration puissante", "scores": [2, 1, 1]},
+        {"label": "Silence", "scores": [1, 1, 2]},
+        {"label": "Application simple", "scores": [1, 2, 0]}]}
+    ]
+  },
+  {
+    "slug": "quel-casque-bluetooth-pour-toi",
+    "title": "Quel casque Bluetooth pour toi ? Quiz 30 secondes",
+    "keyword": "quel casque bluetooth choisir quiz",
+    "parent": "meilleur-casque-bluetooth-moins-100-euros",
+    "intro": "3 questions pour trancher entre notre top 3 à moins de 100 €.",
+    "questions": [
+      {"q": "Tu l'utiliseras surtout pour…", "options": [
+        {"label": "Musique à la maison", "scores": [2, 1, 1]},
+        {"label": "Trajets / transports", "scores": [1, 2, 1]},
+        {"label": "Sport", "scores": [0, 1, 2]}]},
+      {"q": "Le plus important ?", "options": [
+        {"label": "Le prix le plus bas", "scores": [0, 2, 1]},
+        {"label": "Le confort longue durée", "scores": [2, 0, 1]},
+        {"label": "Les basses puissantes", "scores": [1, 1, 2]}]},
+      {"q": "Tu portes des lunettes ?", "options": [
+        {"label": "Oui, coussinets doux obligatoires", "scores": [2, 1, 0]},
+        {"label": "Non", "scores": [1, 1, 2]}]}
+    ]
+  },
+  {
+    "slug": "quel-matelas-pour-toi",
+    "title": "Quel matelas 140x190 pour toi ? Quiz 30 secondes",
+    "keyword": "quel matelas choisir quiz",
+    "parent": "meilleur-matelas-140x190-pas-cher",
+    "intro": "Ferme ou moelleux, petit budget ou durable : on tranche pour toi.",
+    "questions": [
+      {"q": "Tu dors surtout…", "options": [
+        {"label": "Sur le dos", "scores": [2, 1, 0]},
+        {"label": "Sur le côté", "scores": [1, 2, 1]},
+        {"label": "Sur le ventre", "scores": [2, 0, 1]}]},
+      {"q": "Ton budget ?", "options": [
+        {"label": "Serré, moins de 400 €", "scores": [0, 1, 2]},
+        {"label": "400 à 700 €", "scores": [1, 2, 0]},
+        {"label": "Investissement 10 ans", "scores": [2, 1, 0]}]},
+      {"q": "Tu as souvent…", "options": [
+        {"label": "Mal au dos", "scores": [2, 1, 0]},
+        {"label": "Chaud la nuit", "scores": [1, 2, 1]},
+        {"label": "Un partenaire qui bouge", "scores": [2, 1, 1]}]}
+    ]
+  }
+]

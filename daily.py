@@ -5,12 +5,15 @@ from lib import load, load_published, save_published, today_iso
 from build import build
 
 def select_next(keywords, published):
-    """Rend le prochain mot-cle non publie (pur, testable)."""
+    """Rend le prochain mot-cle non publie (pur, testable).
+    Priorite au saisonnier (Noel/Black Friday) pour capter le pic Q4."""
     done = set(published.keys()) if isinstance(published, dict) else set(published)
-    for k in keywords:
-        if k["slug"] not in done:
-            return k
-    return None
+    todo = [k for k in keywords if k["slug"] not in done]
+    seasonal = [k for k in todo if any(w in k["slug"] for w in
+                ["noel", "black-friday", "cadeau", "avent", "calendrier"])]
+    if seasonal:
+        return seasonal[0]
+    return todo[0] if todo else None
 
 def main():
     keywords = load("data/keywords.json", [])
