@@ -71,6 +71,12 @@ th,td{padding:12px;text-align:left}th{background:#0f172a;color:#fff;font-size:13
 .rank.gold{background:linear-gradient(90deg,#ffd60a,#ff9d0a);color:#111}
 .guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .guide div{background:#f8faff;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px}
+.cv-head{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0f172a,#2b3560);color:#fff;border-radius:12px;padding:16px;margin-bottom:12px}
+.cv-head h3{margin:0;font-size:22px}
+.cv-title{margin:2px 0;color:var(--brand);font-weight:700}
+.cv-contact{margin:0;font-size:13px;color:#c3cbdd}
+.cv-h{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:4px;margin:14px 0 6px}
+.cv-pill{display:inline-block;background:#eef2ff;border:1px solid #d9defa;border-radius:999px;padding:4px 12px;margin:2px;font-size:13px}
 details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0}
 summary{font-weight:800;cursor:pointer}
 .ad{background:#f9fafb;border:1.5px dashed #cbd5e1;padding:12px;text-align:center;margin-bottom:16px;border-radius:14px;color:var(--muted)}
