@@ -216,7 +216,8 @@ button.action{background:#0f172a;color:#fff;padding:12px 18px;border-radius:12px
 button.action:hover{transform:translateY(-1px);background:#1e293b}
 .res{background:linear-gradient(180deg,#0f172a,#1a2440);color:#fff;border-radius:14px;padding:16px;margin-top:12px;font-size:16px;border:1px solid #26314f}
 .res b{color:var(--brand)}
-.res a{color:var(--brand);font-weight:700}
+.res a:not(.btn){color:var(--brand);font-weight:700}
+.res .btn{color:#111}
 table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14.5px}
 th,td{padding:12px;text-align:left}th{background:#0f172a;color:#fff;font-size:13px;letter-spacing:.3px}tr+tr td{border-top:1px solid var(--line)}tr:nth-child(even) td{background:#f8faff}
 .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
@@ -614,6 +615,7 @@ def build():
     entries += [(f"{url}/quiz/{s}/", today_iso()) for s in quiz_slugs]
     entries += [(url + "/idees-cadeaux/", today_iso())]
     entries += [(url + "/promos/", today_iso())]
+    entries += [(url + "/api/", today_iso())]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(
         [f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "<changefreq>weekly</changefreq></url>" for u, d in entries]) + "</urlset>"
     with open(os.path.join(PUBLIC, "sitemap.xml"), "w", encoding="utf-8") as f:
@@ -642,6 +644,36 @@ def build():
     lines += ["", "## Premium", f"- [Pack Excel]({url}/premium/) : {m.get('premium_product', '')}"]
     with open(os.path.join(PUBLIC, "llms.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
+
+    # API JSON statique pour devs (GET, sans cle) + page doc
+    api_dir = os.path.join(PUBLIC, "api")
+    os.makedirs(api_dir, exist_ok=True)
+    api_outils = [{"slug": t["slug"], "title": t["title"], "description": t["meta"],
+                   "url": f"{url}/outils/{t['slug']}/"} for t in tools]
+    api_articles = [{"slug": a["slug"], "title": a["title"], "keyword": a["keyword"],
+                     "category": a["category"], "date": a.get("pub_date", ""),
+                     "url": f"{url}/comparatifs/{a['slug']}/",
+                     "products": [{"name": p, "link": amazon_link(p, cfg["monetization"].get("amazon_tag", ""))}
+                                  for p in a["products"]]} for a in articles]
+    api_quiz = [{"slug": q["slug"], "title": q["title"],
+                 "url": f"{url}/quiz/{q['slug']}/"} for q in
+                [quizzes.get(a["slug"]) or auto_quiz(a) for a in articles]]
+    api_index = {"site": cfg["site_name"], "home": url + "/",
+                 "endpoints": {"/api/outils.json": f"{len(tools)} outils",
+                               "/api/comparatifs.json": f"{len(articles)} comparatifs",
+                               "/api/quiz.json": f"{len(api_quiz)} quiz"}}
+    for name, obj in [("outils.json", api_outils), ("comparatifs.json", api_articles),
+                      ("quiz.json", api_quiz), ("index.json", api_index)]:
+        with open(os.path.join(api_dir, name), "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=2)
+    apidoc = f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
+<h1 class="page">API développeurs (gratuite, sans clé)</h1>
+<p class="lead">JSON statique régénéré 2 fois par jour. Usage : mêmes origines ou côté serveur (scripts, applis, tableurs). Exemple : <code>fetch("{esc(url)}/api/comparatifs.json").then(r =&gt; r.json())</code></p>
+<div class="card-section"><h2>📡 Endpoints GET</h2>
+<div class="guide"><div><b>/api/outils.json</b><br>{len(tools)} outils : slug, titre, description, url.</div><div><b>/api/comparatifs.json</b><br>{len(articles)} comparatifs : keyword, catégorie, date, produits + liens.</div><div><b>/api/quiz.json</b><br>{len(api_quiz)} quiz avec urls.</div><div><b>/api/index.json</b><br>Manifeste + compteurs.</div></div>
+<p class="hint">Données indicatives (revues à chaque publication). Citez la source avec un lien vers la page d'origine.</p></div>"""
+    with open(os.path.join(api_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(base_page(cfg, "API développeurs", "API JSON gratuite : outils et comparatifs.", apidoc, "api/", prefix="../"))
 
     # Visuels Pinterest 1000x1500 (1 par article, ignores si Pillow absent)
     try:

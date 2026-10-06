@@ -102,6 +102,30 @@ class TestBuild(unittest.TestCase):
         self.assertNotIn("vignette.min.js", html)
         self.assertNotIn("nap5k.com/tag.min.js", html)
 
+    def test_boutons_lisibles_sur_fond_sombre(self):
+        css = open(os.path.join(PUBLIC, "style.css"), encoding="utf-8").read()
+        self.assertIn(".res a:not(.btn)", css)
+        self.assertIn(".res .btn", css)
+
+    def test_api_json(self):
+        with open(os.path.join(ROOT, "data", "tools.json"), encoding="utf-8") as f:
+            n_tools = len(json.load(f))
+        import lib as libmod
+        pub = libmod.load_published()
+        n_articles = len(pub)
+        for name in ["outils.json", "comparatifs.json", "quiz.json", "index.json"]:
+            with open(os.path.join(PUBLIC, "api", name), encoding="utf-8") as f:
+                data = json.load(f)
+            self.assertTrue(data, f"API vide : {name}")
+        with open(os.path.join(PUBLIC, "api", "outils.json"), encoding="utf-8") as f:
+            self.assertEqual(len(json.load(f)), n_tools)
+        with open(os.path.join(PUBLIC, "api", "comparatifs.json"), encoding="utf-8") as f:
+            arts = json.load(f)
+            self.assertEqual(len(arts), n_articles)
+            self.assertIn("products", arts[0])
+            self.assertIn("tag=", arts[0]["products"][0]["link"])
+        self.assertTrue(os.path.exists(os.path.join(PUBLIC, "api", "index.html")))
+
     def test_acces_promos_quiz_depuis_accueil(self):
         html = read_pub("index.html")
         self.assertIn("href='promos/'", html)
