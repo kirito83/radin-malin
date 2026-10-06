@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Robot cuiseur Black Friday : Companion vs kCook](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-cuiseur-black-friday/) (robot cuiseur black friday)
 - [Montre connectée Black Friday : les plus grosses remises](https://kirito83.github.io/radin-malin/comparatifs/meilleure-montre-connectee-black-friday/) (montre connectee black friday)
 - [Meilleur PC portable Black Friday à moins de 600 €](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pc-portable-black-friday-600-euros/) (pc portable black friday 600 euros)
 - [iPhone reconditionné Black Friday : quel modèle choisir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-iphone-reconditionne-black-friday/) (iphone reconditionne black friday)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleure bougie parfumée ambiance Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleure-bougie-parfumee-noel/) (meilleure bougie parfumee noel)
 - [Meilleur plaid chaud et doux pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-plaid-noel-chaud-doux/) (meilleur plaid chaud doux)
 - [Meilleur jeu de société famille pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-jeu-societe-famille-noel/) (meilleur jeu societe famille noel)
-- [Meilleur calendrier de l'Avent adulte 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-calendrier-avent-2026-adulte/) (meilleur calendrier avent adulte)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
