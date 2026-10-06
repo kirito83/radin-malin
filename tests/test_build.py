@@ -97,8 +97,11 @@ class TestBuild(unittest.TestCase):
 
     def test_tags_head(self):
         html = read_pub("index.html")
+        self.assertIn("window.__rmc", html)
         self.assertIn("G-VHM284ZNV5", html)
         self.assertIn('name="monetag"', html)
+        self.assertIn('id="rm-consent"', html)
+        self.assertNotIn('<script async src="https://www.googletagmanager.com', html)
         self.assertNotIn("vignette.min.js", html)
         self.assertNotIn("nap5k.com/tag.min.js", html)
 

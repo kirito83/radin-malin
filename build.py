@@ -61,37 +61,51 @@ def amazon_link(query, tag):
         return f"https://www.amazon.fr/s?k={q}&tag={tag}"
     return f"https://www.amazon.fr/s?k={q}"
 
-def vignette_loader(raw):
-    """Extrait le script vignette et le plafonne a 1x/24h. "" si absent."""
-    vign = ""
-    for m in re.finditer(r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>", raw or ""):
-        if "vignette" in m.group(2):
-            zone, src = m.group(1), m.group(2)
-            vign = ("<script>(function(){try{var k='rm_vign',t=Date.now();"
-                    "if(t-parseInt(localStorage.getItem(k)||'0',10)<864e5)return;"
-                    "localStorage.setItem(k,String(t));var s=document.createElement('script');"
-                    "s.dataset.zone='" + zone + "';s.src='" + src + "';"
-                    "document.body.appendChild(s);}catch(e){}})();</script>")
-    return vign
+TAGPAT = r"<script>\(function\(s\)\{s\.dataset\.zone='(\d+)',s\.src='([^']+)'\}\)\(\[document\.documentElement, document\.body\]\.filter\(Boolean\)\.pop\(\)\.appendChild\(document\.createElement\('script'\)\)\)</script>"
+
+CONSENT_JS = """function rmGet(){try{return JSON.parse(localStorage.getItem("rm-consent")||"null");}catch(e){return null;}}
+function rmShow(){var b=document.getElementById("rm-consent");if(b){b.hidden=false;}}
+function rmHide(){var b=document.getElementById("rm-consent");if(b){b.hidden=true;}}
+function rmSave(a,d){try{localStorage.setItem("rm-consent",JSON.stringify({v:1,an:a?1:0,ad:d?1:0,t:Date.now()}));}catch(e){}rmHide();rmApply();}
+function rmConsent(a,d){rmSave(a?1:0,d?1:0);}
+function rmConsentSave(){var a=document.getElementById("rm-c-an");var d=document.getElementById("rm-c-ad");rmSave(a&&a.checked?1:0,d&&d.checked?1:0);}
+function rmLoadGa(){if(window.__gaLoaded||!window.__rmc||!window.__rmc.ga){return;}window.__gaLoaded=1;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+window.__rmc.ga;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments);};window.gtag("js",new Date());window.gtag("config",window.__rmc.ga);}
+function rmLoadAds(){if(window.__adsLoaded||!window.__rmc){return;}window.__adsLoaded=1;var box=document.getElementById("rm-adbox");if(box){box.hidden=false;}(window.__rmc.zones||[]).forEach(function(z){var s=document.createElement("script");s.dataset.zone=z[0];s.src=z[1];document.body.appendChild(s);});var v=window.__rmc.vign;if(v){try{var k="rm_vign";if(Date.now()-parseInt(localStorage.getItem(k)||"0",10)>=864e5){localStorage.setItem(k,String(Date.now()));var s2=document.createElement("script");s2.dataset.zone=v[0];s2.src=v[1];document.body.appendChild(s2);}}catch(e){}}if(window.__rmc.adsense){var s3=document.createElement("script");s3.async=true;s3.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+window.__rmc.adsense;document.head.appendChild(s3);(window.adsbygoogle=window.adsbygoogle||[]).push({});}}
+function rmApply(){var c=rmGet();if(!c){rmShow();return;}if(c.an&&window.__rmc&&window.__rmc.ga){rmLoadGa();}if(c.ad){rmLoadAds();}}
+document.addEventListener("DOMContentLoaded",rmApply);"""
+
+def consent_head(cfg):
+    """Config JSON + chargeur consentement. "" si rien a charger (pas de bandeau)."""
+    ads = cfg.get("monetization", {})
+    obj = {"ga": cfg.get("ga_id", ""), "zones": [], "vign": None, "adsense": ""}
+    if ads.get("monetag_inpage_enabled"):
+        for m in re.finditer(TAGPAT, ads.get("monetag_inpage", "") + ads.get("monetag_tag", "")):
+            if "vignette" not in m.group(2):
+                obj["zones"].append([m.group(1), m.group(2)])
+    if ads.get("monetag_vignette_enabled"):
+        for m in re.finditer(TAGPAT, ads.get("monetag_vignette", "")):
+            if "vignette" in m.group(2):
+                obj["vign"] = [m.group(1), m.group(2)]
+    if ads.get("adsense_client") and "VOTRE" not in ads["adsense_client"]:
+        obj["adsense"] = ads["adsense_client"]
+    if not (obj["ga"] or obj["zones"] or obj["vign"] or obj["adsense"]):
+        return "", False, False
+    has_ads = bool(obj["zones"] or obj["vign"] or obj["adsense"])
+    return "<script>window.__rmc=" + json.dumps(obj) + ";" + CONSENT_JS + "</script>", True, has_ads
 
 def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image="", body_class=""):
     site = esc(cfg["site_name"])
     url = cfg["site_url"].rstrip("/")
     canon = f"{url}/{canonical_path.lstrip('/')}" if canonical_path else url + "/"
     ads = cfg["monetization"]
-    # Slots pubs : s'activent seuls quand les IDs sont renseignes
+    consent_js, has_consent, has_ads = consent_head(cfg)
+    # Boite pub : cachee tant que les pubs ne sont pas consenties/chargees
     ad_top = ""
-    if ads.get("adsense_client") and "VOTRE" not in ads["adsense_client"]:
-        ad_top = f"""<div class="ad"><small>Publicité</small>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={esc(ads['adsense_client'])}" crossorigin="anonymous"></script>
-<ins class="adsbygoogle" style="display:block" data-ad-client="{esc(ads['adsense_client'])}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script></div>"""
-    elif ads.get("monetag_tag") or ads.get("monetag_inpage_enabled") or ads.get("monetag_vignette_enabled"):
-        inpage = ads.get("monetag_inpage", "") if ads.get("monetag_inpage_enabled") else ""
-        if not inpage and ads.get("monetag_tag") and "vignette" not in ads.get("monetag_tag"):
-            inpage = ads["monetag_tag"]
-        vign = vignette_loader(ads.get("monetag_vignette", "")) if ads.get("monetag_vignette_enabled") else ""
-        ad_top = f"""<div class="ad"><small>Publicité</small>{inpage}{vign}</div>""" if (inpage or vign) else ""
+    if has_ads:
+        ins = ""
+        if ads.get("adsense_client") and "VOTRE" not in ads["adsense_client"]:
+            ins = f"""<ins class="adsbygoogle" style="display:block" data-ad-client="{esc(ads['adsense_client'])}" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>"""
+        ad_top = f"""<div class="ad" id="rm-adbox" hidden><small>Publicité</small>{ins}</div>"""
 
     stripe_box = ""
     if ads.get("stripe_pro_link") and "VOTRE" not in ads["stripe_pro_link"]:
@@ -127,7 +141,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 <meta name="twitter:description" content="{esc(meta_desc)}">
 {('<meta property="og:image" content="' + esc(image) + '"><meta name="twitter:image" content="' + esc(image) + '">') if image else ''}
 <link rel="stylesheet" href="{prefix}style.css">
-{cfg.get('analytics_script','')}
+{consent_js}
 {cfg.get('head_extra','')}
 </head>
 <body class="{body_class}">
@@ -142,11 +156,15 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 {stripe_box}
 <p class="disc">⚠️ {esc(cfg['affiliate_disclaimer'])}</p>
 </main>
+<div id="rm-consent" hidden><div class="wrap"><p><b>🍪 On respecte ta vie privée.</b> Choisis ce que tu autorises : <a href="{prefix}confidentialite/">en savoir plus</a></p>
+<label><input type="checkbox" id="rm-c-an" checked> Mesure d'audience anonyme</label>
+<label><input type="checkbox" id="rm-c-ad" checked> Publicités personnalisées</label>
+<div class="actions"><button class="action" onclick="rmConsent(1,1)">Tout accepter</button><button class="action" onclick="rmConsent(0,0)">Tout refuser</button><button class="action" onclick="rmConsentSave()">Enregistrer mes choix</button></div></div></div>
 <a class="feedback" href="{prefix}contact/">💬 Bug ? Idée d'outil ? Dis-le nous →</a>
 <footer class="site"><div class="wrap"><div class="foot-grid">
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 2 nouveaux comparatifs chaque jour. Le site est financé par l'affiliation et la pub, sans surcoût pour toi.</p></div>
 <div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}{'<a href="' + esc(cfg.get('social_bsky','')) + '">🦋 Bluesky</a>' if cfg.get('social_bsky') else ''}{'<a href="' + esc(cfg.get('social_masto','')) + '">🐘 Mastodon</a>' if cfg.get('social_masto') else ''}</div>
-<div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a></div>
+<div><h4>Technique</h4><a href="{prefix}sitemap.xml">Sitemap</a><a href="{prefix}rss.xml">Flux RSS</a><a href="{prefix or './'}#methode">Notre méthode</a><a href="#" onclick="rmShow();return false;">🍪 Cookies</a></div>
 <div><h4>Infos</h4><a href="{prefix}a-propos/">À propos</a><a href="{prefix}contact/">Contact</a><a href="{prefix}confidentialite/">Confidentialité</a><a href="{prefix}promos/">Promos en cours</a></div>
 </div><p class="hint">© {datetime.date.today().year} {site} — Contenu indicatif, prix variables. Vérifie toujours l'offre du jour.</p></div></footer>
 </body>
@@ -248,6 +266,12 @@ footer.site a{color:#dbe2ef}
 .search{position:relative;margin:12px 0 4px}
 .search input{padding-left:44px;border-radius:999px}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+#rm-consent{position:fixed;left:0;right:0;bottom:0;z-index:80;background:#0f172a;color:#dbe2ef;border-top:2px solid var(--brand);padding:14px 0;font-size:14px}
+#rm-consent a{color:var(--brand)}
+#rm-consent label{display:inline-flex;gap:6px;align-items:center;margin:6px 14px 6px 0;font-size:13.5px}
+#rm-consent input{width:auto;margin:0}
+#rm-consent .actions{margin-top:10px}
+#rm-consent .actions .action{padding:9px 14px;font-size:14px}
 .feedback{position:fixed;right:14px;bottom:14px;z-index:55;background:#0f172a;color:#fff;font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:999px;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.35);border:1px solid #2b3560;min-height:44px;display:inline-flex;align-items:center}
 .feedback:hover{background:#1e293b}
 body.has-sticky .feedback{bottom:76px}
@@ -594,7 +618,7 @@ def build():
         "confidentialite": ("Politique de confidentialité", "Cookies, affiliation et données : ce que fait ce site.", f"""<p style="margin-top:6px"><a class="breadcrumb" href="../">← Retour accueil</a></p>
 <h1 class="page">Politique de confidentialité</h1>
 <p class="lead">Site personnel sans compte ni inscription. Voici exactement ce qui se passe quand tu visites.</p>
-<div class="card-section"><h2>🍪 Cookies et publicité</h2><p>Nos partenaires publicitaires (Monetag, Google AdSense) déposent des cookies pour mesurer et personnaliser les annonces. Tu peux les refuser dans ton navigateur, le site reste utilisable.</p>
+<div class="card-section"><h2>🍪 Cookies et ton choix</h2><p>À ta première visite, une bannière te propose <b>Tout accepter</b>, <b>Tout refuser</b> ou <b>Personnaliser</b> (Mesure d'audience / Publicités) :</p><ul><li><b>Sans choix</b> : rien n'est chargé — ni mesure, ni pub. Le site reste 100 % utilisable.</li><li><b>Mesure d'audience</b> : statistiques anonymes de visite (Google Analytics).</li><li><b>Publicités</b> : nos partenaires (Monetag, Google AdSense) déposent des cookies pour afficher et mesurer les annonces.</li></ul><p>Ton choix est conservé 6 mois dans ton navigateur. Pour le modifier : lien <b>🍪 Cookies</b> en bas de chaque page.</p></div>
 <h2>🔗 Affiliation</h2><p>Nos boutons « Voir le prix » contiennent un identifiant affilié (Amazon) : si tu achètes dans les 24 h, nous touchons une commission <b>sans surcoût pour toi</b>. C'est ce qui finance les outils gratuits.</p>
 <h2>📊 Mesure d'audience</h2><p>Statistiques anonymes éventuelles (pages vues), aucune donnée nominative collectée sur le site. Les outils calculent dans ton navigateur : rien n'est envoyé ni stocké.</p>
 <h2>✉️ Contact</h2><p>Pour toute question ou suppression de donnée : passe par la page Contact.</p></div>"""),

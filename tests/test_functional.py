@@ -233,6 +233,13 @@ class TestFonctionnel(unittest.TestCase):
         self.assertIn("10.00", r)
         self.assertIn("3 mati", r)
 
+    def test_moyenne_minimum_une_matiere(self):
+        t = self.tools["calcul-moyenne-notes"]
+        r = run_tool(t, {"n1": "12", "c1": "2", "n2": "10", "c2": "1", "n3": "10", "c3": "1"},
+                     call="delNote();delNote();delNote();delNote();calcMoy();")
+        self.assertIn("12.00", r)
+        self.assertIn("1 matière", r)
+
     def test_cv_apercu(self):
         t = self.tools["generateur-cv-gratuit"]
         r = run_tool(t, {"cvn": "Jean Test", "cvt": "Dev", "cve": "j@t.fr", "cvp": "0600", "cvx": "X", "cvf": "F", "cvs": "S"},

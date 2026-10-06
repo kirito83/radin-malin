@@ -26,7 +26,8 @@ python stats.py        # tableau de bord local et privé
 
 ## 🔑 Config (`config.json`)
 
-Identité (`site_url`, `site_name`…), monétisation (`monetization.*` : tags Amazon/pubs, liens Stripe/PayPal — PayPal masqué si non configuré), liens sociaux (masqués si vides), `analytics_script`, `head_extra`, `google_site_verification`.
+Identité (`site_url`, `site_name`…), monétisation (`monetization.*` : tags Amazon/pubs, liens Stripe/PayPal — PayPal masqué si non configuré), liens sociaux (masqués si vides), `ga_id`, `head_extra`, `google_site_verification`.
+Consentement : bandeau + cases mesure/pubs, GA et pubs chargés uniquement après acceptation (`rmShow()` rouvre le choix).
 Jamais de code dans `build.py` pour un snippet : tout passe par `config.json`.
 Jamais de secret commité : clés en Secrets GitHub ou variables d'environnement.
 
