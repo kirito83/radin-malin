@@ -172,6 +172,24 @@ class TestFonctionnel(unittest.TestCase):
         r = run_tool(t, {"plist": "Alice\nBob\nCharlie", "nb": "1"}, call="tirage();")
         self.assertTrue(any(n in r for n in ["Alice", "Bob", "Charlie"]))
 
+    def test_equipes(self):
+        t = self.tools["generateur-equipes"]
+        r = run_tool(t, {"joueurs": "Karim\nLéa\nMehdi\nSara\nTom\nNina", "neq": "2"}, call="genTeams();")
+        self.assertIn("Équipe 1 (3)", r)
+        self.assertIn("Équipe 2 (3)", r)
+        for nom in ["Karim", "Léa", "Mehdi", "Sara", "Tom", "Nina"]:
+            self.assertEqual(r.count(nom), 1, f"{nom} absent ou en double")
+
+    def test_cv_import(self):
+        t = self.tools["generateur-cv-gratuit"]
+        txt = "Sophie Martin\nCheffe de projet\nsophie@mail.fr\n06 12 34 56 78\n5 ans de gestion agile"
+        r = run_tool(t, {"cvn": "", "cvt": "", "cve": "", "cvp": "", "cvv": "", "cvl": "", "cvr": "", "cvx": "", "cvf": "", "cvs": "", "cvg": "", "cvh": "", "cvimport": txt},
+                     call="importTexte();", tail='__els["cvn"].value+"|"+__els["cve"].value+"|"+__els["cvp"].value')
+        nom, mail, tel = r.split("|")
+        self.assertEqual(nom, "Sophie Martin")
+        self.assertEqual(mail, "sophie@mail.fr")
+        self.assertEqual(tel, "06 12 34 56 78")
+
     def test_ovulation(self):
         t = self.tools["calcul-ovulation-grossesse"]
         r = run_tool(t, {"dr": "2026-01-01", "cy": "28"})

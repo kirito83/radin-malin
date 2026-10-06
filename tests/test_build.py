@@ -108,6 +108,15 @@ class TestBuild(unittest.TestCase):
         self.assertIn("Quiz 30 secondes", html)
         self.assertIn("href='quiz/", html)
 
+    def test_pastille_contact_partout(self):
+        for p in ["index.html", "outils/calcul-tva-remise/index.html",
+                  "comparatifs/meilleur-aspirateur-robot-2026/index.html"]:
+            html = read_pub(p)
+            self.assertIn('class="feedback"', html)
+            self.assertIn("contact/", html)
+        art = read_pub("comparatifs/meilleur-aspirateur-robot-2026/index.html")
+        self.assertIn('class="has-sticky"', art)
+
     def test_routage_outils_vers_comparatifs(self):
         with open(os.path.join(ROOT, "data", "tools.json"), encoding="utf-8") as f:
             slugs = [t["slug"] for t in json.load(f)]

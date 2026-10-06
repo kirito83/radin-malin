@@ -7,7 +7,7 @@ from lib import load, load_published, save_published, today_iso, active_promos, 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
 
-ICONS = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸", "simulateur-impot-revenu": "📊", "calcul-moyenne-notes": "🎓", "generateur-cv-gratuit": "📄", "compresseur-image": "🖼️", "calcul-calories": "🔥", "convertisseur-cups-grammes": "🥄", "semaines-grossesse": "🤰"}
+ICONS = {"calcul-tva-remise": "🧾", "calcul-pret-mensualite": "🏦", "calcul-imc": "⚖️", "convertisseur-devises": "💱", "generateur-mot-de-passe": "🔐", "compteur-mots-caracteres": "✍️", "generateur-qr-code": "📷", "convertisseur-unites": "📏", "calcul-age": "🎂", "generateur-facture": "🧮", "salaire-brut-net": "💶", "frais-notaire": "🏠", "jours-entre-deux-dates": "📅", "tirage-au-sort": "🎲", "calcul-ovulation-grossesse": "🌸", "simulateur-impot-revenu": "📊", "calcul-moyenne-notes": "🎓", "generateur-cv-gratuit": "📄", "compresseur-image": "🖼️", "calcul-calories": "🔥", "convertisseur-cups-grammes": "🥄", "semaines-grossesse": "🤰", "generateur-equipes": "👥"}
 
 def art_card(a, href_prefix=""):
     return f"<a class='art-card' href='{href_prefix}comparatifs/{esc(a['slug'])}/'><div class='art-top'><span class='cat'>{esc(a['category'])}</span><span class='fresh'>publié le {esc(fr_date(a.get('pub_date', '')))}</span></div><b class='t'>{esc(a['title'])}</b><span class='k'>{esc(a['keyword'])}</span><span class='art-cta'>Comparer les prix →</span></a>"
@@ -74,7 +74,7 @@ def vignette_loader(raw):
                     "document.body.appendChild(s);}catch(e){}})();</script>")
     return vign
 
-def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image=""):
+def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robots="index, follow", image="", body_class=""):
     site = esc(cfg["site_name"])
     url = cfg["site_url"].rstrip("/")
     canon = f"{url}/{canonical_path.lstrip('/')}" if canonical_path else url + "/"
@@ -130,7 +130,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 {cfg.get('analytics_script','')}
 {cfg.get('head_extra','')}
 </head>
-<body>
+<body class="{body_class}">
 <header class="site"><div class="wrap topbar">
 <a class="logo" href="{prefix or './'}"><span class="logo-dot">💰</span><span>{site}<small>OUTILS GRATUITS • COMPARATIFS</small></span></a>
 <nav class="main"><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel</a><a class="cta" href="{prefix or './'}#comparatifs">Top promos →</a></nav>
@@ -142,6 +142,7 @@ def base_page(cfg, title, meta_desc, content, canonical_path="", prefix="", robo
 {stripe_box}
 <p class="disc">⚠️ {esc(cfg['affiliate_disclaimer'])}</p>
 </main>
+<a class="feedback" href="{prefix}contact/">💬 Bug ? Idée d'outil ? Dis-le nous →</a>
 <footer class="site"><div class="wrap"><div class="foot-grid">
 <div><h4>💰 {site}</h4><p style="margin:0;font-size:14px">Outils gratuits + 2 nouveaux comparatifs chaque jour. Le site est financé par l'affiliation et la pub, sans surcoût pour toi.</p></div>
 <div><h4>Site</h4><a href="{prefix or './'}">Accueil</a><a href="{prefix or './'}#outils">Tous les outils</a><a href="{prefix or './'}#comparatifs">Comparatifs</a><a href="{prefix}premium/">Pack Excel {esc(cfg['monetization']['premium_price'])}</a>{'<a href="' + esc(cfg.get('telegram_channel','')) + '">✈️ Canal Telegram</a>' if cfg.get('telegram_channel') else ''}{'<a href="' + esc(cfg.get('social_bsky','')) + '">🦋 Bluesky</a>' if cfg.get('social_bsky') else ''}{'<a href="' + esc(cfg.get('social_masto','')) + '">🐘 Mastodon</a>' if cfg.get('social_masto') else ''}</div>
@@ -246,6 +247,9 @@ footer.site a{color:#dbe2ef}
 .search{position:relative;margin:12px 0 4px}
 .search input{padding-left:44px;border-radius:999px}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+.feedback{position:fixed;right:14px;bottom:14px;z-index:55;background:#0f172a;color:#fff;font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:999px;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.35);border:1px solid #2b3560;min-height:44px;display:inline-flex;align-items:center}
+.feedback:hover{background:#1e293b}
+body.has-sticky .feedback{bottom:76px}
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
@@ -325,7 +329,7 @@ def article_html(cfg, item, related=None, duel=None, quiz=None):
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": cfg['site_url'].rstrip('/') + "/"}, {"@type": "ListItem", "position": 2, "name": item["category"], "item": cfg['site_url'].rstrip('/') + f"/categorie/{item['category']}/"}, {"@type": "ListItem", "position": 3, "name": item["title"]}]}, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quel est le meilleur choix en 2026 ?", "acceptedAnswer": {"@type": "Answer", "text": f"Notre pick qualité/prix : {item['products'][0]}. Vérifiez la promo du jour avant d'acheter."}}, {"@type": "Question", "name": "Où acheter au meilleur prix ?", "acceptedAnswer": {"@type": "Answer", "text": "Comparez Amazon, Cdiscount et Boulanger pour trouver la meilleure offre."}}, {"@type": "Question", "name": "Comment avons-nous comparé ?", "acceptedAnswer": {"@type": "Answer", "text": "Avis clients, fiabilité SAV et rapport qualité/prix."}}]}, ensure_ascii=False)}</script>"""
-    return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{item['slug']}.png")
+    return base_page(cfg, item["title"], item["title"] + " — comparatif, avis et meilleur prix.", body, f"comparatifs/{item['slug']}/", prefix="../../", image=f"{cfg['site_url'].rstrip('/')}/pins/{item['slug']}.png", body_class="has-sticky")
 
 def versus_html(cfg, item):
     """Page duel P1 vs P2 : requetes 'X vs Y' a forte intention d'achat."""
