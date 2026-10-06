@@ -1,0 +1,140 @@
+[
+  {
+    "slug": "calcul-tva-remise",
+    "title": "Calcul TVA, remise et pourcentage (gratuit)",
+    "description": "Calculez TVA, prix HT/TTC et remises en % en 1 clic. Outil gratuit, sans inscription.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-tva-remise/"
+  },
+  {
+    "slug": "calcul-pret-mensualite",
+    "title": "Calcul mensualité de prêt / crédit (gratuit)",
+    "description": "Simulez votre mensualité de crédit : montant, taux, durée. Outil gratuit pour emprunt immobilier ou conso.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-pret-mensualite/"
+  },
+  {
+    "slug": "calcul-imc",
+    "title": "Calcul IMC gratuit : poids idéal et interprétation",
+    "description": "Calculez votre IMC gratuitement : poids, taille, interprétation OMS et poids idéal.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-imc/"
+  },
+  {
+    "slug": "convertisseur-devises",
+    "title": "Convertisseur devises EUR / USD / GBP",
+    "description": "Convertissez euros, dollars, livres en 1 clic. Taux indicatifs, outil gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/convertisseur-devises/"
+  },
+  {
+    "slug": "generateur-mot-de-passe",
+    "title": "Générateur de mot de passe fort (gratuit)",
+    "description": "Générez un mot de passe fort et unique en 1 clic. 100 % local, rien n'est envoyé.",
+    "url": "https://kirito83.github.io/radin-malin/outils/generateur-mot-de-passe/"
+  },
+  {
+    "slug": "compteur-mots-caracteres",
+    "title": "Compteur de mots et caractères en ligne",
+    "description": "Comptez mots, caractères, phrases et temps de lecture gratuitement.",
+    "url": "https://kirito83.github.io/radin-malin/outils/compteur-mots-caracteres/"
+  },
+  {
+    "slug": "generateur-qr-code",
+    "title": "Générateur QR Code gratuit",
+    "description": "Créez un QR code gratuit pour lien, wifi, texte. Téléchargeable en image.",
+    "url": "https://kirito83.github.io/radin-malin/outils/generateur-qr-code/"
+  },
+  {
+    "slug": "convertisseur-unites",
+    "title": "Convertisseur unités : kg/lbs, cm/inch, °C/°F",
+    "description": "Convertissez poids, tailles, distances et températures. Outil gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/convertisseur-unites/"
+  },
+  {
+    "slug": "calcul-age",
+    "title": "Calcul d'âge exact : ans, mois, jours",
+    "description": "Calculez votre âge exact en ans, mois et jours. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-age/"
+  },
+  {
+    "slug": "generateur-facture",
+    "title": "Générateur de facture / devis gratuit (PDF)",
+    "description": "Créez une facture ou un devis gratuit et imprimez en PDF. Sans inscription.",
+    "url": "https://kirito83.github.io/radin-malin/outils/generateur-facture/"
+  },
+  {
+    "slug": "salaire-brut-net",
+    "title": "Salaire brut net 2026 : convertisseur gratuit",
+    "description": "Convertissez salaire brut en net (et inversement) : cadre, non-cadre, fonction publique. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/salaire-brut-net/"
+  },
+  {
+    "slug": "frais-notaire",
+    "title": "Frais de notaire 2026 : simulateur achat immobilier",
+    "description": "Estimez vos frais de notaire 2026 : ancien, neuf, terrain. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/frais-notaire/"
+  },
+  {
+    "slug": "jours-entre-deux-dates",
+    "title": "Jours entre deux dates : calculateur gratuit",
+    "description": "Calculez le nombre de jours entre deux dates : grossesse, congés, âge, échéances.",
+    "url": "https://kirito83.github.io/radin-malin/outils/jours-entre-deux-dates/"
+  },
+  {
+    "slug": "tirage-au-sort",
+    "title": "Tirage au sort gratuit : gagnant aléatoire en ligne",
+    "description": "Tirez un gagnant au hasard : concours, Secret Santa, équipes. Gratuit et impartial.",
+    "url": "https://kirito83.github.io/radin-malin/outils/tirage-au-sort/"
+  },
+  {
+    "slug": "calcul-ovulation-grossesse",
+    "title": "Calcul ovulation et grossesse : calendrier gratuit",
+    "description": "Estimez ovulation, période fertile et date d'accouchement. Indicatif.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-ovulation-grossesse/"
+  },
+  {
+    "slug": "simulateur-impot-revenu",
+    "title": "Simulateur impôt sur le revenu 2026 (gratuit)",
+    "description": "Estimez votre impôt 2026 : tranches, parts fiscales, décote. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/simulateur-impot-revenu/"
+  },
+  {
+    "slug": "calcul-moyenne-notes",
+    "title": "Calcul moyenne notes avec coefficients (gratuit)",
+    "description": "Calculez votre moyenne générale avec coefficients : bac, brevet, semestre. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-moyenne-notes/"
+  },
+  {
+    "slug": "generateur-cv-gratuit",
+    "title": "Générateur de CV gratuit (sans inscription, PDF)",
+    "description": "Créez un CV propre et gratuit : remplissez, imprimez en PDF. Sans inscription.",
+    "url": "https://kirito83.github.io/radin-malin/outils/generateur-cv-gratuit/"
+  },
+  {
+    "slug": "compresseur-image",
+    "title": "Compresser / redimensionner une image (gratuit, privé)",
+    "description": "Réduisez le poids de vos images gratuitement, sans envoi : tout se passe dans votre navigateur.",
+    "url": "https://kirito83.github.io/radin-malin/outils/compresseur-image/"
+  },
+  {
+    "slug": "calcul-calories",
+    "title": "Calcul calories par jour (TMB + activité, gratuit)",
+    "description": "Calculez vos besoins caloriques quotidiens : métabolisme + activité. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/calcul-calories/"
+  },
+  {
+    "slug": "convertisseur-cups-grammes",
+    "title": "Convertisseur cups / grammes (recettes US, gratuit)",
+    "description": "Convertissez tasses américaines en grammes : farine, sucre, beurre, lait. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/convertisseur-cups-grammes/"
+  },
+  {
+    "slug": "semaines-grossesse",
+    "title": "Semaines de grossesse : calendrier + trimestre (gratuit)",
+    "description": "Calculez vos semaines d'aménorrhée, trimestre et date d'accouchement. Indicatif.",
+    "url": "https://kirito83.github.io/radin-malin/outils/semaines-grossesse/"
+  },
+  {
+    "slug": "generateur-equipes",
+    "title": "Générateur d'équipes aléatoires (foot, sport, jeux)",
+    "description": "Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.",
+    "url": "https://kirito83.github.io/radin-malin/outils/generateur-equipes/"
+  }
+]
