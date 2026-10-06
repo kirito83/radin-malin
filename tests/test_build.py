@@ -103,7 +103,8 @@ class TestBuild(unittest.TestCase):
         self.assertNotIn("nap5k.com/tag.min.js", html)
 
     def test_boutons_lisibles_sur_fond_sombre(self):
-        css = open(os.path.join(PUBLIC, "style.css"), encoding="utf-8").read()
+        with open(os.path.join(PUBLIC, "style.css"), encoding="utf-8") as f:
+            css = f.read()
         self.assertIn(".res a:not(.btn)", css)
         self.assertIn(".res .btn", css)
 
