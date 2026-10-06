@@ -92,6 +92,9 @@ footer.site a{color:#dbe2ef}
 .search{position:relative;margin:12px 0 4px}
 .search input{padding-left:44px;border-radius:999px}
 .search span{position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:18px}
+.feedback{position:fixed;right:14px;bottom:14px;z-index:55;background:#0f172a;color:#fff;font-weight:700;font-size:13.5px;padding:11px 16px;border-radius:999px;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.35);border:1px solid #2b3560;min-height:44px;display:inline-flex;align-items:center}
+.feedback:hover{background:#1e293b}
+body.has-sticky .feedback{bottom:76px}
 .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(13,17,32,.94);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap}
 .sticky-cta span{color:#dbe2ef;font-size:13px;font-weight:600}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
