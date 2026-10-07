@@ -1736,5 +1736,27 @@
         "link": "https://www.amazon.fr/s?k=Nespresso+Vertuo&tag=radinmalin-21"
       }
     ]
+  },
+  {
+    "slug": "meilleur-dyson-black-friday",
+    "title": "Dyson Black Friday : V8, V11 ou V15, lequel vaut le coup",
+    "keyword": "dyson black friday",
+    "category": "maison",
+    "date": "2026-10-07",
+    "url": "https://kirito83.github.io/radin-malin/comparatifs/meilleur-dyson-black-friday/",
+    "products": [
+      {
+        "name": "Dyson V8",
+        "link": "https://www.amazon.fr/s?k=Dyson+V8&tag=radinmalin-21"
+      },
+      {
+        "name": "Dyson V11",
+        "link": "https://www.amazon.fr/s?k=Dyson+V11&tag=radinmalin-21"
+      },
+      {
+        "name": "Dyson V15 Detect",
+        "link": "https://www.amazon.fr/s?k=Dyson+V15+Detect&tag=radinmalin-21"
+      }
+    ]
   }
 ]

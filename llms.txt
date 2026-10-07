@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Dyson Black Friday : V8, V11 ou V15, lequel vaut le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-dyson-black-friday/) (dyson black friday)
 - [Machine à café Black Friday : grain vs dosettes](https://kirito83.github.io/radin-malin/comparatifs/meilleure-machine-cafe-black-friday/) (machine cafe black friday)
 - [Airfryer Black Friday : les promos à ne pas rater](https://kirito83.github.io/radin-malin/comparatifs/meilleur-airfryer-black-friday/) (airfryer black friday)
 - [Robot cuiseur Black Friday : Companion vs kCook](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-cuiseur-black-friday/) (robot cuiseur black friday)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleure montre homme à moins de 100 € (cadeau Noël)](https://kirito83.github.io/radin-malin/comparatifs/meilleure-montre-homme-moins-100-euros-noel/) (montre homme moins 100 euros noel)
 - [Meilleur robot cuiseur à offrir pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-cuiseur-noel/) (meilleur robot cuiseur noel)
 - [Meilleur coffret vin à offrir pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-coffret-vin-noel/) (meilleur coffret vin noel)
-- [Meilleure bougie parfumée ambiance Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleure-bougie-parfumee-noel/) (meilleure bougie parfumee noel)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
