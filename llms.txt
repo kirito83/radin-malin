@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Lego Black Friday : les sets avec les vraies réductions](https://kirito83.github.io/radin-malin/comparatifs/meilleur-lego-black-friday/) (lego black friday)
 - [Trottinette électrique Black Friday : Xiaomi vs Ninebot](https://kirito83.github.io/radin-malin/comparatifs/meilleure-trottinette-electrique-black-friday/) (trottinette electrique black friday)
 - [Matelas Black Friday 140x190 : les meilleures remises](https://kirito83.github.io/radin-malin/comparatifs/meilleur-matelas-black-friday-140x190/) (matelas black friday 140x190)
 - [Dyson Black Friday : V8, V11 ou V15, lequel vaut le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-dyson-black-friday/) (dyson black friday)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Aspirateur robot Black Friday : les vraies bonnes affaires](https://kirito83.github.io/radin-malin/comparatifs/meilleur-aspirateur-robot-black-friday/) (aspirateur robot black friday)
 - [Meilleur coffret chocolat pour Noël](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chocolat-noel-coffret/) (meilleur coffret chocolat noel)
 - [Meilleur casque audio enfant à offrir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-casque-enfant-noel/) (meilleur casque enfant noel)
-- [Meilleure montre homme à moins de 100 € (cadeau Noël)](https://kirito83.github.io/radin-malin/comparatifs/meilleure-montre-homme-moins-100-euros-noel/) (montre homme moins 100 euros noel)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
