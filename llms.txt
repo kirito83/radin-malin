@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Idée cadeau collègue Secret Santa à moins de 20 €](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-collegue-secret-santa/) (idee cadeau collegue secret santa)
 - [Petit électroménager Black Friday : ce qui vaut vraiment le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-grille-pain-black-friday/) (petit electromenager black friday)
 - [Coffret parfum femme Black Friday : les classiques](https://kirito83.github.io/radin-malin/comparatifs/meilleur-parfum-femme-black-friday-coffret/) (coffret parfum femme black friday)
 - [Lego Black Friday : les sets avec les vraies réductions](https://kirito83.github.io/radin-malin/comparatifs/meilleur-lego-black-friday/) (lego black friday)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [iPhone reconditionné Black Friday : quel modèle choisir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-iphone-reconditionne-black-friday/) (iphone reconditionne black friday)
 - [Meilleure TV 55 pouces Black Friday : OLED vs QLED](https://kirito83.github.io/radin-malin/comparatifs/meilleure-tv-55-pouces-black-friday/) (tv 55 pouces black friday)
 - [Casque audio Black Friday : les promos qui valent le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-casque-black-friday-2026/) (casque black friday)
-- [Aspirateur robot Black Friday : les vraies bonnes affaires](https://kirito83.github.io/radin-malin/comparatifs/meilleur-aspirateur-robot-black-friday/) (aspirateur robot black friday)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
