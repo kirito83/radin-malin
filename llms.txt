@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Idée cadeau maîtresse fin d'année (petit budget)](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-maitresse-fin-annee/) (idee cadeau maitresse fin annee)
 - [Idée cadeau crémaillère : utile dès le 1er jour](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-cremaillere-appartement/) (idee cadeau cremaillere)
 - [Idée cadeau de mariage pour les mariés](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-mariage-couple/) (idee cadeau mariage couple)
 - [Idée cadeau de naissance qui fait vraiment plaisir](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-naissance-bebe/) (idee cadeau naissance bebe)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Airfryer Black Friday : les promos à ne pas rater](https://kirito83.github.io/radin-malin/comparatifs/meilleur-airfryer-black-friday/) (airfryer black friday)
 - [Robot cuiseur Black Friday : Companion vs kCook](https://kirito83.github.io/radin-malin/comparatifs/meilleur-robot-cuiseur-black-friday/) (robot cuiseur black friday)
 - [Montre connectée Black Friday : les plus grosses remises](https://kirito83.github.io/radin-malin/comparatifs/meilleure-montre-connectee-black-friday/) (montre connectee black friday)
-- [Meilleur PC portable Black Friday à moins de 600 €](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pc-portable-black-friday-600-euros/) (pc portable black friday 600 euros)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
