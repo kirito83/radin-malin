@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Idée cadeau cuisinier amateur qui a déjà tout](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-cuisinier-amateur/) (idee cadeau cuisinier)
 - [Idée cadeau sportif : course et fitness](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-sportif-course/) (idee cadeau sportif)
 - [Idée cadeau papy et mamie : simple et touchant](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-papy-mamie-noel/) (idee cadeau papy mamie)
 - [Idée cadeau maîtresse fin d'année (petit budget)](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-maitresse-fin-annee/) (idee cadeau maitresse fin annee)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Matelas Black Friday 140x190 : les meilleures remises](https://kirito83.github.io/radin-malin/comparatifs/meilleur-matelas-black-friday-140x190/) (matelas black friday 140x190)
 - [Dyson Black Friday : V8, V11 ou V15, lequel vaut le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-dyson-black-friday/) (dyson black friday)
 - [Machine à café Black Friday : grain vs dosettes](https://kirito83.github.io/radin-malin/comparatifs/meilleure-machine-cafe-black-friday/) (machine cafe black friday)
-- [Airfryer Black Friday : les promos à ne pas rater](https://kirito83.github.io/radin-malin/comparatifs/meilleur-airfryer-black-friday/) (airfryer black friday)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
