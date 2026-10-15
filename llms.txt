@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur biberon anti-colique : comparatif mamans](https://kirito83.github.io/radin-malin/comparatifs/meilleur-biberon-anti-colique/) (meilleur biberon anti colique)
 - [Meilleur kit démarrage bébé : l'essentiel sans se ruiner](https://kirito83.github.io/radin-malin/comparatifs/meilleur-kit-demarrage-bebe-2026/) (kit demarrage bebe essentiel)
 - [Idée cadeau jardinier balcon et plantes d'intérieur](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-jardinier-balcon/) (idee cadeau jardinier)
 - [Idée cadeau lecteur : au-delà du livre](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-lecteur-livre/) (idee cadeau lecteur)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Petit électroménager Black Friday : ce qui vaut vraiment le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-grille-pain-black-friday/) (petit electromenager black friday)
 - [Coffret parfum femme Black Friday : les classiques](https://kirito83.github.io/radin-malin/comparatifs/meilleur-parfum-femme-black-friday-coffret/) (coffret parfum femme black friday)
 - [Lego Black Friday : les sets avec les vraies réductions](https://kirito83.github.io/radin-malin/comparatifs/meilleur-lego-black-friday/) (lego black friday)
-- [Trottinette électrique Black Friday : Xiaomi vs Ninebot](https://kirito83.github.io/radin-malin/comparatifs/meilleure-trottinette-electrique-black-friday/) (trottinette electrique black friday)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
