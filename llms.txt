@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur cuiseur vapeur électrique : sain et simple](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cuiseur-vapeur-electrique/) (meilleur cuiseur vapeur electrique)
 - [Meilleur chauffe-biberon rapide maison et voiture](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chauffe-biberon-rapide/) (meilleur chauffe biberon)
 - [Meilleur biberon anti-colique : comparatif mamans](https://kirito83.github.io/radin-malin/comparatifs/meilleur-biberon-anti-colique/) (meilleur biberon anti colique)
 - [Meilleur kit démarrage bébé : l'essentiel sans se ruiner](https://kirito83.github.io/radin-malin/comparatifs/meilleur-kit-demarrage-bebe-2026/) (kit demarrage bebe essentiel)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Idée cadeau de naissance qui fait vraiment plaisir](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-naissance-bebe/) (idee cadeau naissance bebe)
 - [Idée cadeau collègue Secret Santa à moins de 20 €](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-collegue-secret-santa/) (idee cadeau collegue secret santa)
 - [Petit électroménager Black Friday : ce qui vaut vraiment le coup](https://kirito83.github.io/radin-malin/comparatifs/meilleur-grille-pain-black-friday/) (petit electromenager black friday)
-- [Coffret parfum femme Black Friday : les classiques](https://kirito83.github.io/radin-malin/comparatifs/meilleur-parfum-femme-black-friday-coffret/) (coffret parfum femme black friday)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
