@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur hachoir à viande : manuel vs électrique](https://kirito83.github.io/radin-malin/comparatifs/meilleur-hachoir-viande-manuel-electrique/) (meilleur hachoir viande)
 - [Meilleure mandoline cuisine sécurisée qui coupe vraiment](https://kirito83.github.io/radin-malin/comparatifs/meilleure-mandoline-cuisine-securisee/) (meilleure mandoline cuisine)
 - [Meilleur cuiseur vapeur électrique : sain et simple](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cuiseur-vapeur-electrique/) (meilleur cuiseur vapeur electrique)
 - [Meilleur chauffe-biberon rapide maison et voiture](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chauffe-biberon-rapide/) (meilleur chauffe biberon)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Idée cadeau crémaillère : utile dès le 1er jour](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-cremaillere-appartement/) (idee cadeau cremaillere)
 - [Idée cadeau de mariage pour les mariés](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-mariage-couple/) (idee cadeau mariage couple)
 - [Idée cadeau de naissance qui fait vraiment plaisir](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-naissance-bebe/) (idee cadeau naissance bebe)
-- [Idée cadeau collègue Secret Santa à moins de 20 €](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-collegue-secret-santa/) (idee cadeau collegue secret santa)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
