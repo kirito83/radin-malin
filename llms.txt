@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur moulin à café manuel : mouture régulière](https://kirito83.github.io/radin-malin/comparatifs/meilleur-moulin-cafe-manuel/) (meilleur moulin cafe manuel)
 - [Meilleure théière en fonte : le thé reste chaud](https://kirito83.github.io/radin-malin/comparatifs/meilleure-theiere-fonte-2026/) (meilleure theiere fonte)
 - [Meilleur extracteur de jus à froid : jus sans pulpe](https://kirito83.github.io/radin-malin/comparatifs/meilleur-extracteur-jus-froid/) (meilleur extracteur jus froid)
 - [Meilleur gaufrier croque-monsieur 3 en 1](https://kirito83.github.io/radin-malin/comparatifs/meilleur-gaufrier-croque-monsieur-3-en-1/) (meilleur gaufrier croque monsieur)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Idée cadeau lecteur : au-delà du livre](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-lecteur-livre/) (idee cadeau lecteur)
 - [Idée cadeau cuisinier amateur qui a déjà tout](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-cuisinier-amateur/) (idee cadeau cuisinier)
 - [Idée cadeau sportif : course et fitness](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-sportif-course/) (idee cadeau sportif)
-- [Idée cadeau papy et mamie : simple et touchant](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-papy-mamie-noel/) (idee cadeau papy mamie)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4

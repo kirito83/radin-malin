@@ -2308,5 +2308,27 @@
         "link": "https://www.amazon.fr/s?k=Pluie+Soleil+Tetsubin&tag=radinmalin-21"
       }
     ]
+  },
+  {
+    "slug": "meilleur-moulin-cafe-manuel",
+    "title": "Meilleur moulin à café manuel : mouture régulière",
+    "keyword": "meilleur moulin cafe manuel",
+    "category": "cuisine",
+    "date": "2026-10-20",
+    "url": "https://kirito83.github.io/radin-malin/comparatifs/meilleur-moulin-cafe-manuel/",
+    "products": [
+      {
+        "name": "Hario Skerton Pro",
+        "link": "https://www.amazon.fr/s?k=Hario+Skerton+Pro&tag=radinmalin-21"
+      },
+      {
+        "name": "Timemore C2",
+        "link": "https://www.amazon.fr/s?k=Timemore+C2&tag=radinmalin-21"
+      },
+      {
+        "name": "Peugeot Brasilia",
+        "link": "https://www.amazon.fr/s?k=Peugeot+Brasilia&tag=radinmalin-21"
+      }
+    ]
   }
 ]
