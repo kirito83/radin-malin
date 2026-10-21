@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur oxymètre de doigt précis 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oxymetre-doigt-2026/) (meilleur oxymetre doigt)
 - [Meilleur pèse-personne mécanique fiable sans pile](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pese-personne-mecanique-fiable/) (meilleur pese personne mecanique)
 - [Meilleur moulin à café manuel : mouture régulière](https://kirito83.github.io/radin-malin/comparatifs/meilleur-moulin-cafe-manuel/) (meilleur moulin cafe manuel)
 - [Meilleure théière en fonte : le thé reste chaud](https://kirito83.github.io/radin-malin/comparatifs/meilleure-theiere-fonte-2026/) (meilleure theiere fonte)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur kit démarrage bébé : l'essentiel sans se ruiner](https://kirito83.github.io/radin-malin/comparatifs/meilleur-kit-demarrage-bebe-2026/) (kit demarrage bebe essentiel)
 - [Idée cadeau jardinier balcon et plantes d'intérieur](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-jardinier-balcon/) (idee cadeau jardinier)
 - [Idée cadeau lecteur : au-delà du livre](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-lecteur-livre/) (idee cadeau lecteur)
-- [Idée cadeau cuisinier amateur qui a déjà tout](https://kirito83.github.io/radin-malin/comparatifs/idee-cadeau-cuisinier-amateur/) (idee cadeau cuisinier)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
