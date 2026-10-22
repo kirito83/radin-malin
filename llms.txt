@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur ballon de gym 65 cm anti-éclatement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ballon-gym-65cm/) (meilleur ballon gym 65cm)
 - [Meilleur pistolet de massage musculaire pas cher](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pistolet-massage-musculaire/) (meilleur pistolet massage musculaire)
 - [Meilleur tapis d'acupression pour le dos](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tapis-acupression-dos/) (meilleur tapis acupression dos)
 - [Meilleur oxymètre de doigt précis 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oxymetre-doigt-2026/) (meilleur oxymetre doigt)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur cuiseur vapeur électrique : sain et simple](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cuiseur-vapeur-electrique/) (meilleur cuiseur vapeur electrique)
 - [Meilleur chauffe-biberon rapide maison et voiture](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chauffe-biberon-rapide/) (meilleur chauffe biberon)
 - [Meilleur biberon anti-colique : comparatif mamans](https://kirito83.github.io/radin-malin/comparatifs/meilleur-biberon-anti-colique/) (meilleur biberon anti colique)
-- [Meilleur kit démarrage bébé : l'essentiel sans se ruiner](https://kirito83.github.io/radin-malin/comparatifs/meilleur-kit-demarrage-bebe-2026/) (kit demarrage bebe essentiel)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
