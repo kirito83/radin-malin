@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur banc de musculation pliable appartement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-banc-musculation-pliable/) (meilleur banc musculation pliable)
 - [Meilleur set d'élastiques musculation maison](https://kirito83.github.io/radin-malin/comparatifs/meilleur-set-elastiques-musculation/) (meilleur elastiques musculation)
 - [Meilleur ballon de gym 65 cm anti-éclatement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ballon-gym-65cm/) (meilleur ballon gym 65cm)
 - [Meilleur pistolet de massage musculaire pas cher](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pistolet-massage-musculaire/) (meilleur pistolet massage musculaire)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur hachoir à viande : manuel vs électrique](https://kirito83.github.io/radin-malin/comparatifs/meilleur-hachoir-viande-manuel-electrique/) (meilleur hachoir viande)
 - [Meilleure mandoline cuisine sécurisée qui coupe vraiment](https://kirito83.github.io/radin-malin/comparatifs/meilleure-mandoline-cuisine-securisee/) (meilleure mandoline cuisine)
 - [Meilleur cuiseur vapeur électrique : sain et simple](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cuiseur-vapeur-electrique/) (meilleur cuiseur vapeur electrique)
-- [Meilleur chauffe-biberon rapide maison et voiture](https://kirito83.github.io/radin-malin/comparatifs/meilleur-chauffe-biberon-rapide/) (meilleur chauffe biberon)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
