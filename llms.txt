@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur siège auto bébé groupe 1/2/3 évolutif](https://kirito83.github.io/radin-malin/comparatifs/meilleur-siege-auto-bebe-groupe-1-2-3/) (meilleur siege auto bebe evolutif)
 - [Meilleure corde à sauter boxe et cardio](https://kirito83.github.io/radin-malin/comparatifs/meilleure-corde-sauter-boxe/) (meilleure corde a sauter boxe)
 - [Meilleur gilet lesté pour course et crossfit](https://kirito83.github.io/radin-malin/comparatifs/meilleur-gilet-leste-course/) (meilleur gilet leste)
 - [Meilleur banc de musculation pliable appartement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-banc-musculation-pliable/) (meilleur banc musculation pliable)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur extracteur de jus à froid : jus sans pulpe](https://kirito83.github.io/radin-malin/comparatifs/meilleur-extracteur-jus-froid/) (meilleur extracteur jus froid)
 - [Meilleur gaufrier croque-monsieur 3 en 1](https://kirito83.github.io/radin-malin/comparatifs/meilleur-gaufrier-croque-monsieur-3-en-1/) (meilleur gaufrier croque monsieur)
 - [Meilleure yaourtière 2026 : yaourts maison fermes](https://kirito83.github.io/radin-malin/comparatifs/meilleure-yaourtiere-2026/) (meilleure yaourtiere)
-- [Meilleur hachoir à viande : manuel vs électrique](https://kirito83.github.io/radin-malin/comparatifs/meilleur-hachoir-viande-manuel-electrique/) (meilleur hachoir viande)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
