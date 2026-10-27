@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur radio réveil lumineux au lever doux](https://kirito83.github.io/radin-malin/comparatifs/meilleur-radio-reveil-lumineux-doux/) (meilleur reveil lumineux)
 - [Meilleur porte-bébé physiologique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-porte-bebe-physiologique-2026/) (meilleur porte bebe physiologique)
 - [Meilleur lit parapluie bébé pour voyager léger](https://kirito83.github.io/radin-malin/comparatifs/meilleur-lit-parapluie-bebe-voyage/) (meilleur lit parapluie bebe voyage)
 - [Meilleure poussette canne compacte voyage avion](https://kirito83.github.io/radin-malin/comparatifs/meilleure-poussette-canne-compacte-voyage/) (meilleure poussette canne voyage)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur oxymètre de doigt précis 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oxymetre-doigt-2026/) (meilleur oxymetre doigt)
 - [Meilleur pèse-personne mécanique fiable sans pile](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pese-personne-mecanique-fiable/) (meilleur pese personne mecanique)
 - [Meilleur moulin à café manuel : mouture régulière](https://kirito83.github.io/radin-malin/comparatifs/meilleur-moulin-cafe-manuel/) (meilleur moulin cafe manuel)
-- [Meilleure théière en fonte : le thé reste chaud](https://kirito83.github.io/radin-malin/comparatifs/meilleure-theiere-fonte-2026/) (meilleure theiere fonte)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
