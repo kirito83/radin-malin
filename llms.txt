@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleure housse de canapé d'angle extensible](https://kirito83.github.io/radin-malin/comparatifs/meilleure-housse-canape-angle-extensible/) (meilleure housse canape angle)
 - [Meilleur grand tapis de salon lavable en machine](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tapis-salon-grande-taille-lavable/) (meilleur tapis salon lavable)
 - [Meilleur store occultant sans percer pour locataire](https://kirito83.github.io/radin-malin/comparatifs/meilleur-store-occultant-fenetre-sans-percer/) (meilleur store occultant sans percer)
 - [Meilleur plafonnier LED salon moderne pas cher](https://kirito83.github.io/radin-malin/comparatifs/meilleur-plafonnier-led-salon-moderne/) (meilleur plafonnier led salon)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur set d'élastiques musculation maison](https://kirito83.github.io/radin-malin/comparatifs/meilleur-set-elastiques-musculation/) (meilleur elastiques musculation)
 - [Meilleur ballon de gym 65 cm anti-éclatement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ballon-gym-65cm/) (meilleur ballon gym 65cm)
 - [Meilleur pistolet de massage musculaire pas cher](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pistolet-massage-musculaire/) (meilleur pistolet massage musculaire)
-- [Meilleur tapis d'acupression pour le dos](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tapis-acupression-dos/) (meilleur tapis acupression dos)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
