@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur oreiller pour dormir sur le ventre](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oreiller-ventre-dormeur/) (meilleur oreiller dormir ventre)
 - [Meilleur surmatelas mémoire de forme 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-surmatelas-memoire-forme-2026/) (meilleur surmatelas memoire forme)
 - [Meilleure housse de canapé d'angle extensible](https://kirito83.github.io/radin-malin/comparatifs/meilleure-housse-canape-angle-extensible/) (meilleure housse canape angle)
 - [Meilleur grand tapis de salon lavable en machine](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tapis-salon-grande-taille-lavable/) (meilleur tapis salon lavable)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur gilet lesté pour course et crossfit](https://kirito83.github.io/radin-malin/comparatifs/meilleur-gilet-leste-course/) (meilleur gilet leste)
 - [Meilleur banc de musculation pliable appartement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-banc-musculation-pliable/) (meilleur banc musculation pliable)
 - [Meilleur set d'élastiques musculation maison](https://kirito83.github.io/radin-malin/comparatifs/meilleur-set-elastiques-musculation/) (meilleur elastiques musculation)
-- [Meilleur ballon de gym 65 cm anti-éclatement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-ballon-gym-65cm/) (meilleur ballon gym 65cm)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
