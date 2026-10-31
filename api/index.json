@@ -3,7 +3,7 @@
   "home": "https://kirito83.github.io/radin-malin/",
   "endpoints": {
     "/api/outils.json": "23 outils",
-    "/api/comparatifs.json": "127 comparatifs",
-    "/api/quiz.json": "127 quiz"
+    "/api/comparatifs.json": "128 comparatifs",
+    "/api/quiz.json": "128 quiz"
   }
 }

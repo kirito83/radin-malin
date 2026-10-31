@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur micro cravate smartphone pour vidéos](https://kirito83.github.io/radin-malin/comparatifs/meilleur-micro-cravate-smartphone-video/) (meilleur micro cravate smartphone)
 - [Meilleur cadre photo numérique wifi pour offrir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cadre-photo-numerique-wifi-famille/) (meilleur cadre photo numerique wifi)
 - [Meilleur oreiller pour dormir sur le ventre](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oreiller-ventre-dormeur/) (meilleur oreiller dormir ventre)
 - [Meilleur surmatelas mémoire de forme 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-surmatelas-memoire-forme-2026/) (meilleur surmatelas memoire forme)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur siège auto bébé groupe 1/2/3 évolutif](https://kirito83.github.io/radin-malin/comparatifs/meilleur-siege-auto-bebe-groupe-1-2-3/) (meilleur siege auto bebe evolutif)
 - [Meilleure corde à sauter boxe et cardio](https://kirito83.github.io/radin-malin/comparatifs/meilleure-corde-sauter-boxe/) (meilleure corde a sauter boxe)
 - [Meilleur gilet lesté pour course et crossfit](https://kirito83.github.io/radin-malin/comparatifs/meilleur-gilet-leste-course/) (meilleur gilet leste)
-- [Meilleur banc de musculation pliable appartement](https://kirito83.github.io/radin-malin/comparatifs/meilleur-banc-musculation-pliable/) (meilleur banc musculation pliable)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
