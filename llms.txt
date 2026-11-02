@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur tuyau d'arrosage extensible 30 m qui ne fuit pas](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tuyau-arrosage-extensible-30m/) (meilleur tuyau arrosage extensible)
 - [Meilleur désherbeur thermique pour jardin sans chimie](https://kirito83.github.io/radin-malin/comparatifs/meilleur-desherbeur-thermique-jardin/) (meilleur desherbeur thermique)
 - [Meilleur composteur d'appartement sans odeur](https://kirito83.github.io/radin-malin/comparatifs/meilleur-composteur-appartement-sans-odeur/) (meilleur composteur appartement)
 - [Meilleur WC japonais pas cher : abattant lavant](https://kirito83.github.io/radin-malin/comparatifs/meilleur-bidet-wc-japonais-pas-cher/) (meilleur wc japonais pas cher)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur radio réveil lumineux au lever doux](https://kirito83.github.io/radin-malin/comparatifs/meilleur-radio-reveil-lumineux-doux/) (meilleur reveil lumineux)
 - [Meilleur porte-bébé physiologique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-porte-bebe-physiologique-2026/) (meilleur porte bebe physiologique)
 - [Meilleur lit parapluie bébé pour voyager léger](https://kirito83.github.io/radin-malin/comparatifs/meilleur-lit-parapluie-bebe-voyage/) (meilleur lit parapluie bebe voyage)
-- [Meilleure poussette canne compacte voyage avion](https://kirito83.github.io/radin-malin/comparatifs/meilleure-poussette-canne-compacte-voyage/) (meilleure poussette canne voyage)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
