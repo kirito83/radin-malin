@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleure niche chien extérieur isolée hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-niche-chien-exterieur-isolee/) (meilleure niche chien exterieur isolee)
 - [Meilleur poulailler 4 poules pas cher et solide](https://kirito83.github.io/radin-malin/comparatifs/meilleur-poulailler-4-poules-pas-cher/) (meilleur poulailler 4 poules)
 - [Meilleure mini serre de balcon pour tomates](https://kirito83.github.io/radin-malin/comparatifs/meilleur-serre-balcon-tomates/) (meilleure serre balcon tomates)
 - [Meilleur coffre de jardin étanche 500 L](https://kirito83.github.io/radin-malin/comparatifs/meilleur-coffre-jardin-etanche-500l/) (meilleur coffre jardin etanche)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur micro cravate smartphone pour vidéos](https://kirito83.github.io/radin-malin/comparatifs/meilleur-micro-cravate-smartphone-video/) (meilleur micro cravate smartphone)
 - [Meilleur cadre photo numérique wifi pour offrir](https://kirito83.github.io/radin-malin/comparatifs/meilleur-cadre-photo-numerique-wifi-famille/) (meilleur cadre photo numerique wifi)
 - [Meilleur oreiller pour dormir sur le ventre](https://kirito83.github.io/radin-malin/comparatifs/meilleur-oreiller-ventre-dormeur/) (meilleur oreiller dormir ventre)
-- [Meilleur surmatelas mémoire de forme 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-surmatelas-memoire-forme-2026/) (meilleur surmatelas memoire forme)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
