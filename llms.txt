@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur panier orthopédique pour vieux chien](https://kirito83.github.io/radin-malin/comparatifs/meilleur-panier-chien-orthopedique-vieux-chien/) (meilleur panier chien orthopedique)
 - [Meilleure longe 10 m pour chien : liberté contrôlée](https://kirito83.github.io/radin-malin/comparatifs/meilleure-laisse-longue-chien-10m/) (meilleure longe chien 10m)
 - [Meilleur harnais chien anti-traction qui ne blesse pas](https://kirito83.github.io/radin-malin/comparatifs/meilleur-harnais-chien-anti-traction/) (meilleur harnais chien anti traction)
 - [Meilleur griffoir chat en carton durable](https://kirito83.github.io/radin-malin/comparatifs/meilleur-griffoir-chat-carton-durable/) (meilleur griffoir chat carton)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur parasol déporté 3 m pas cher qui tient au vent](https://kirito83.github.io/radin-malin/comparatifs/meilleur-parasol-deporte-3m-pas-cher/) (meilleur parasol deporte 3m)
 - [Meilleur salon de jardin en résine petit prix](https://kirito83.github.io/radin-malin/comparatifs/meilleur-salon-jardin-resine-petit-prix/) (meilleur salon jardin resine pas cher)
 - [Meilleure brouette de jardin 100 L solide](https://kirito83.github.io/radin-malin/comparatifs/meilleur-brouette-jardin-100l/) (meilleure brouette jardin 100l)
-- [Meilleur tuyau d'arrosage extensible 30 m qui ne fuit pas](https://kirito83.github.io/radin-malin/comparatifs/meilleur-tuyau-arrosage-extensible-30m/) (meilleur tuyau arrosage extensible)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
