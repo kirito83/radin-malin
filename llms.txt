@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur plaid électrique chauffant : facture allégée](https://kirito83.github.io/radin-malin/comparatifs/meilleur-plaid-electrique-chauffant/) (meilleur plaid electrique chauffant)
 - [Meilleur radiateur électrique économique pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-radiateur-electrique-economique-2026/) (meilleur radiateur electrique economique)
 - [Meilleure doudoune femme pas chère pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleure-doudoune-femme-pas-chere-hiver/) (meilleure doudoune femme pas chere)
 - [Meilleur pyjama homme chaud pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pyjama-homme-chaud-hiver/) (meilleur pyjama homme chaud)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleure niche chien extérieur isolée hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-niche-chien-exterieur-isolee/) (meilleure niche chien exterieur isolee)
 - [Meilleur poulailler 4 poules pas cher et solide](https://kirito83.github.io/radin-malin/comparatifs/meilleur-poulailler-4-poules-pas-cher/) (meilleur poulailler 4 poules)
 - [Meilleure mini serre de balcon pour tomates](https://kirito83.github.io/radin-malin/comparatifs/meilleur-serre-balcon-tomates/) (meilleure serre balcon tomates)
-- [Meilleur coffre de jardin étanche 500 L](https://kirito83.github.io/radin-malin/comparatifs/meilleur-coffre-jardin-etanche-500l/) (meilleur coffre jardin etanche)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
