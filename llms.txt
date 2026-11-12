@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur radiateur électrique économique pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-radiateur-electrique-economique-2026/) (meilleur radiateur electrique economique)
 - [Meilleure doudoune femme pas chère pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleure-doudoune-femme-pas-chere-hiver/) (meilleure doudoune femme pas chere)
 - [Meilleur pyjama homme chaud pour l'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-pyjama-homme-chaud-hiver/) (meilleur pyjama homme chaud)
 - [Meilleur sèche-linge pompe à chaleur 9 kg classe A](https://kirito83.github.io/radin-malin/comparatifs/meilleur-seche-linge-pompe-chaleur-9kg/) (meilleur seche linge pompe chaleur 9kg)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur poulailler 4 poules pas cher et solide](https://kirito83.github.io/radin-malin/comparatifs/meilleur-poulailler-4-poules-pas-cher/) (meilleur poulailler 4 poules)
 - [Meilleure mini serre de balcon pour tomates](https://kirito83.github.io/radin-malin/comparatifs/meilleur-serre-balcon-tomates/) (meilleure serre balcon tomates)
 - [Meilleur coffre de jardin étanche 500 L](https://kirito83.github.io/radin-malin/comparatifs/meilleur-coffre-jardin-etanche-500l/) (meilleur coffre jardin etanche)
-- [Meilleur transat bain de soleil jardin pas cher](https://kirito83.github.io/radin-malin/comparatifs/meilleur-bain-soleil-transat-jardin/) (meilleur transat jardin pas cher)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
