@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleur détecteur de fumée connecté 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-detecteur-fumee-connecte-2026/) (meilleur detecteur fumee connecte)
 - [Meilleur thermomètre intérieur/extérieur sans fil](https://kirito83.github.io/radin-malin/comparatifs/meilleur-thermometre-interieur-exterieur-sans-fil/) (meilleur thermometre interieur exterieur)
 - [Meilleur humidificateur d'air pour l'hiver (air sec)](https://kirito83.github.io/radin-malin/comparatifs/meilleur-humidificateur-air-froid-hiver/) (meilleur humidificateur air hiver)
 - [Meilleur plaid électrique chauffant : facture allégée](https://kirito83.github.io/radin-malin/comparatifs/meilleur-plaid-electrique-chauffant/) (meilleur plaid electrique chauffant)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur distributeur de croquettes programmable avec caméra](https://kirito83.github.io/radin-malin/comparatifs/meilleur-distributeur-croquettes-chat-programmable/) (meilleur distributeur croquettes programmable)
 - [Meilleure litière chat autonettoyante : ça vaut quoi](https://kirito83.github.io/radin-malin/comparatifs/meilleure-litiere-chat-autonettoyante/) (meilleure litiere autonettoyante)
 - [Meilleur grand arbre à chat pas cher et stable](https://kirito83.github.io/radin-malin/comparatifs/meilleur-arbre-chat-grand-pas-cher/) (meilleur arbre chat pas cher)
-- [Meilleure niche chien extérieur isolée hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-niche-chien-exterieur-isolee/) (meilleure niche chien exterieur isolee)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
