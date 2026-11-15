@@ -30,6 +30,7 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Générateur d'équipes aléatoires](https://kirito83.github.io/radin-malin/outils/generateur-equipes/) : Créez des équipes équilibrées au hasard : joueurs, nombre d'équipes. Gratuit.
 
 ## Derniers comparatifs
+- [Meilleure bouilloire à température réglable (thé vert)](https://kirito83.github.io/radin-malin/comparatifs/meilleure-bouilloire-temperature-reglable/) (meilleure bouilloire temperature reglable)
 - [Meilleur blender chauffant pour soupes d'hiver](https://kirito83.github.io/radin-malin/comparatifs/meilleur-blender-chauffant-soupe/) (meilleur blender chauffant soupe)
 - [Meilleur presse-agrumes électrique 2026](https://kirito83.github.io/radin-malin/comparatifs/meilleur-presse-agrumes-electrique-2026/) (meilleur presse agrumes electrique)
 - [Meilleure serpillière électrique laveuse de sol](https://kirito83.github.io/radin-malin/comparatifs/meilleure-serpilliere-electrique-laveuse-sol/) (meilleure serpilliere electrique)
@@ -44,7 +45,6 @@ Accueil : https://kirito83.github.io/radin-malin/
 - [Meilleur panier orthopédique pour vieux chien](https://kirito83.github.io/radin-malin/comparatifs/meilleur-panier-chien-orthopedique-vieux-chien/) (meilleur panier chien orthopedique)
 - [Meilleure longe 10 m pour chien : liberté contrôlée](https://kirito83.github.io/radin-malin/comparatifs/meilleure-laisse-longue-chien-10m/) (meilleure longe chien 10m)
 - [Meilleur harnais chien anti-traction qui ne blesse pas](https://kirito83.github.io/radin-malin/comparatifs/meilleur-harnais-chien-anti-traction/) (meilleur harnais chien anti traction)
-- [Meilleur griffoir chat en carton durable](https://kirito83.github.io/radin-malin/comparatifs/meilleur-griffoir-chat-carton-durable/) (meilleur griffoir chat carton)
 
 ## Premium
 - [Pack Excel](https://kirito83.github.io/radin-malin/premium/) : Pack Excel auto-entrepreneur : budget 12 mois + suivi 50 factures + facture et devis A4
